@@ -2,1134 +2,2121 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naija Game Hub - Ludo</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Naija Game Hub</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
-
+*{box-sizing:border-box}
 body{
-  background:#071b12;
-  color:white;
-  min-height:100vh;
+margin:0;
+font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+background:#07130f;
+color:#fff
 }
-
 button{
-  border:0;
-  cursor:pointer;
+font:inherit;
+border:0;
+cursor:pointer
+}
+.app{
+max-width:520px;
+margin:auto;
+min-height:100vh;
+background:linear-gradient(180deg,#0b2419,#07130f);
+padding-bottom:82px
+}
+header{
+padding:18px 16px 8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+background:#0b2419ee;
+backdrop-filter:blur(10px);
+z-index:10
+}
+.logo{font-weight:900;font-size:20px}
+.coins{
+background:#173b29;
+padding:8px 12px;
+border-radius:20px;
+font-weight:800
+}
+main{padding:10px 15px}
+.page{display:none}
+.page.active{display:block}
+
+.hero{
+background:linear-gradient(135deg,#0e6b3c,#07351f);
+border:1px solid #1d8951;
+border-radius:24px;
+padding:22px;
+margin:8px 0 18px
+}
+.hero h1{
+margin:0 0 7px;
+font-size:29px
+}
+.hero p{
+margin:0;
+color:#d7f5e4
 }
 
-.top{
-  background:linear-gradient(135deg,#008751,#00a862);
-  padding:18px;
-  text-align:center;
-  font-weight:bold;
-  font-size:22px;
-  position:sticky;
-  top:0;
-  z-index:10;
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+margin:14px 0
+}
+.stat,.card{
+background:#10291d;
+border:1px solid #214633;
+border-radius:17px;
+padding:14px
+}
+.stat b{
+display:block;
+font-size:20px
+}
+.stat span{
+font-size:12px;
+color:#9cc3ad
+}
+
+.section-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:18px 2px 10px
+}
+.section-title h2{
+font-size:19px;
+margin:0
+}
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:11px
+}
+.game{
+min-height:145px;
+display:flex;
+flex-direction:column;
+justify-content:space-between
+}
+.game .emoji{font-size:35px}
+.game h3{margin:7px 0 2px}
+.game p{
+margin:0;
+color:#9fc1af;
+font-size:12px
+}
+
+.primary{
+background:#18a45a;
+color:#fff;
+padding:12px 16px;
+border-radius:13px;
+font-weight:800;
+width:100%
+}
+.secondary{
+background:#173c29;
+color:#fff;
+padding:10px 14px;
+border-radius:12px;
+font-weight:700
+}
+
+.bottom{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+max-width:520px;
+width:100%;
+background:#0b2117ee;
+backdrop-filter:blur(12px);
+border-top:1px solid #214633;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+padding:9px 8px 10px;
+z-index:20
+}
+.nav{
+background:none;
+color:#91ad9f;
+padding:5px
+}
+.nav.active{color:#35d77e}
+.nav span{
+display:block;
+font-size:11px;
+margin-top:3px
 }
 
 .back{
-  position:absolute;
-  left:12px;
-  top:15px;
-  background:#ffffff22;
-  color:white;
-  padding:9px 12px;
-  border-radius:10px;
+background:none;
+color:#8ff0b7;
+font-weight:800;
+padding:6px 0;
+margin-bottom:4px
 }
 
-.container{
-  max-width:600px;
-  margin:auto;
-  padding:15px;
+.quizq{
+font-size:21px;
+font-weight:800;
+line-height:1.3
+}
+.answers{
+display:grid;
+gap:10px;
+margin-top:18px
+}
+.answer{
+text-align:left;
+background:#153522;
+color:#fff;
+padding:14px;
+border-radius:13px;
+border:1px solid #28543b
+}
+.answer.correct{background:#176e3e}
+.answer.wrong{background:#722c2c}
+
+.bar{
+height:10px;
+background:#183426;
+border-radius:10px;
+overflow:hidden
+}
+.bar i{
+display:block;
+height:100%;
+background:#2ad878;
+width:0
 }
 
-.card{
-  background:#10291e;
-  border-radius:20px;
-  padding:15px;
-  box-shadow:0 8px 25px #0006;
+/* LUDO */
+
+.ludo-wrap{
+background:#101414;
+border:1px solid #31413b;
+border-radius:24px;
+padding:10px;
+box-shadow:0 15px 40px #0008
 }
 
-.status{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-  gap:8px;
+.ludo{
+position:relative;
+width:100%;
+aspect-ratio:1;
+background:#202525;
+border-radius:18px;
+overflow:hidden;
+border:8px solid #73858b
 }
 
-.badge{
-  padding:9px 12px;
-  border-radius:12px;
-  font-weight:bold;
-  font-size:13px;
+.home{
+position:absolute;
+width:38%;
+height:38%;
+padding:6%;
+display:grid;
+grid-template-columns:1fr 1fr;
+grid-template-rows:1fr 1fr;
+gap:9%;
+border-radius:8%;
+box-shadow:inset 0 0 0 2px #ffffff22
 }
 
-.green{
-  background:#21c46b;
-  color:#062612;
+.home .slot{
+background:#fff;
+border-radius:50%;
+box-shadow:inset 0 0 0 3px #0002
 }
 
-.red{
-  background:#e84b4b;
-}
+.green{background:#5aa927}
+.red{background:#d94343}
+.blue{background:#168ed1}
+.orange{background:#f08a20}
 
-.yellow{
-  background:#f6c945;
-  color:#382900;
-}
+.hgreen{left:4%;top:4%}
+.hblue{right:4%;top:4%}
+.horange{left:4%;bottom:4%}
+.hred{right:4%;bottom:4%}
 
-.blue{
-  background:#3789ff;
-}
-
-#turnText{
-  text-align:center;
-  font-weight:bold;
-  margin:10px 0;
-}
-
-/* BOARD */
-
-.board{
-  width:100%;
-  aspect-ratio:1;
-  background:#f4f1df;
-  border:5px solid #1d241f;
-  border-radius:8px;
-  display:grid;
-  grid-template-columns:repeat(15,1fr);
-  grid-template-rows:repeat(15,1fr);
-  overflow:hidden;
-  position:relative;
+.track{
+position:absolute;
+left:25%;
+top:25%;
+width:50%;
+height:50%;
+display:grid;
+grid-template-columns:repeat(6,1fr);
+grid-template-rows:repeat(6,1fr);
+gap:2px
 }
 
 .cell{
-  border:1px solid #aaa8a0;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+background:#f2f0e7;
+border-radius:3px;
+position:relative
 }
 
-/* HOME AREAS */
-
-.home-green{
-  grid-column:1/7;
-  grid-row:1/7;
-  background:#19b963;
-  position:relative;
+.cell.safe{
+box-shadow:inset 0 0 0 3px #f2c94c
 }
-
-.home-yellow{
-  grid-column:10/16;
-  grid-row:1/7;
-  background:#f5ca3b;
-  position:relative;
-}
-
-.home-red{
-  grid-column:10/16;
-  grid-row:10/16;
-  background:#e84949;
-  position:relative;
-}
-
-.home-blue{
-  grid-column:1/7;
-  grid-row:10/16;
-  background:#3788ef;
-  position:relative;
-}
-
-.home-inner{
-  position:absolute;
-  left:14%;
-  top:14%;
-  width:72%;
-  height:72%;
-  background:white;
-  border-radius:15px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:1fr 1fr;
-  gap:10px;
-  padding:12px;
-}
-
-.token-home{
-  border-radius:50%;
-  border:3px solid #222;
-  box-shadow:inset 0 3px 5px #0004,0 2px 4px #0005;
-}
-
-.token-home.green{background:#18b963;}
-.token-home.yellow{background:#f4c735;}
-.token-home.red{background:#e74444;}
-.token-home.blue{background:#3789ef;}
-
-/* PATH */
-
-.path{
-  background:#fffdf2;
-}
-
-.path.green-path{
-  background:#a7e8c5;
-}
-
-.path.yellow-path{
-  background:#f9e8a1;
-}
-
-.path.red-path{
-  background:#f5b2b2;
-}
-
-.path.blue-path{
-  background:#a9cafa;
-}
-
-.safe{
-  background:#fff !important;
-}
-
-.safe:after{
-  content:"★";
-  color:#555;
-  font-size:11px;
-}
-
-/* CENTER */
 
 .center{
-  grid-column:7/10;
-  grid-row:7/10;
-  background:conic-gradient(
-    #21c46b 0deg 90deg,
-    #f5ca3b 90deg 180deg,
-    #e84949 180deg 270deg,
-    #3789ef 270deg 360deg
-  );
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+position:absolute;
+left:38%;
+top:38%;
+width:24%;
+height:24%;
+background:conic-gradient(
+#168ed1 0 25%,
+#d94343 0 50%,
+#f08a20 0 75%,
+#5aa927 0
+);
+clip-path:polygon(
+50% 0,
+100% 50%,
+50% 100%,
+0 50%
+);
+display:grid;
+place-items:center
 }
 
 .center:after{
-  content:"🏆";
-  background:white;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  box-shadow:0 2px 7px #0005;
+content:"🏆";
+font-size:22px
 }
 
-/* TOKEN ON BOARD */
-
-.token{
-  width:72%;
-  height:72%;
-  border-radius:50%;
-  border:2px solid #222;
-  box-shadow:0 3px 5px #0007;
-  z-index:5;
-  position:absolute;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:10px;
-  font-weight:bold;
+.piece{
+position:absolute;
+width:18px;
+height:18px;
+border-radius:50%;
+border:2px solid #fff;
+box-shadow:0 2px 5px #0008;
+z-index:4;
+transform:translate(-50%,-50%)
 }
 
-.token.green{background:#18b963;}
-.token.yellow{background:#f4c735;}
-.token.red{background:#e74444;}
-.token.blue{background:#3789ef;}
-
-.movable{
-  animation:pulse .7s infinite alternate;
-  box-shadow:0 0 0 4px white,0 0 15px #fff;
-}
-
-@keyframes pulse{
-  from{transform:scale(1);}
-  to{transform:scale(1.18);}
-}
-
-/* DICE */
-
-.controls{
-  margin-top:16px;
-  text-align:center;
-}
+.pg{background:#58c52a}
+.pr{background:#e33}
 
 .dice{
-  width:70px;
-  height:70px;
-  background:white;
-  color:#111;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  margin:0 auto 12px;
-  box-shadow:0 5px 12px #0006;
+display:flex;
+gap:10px;
+justify-content:center;
+align-items:center;
+font-size:36px;
+background:#16251e;
+border-radius:15px;
+padding:8px;
+margin-top:10px
 }
 
-.roll{
-  width:100%;
-  padding:16px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#f6c945,#ffdb63);
-  color:#382900;
-  font-size:17px;
-  font-weight:bold;
+.die{
+width:54px;
+height:54px;
+background:#fff;
+color:#111;
+border-radius:10px;
+display:grid;
+place-items:center;
+font-size:26px;
+font-weight:900
 }
 
-.roll:disabled{
-  opacity:.4;
-  cursor:not-allowed;
+.ludo-msg{
+text-align:center;
+color:#b8d9c6;
+font-size:13px;
+margin:8px
 }
 
-.message{
-  text-align:center;
-  min-height:24px;
-  margin-top:12px;
-  font-size:14px;
+.moves{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+margin-top:9px
 }
 
-.newgame{
-  width:100%;
-  padding:13px;
-  margin-top:10px;
-  background:#ffffff16;
-  color:white;
-  border-radius:12px;
+.moveBtn{
+background:#1b4b31;
+color:#fff;
+padding:9px 11px;
+border-radius:10px;
+font-size:12px
 }
 
-.legend{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:15px;
-  font-size:12px;
+/* FOOTBALL */
+
+.teamgrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
 }
 
-.legend div{
-  background:#ffffff0d;
-  padding:8px;
-  border-radius:9px;
+.team{
+padding:18px;
+border-radius:17px;
+text-align:center;
+border:2px solid transparent;
+background:#132b20
 }
+
+.team.selected{
+border-color:#36dc82
+}
+
+.crest{font-size:38px}
+
+.team b{
+display:block;
+margin-top:7px
+}
+
+.scoreboard{
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+gap:8px;
+text-align:center
+}
+
+.score{
+font-size:42px;
+font-weight:900
+}
+
+.pitch{
+height:280px;
+border-radius:20px;
+background:linear-gradient(90deg,#237c42,#2c914d);
+border:5px solid #dce8dd;
+position:relative;
+overflow:hidden;
+margin-top:15px
+}
+
+.pitch:before,
+.pitch:after{
+content:"";
+position:absolute;
+border:2px solid #ffffff99
+}
+
+.pitch:before{
+left:10%;
+right:10%;
+top:12%;
+bottom:12%;
+border-radius:50%
+}
+
+.pitch:after{
+left:50%;
+top:0;
+bottom:0;
+border-width:0 0 0 2px
+}
+
+.ball{
+position:absolute;
+font-size:34px;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%)
+}
+
+.football-actions{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-top:10px
+}
+
+.football-actions button{
+background:#173d29;
+color:#fff;
+padding:12px 5px;
+border-radius:12px;
+font-weight:800
+}
+
+.profile{text-align:center}
+.avatar{font-size:70px}
+
+.reward{
+background:linear-gradient(135deg,#174f32,#0c2b1c);
+padding:20px;
+border-radius:20px;
+border:1px solid #2a6947
+}
+
+.toast{
+position:fixed;
+left:50%;
+bottom:90px;
+transform:translateX(-50%);
+background:#fff;
+color:#111;
+padding:10px 16px;
+border-radius:12px;
+font-weight:800;
+display:none;
+z-index:50
+}
+
+.small{
+color:#9fc1af;
+font-size:13px
+}
+
+.hide{display:none!important}
 </style>
 </head>
 
 <body>
 
-<div class="top">
-  <button class="back" onclick="goBack()">← Back</button>
-  🎲 Naija Ludo
+<div class="app">
+
+<header>
+<div class="logo">🇳🇬 Naija Game Hub</div>
+<div class="coins">🪙 <span id="coins">100</span></div>
+</header>
+
+<main>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+<h1>Welcome to Naija Game Hub 🎮</h1>
+<p>Play, win coins, gain XP and challenge yourself.</p>
 </div>
 
-<div class="container">
+<div class="stats">
+<div class="stat">
+<b id="homeCoins">100</b>
+<span>Coins</span>
+</div>
 
-  <div class="card">
+<div class="stat">
+<b id="homeXp">0</b>
+<span>XP</span>
+</div>
 
-    <div class="status">
-      <div class="badge green">🟢 YOU</div>
-      <div class="badge red">🔴 COMPUTER</div>
-    </div>
+<div class="stat">
+<b id="homeLevel">1</b>
+<span>Level</span>
+</div>
+</div>
 
-    <div id="turnText">Your turn</div>
+<div class="section-title">
+<h2>Featured Games</h2>
+</div>
 
-    <div class="board" id="board">
+<div class="grid">
 
-      <!-- HOMES -->
+<div class="card game" onclick="show('ludo')">
+<div class="emoji">🎲</div>
+<div>
+<h3>Naija Ludo</h3>
+<p>Classic-style 2 dice Ludo</p>
+</div>
+</div>
 
-      <div class="home-green">
-        <div class="home-inner">
-          <div class="token-home green"></div>
-          <div class="token-home green"></div>
-          <div class="token-home green"></div>
-          <div class="token-home green"></div>
-        </div>
-      </div>
+<div class="card game" onclick="show('football')">
+<div class="emoji">⚽</div>
+<div>
+<h3>Naija Football</h3>
+<p>Choose your club and play</p>
+</div>
+</div>
 
-      <div class="home-yellow">
-        <div class="home-inner">
-          <div class="token-home yellow"></div>
-          <div class="token-home yellow"></div>
-          <div class="token-home yellow"></div>
-          <div class="token-home yellow"></div>
-        </div>
-      </div>
+<div class="card game" onclick="show('quiz')">
+<div class="emoji">🧠</div>
+<div>
+<h3>Naija Quiz</h3>
+<p>Test your knowledge</p>
+</div>
+</div>
 
-      <div class="home-red">
-        <div class="home-inner">
-          <div class="token-home red"></div>
-          <div class="token-home red"></div>
-          <div class="token-home red"></div>
-          <div class="token-home red"></div>
-        </div>
-      </div>
+<div class="card game" onclick="show('speed')">
+<div class="emoji">⚡</div>
+<div>
+<h3>Speed Battle</h3>
+<p>How fast can you react?</p>
+</div>
+</div>
 
-      <div class="home-blue">
-        <div class="home-inner">
-          <div class="token-home blue"></div>
-          <div class="token-home blue"></div>
-          <div class="token-home blue"></div>
-          <div class="token-home blue"></div>
-        </div>
-      </div>
+<div class="card game" onclick="show('word')">
+<div class="emoji">🔤</div>
+<div>
+<h3>Word Rush</h3>
+<p>Guess the word</p>
+</div>
+</div>
 
-      <div class="center"></div>
+<div class="card game" onclick="show('puzzle')">
+<div class="emoji">🧩</div>
+<div>
+<h3>Naija Puzzle</h3>
+<p>Solve the number puzzle</p>
+</div>
+</div>
 
-    </div>
-
-    <div class="controls">
-
-      <div class="dice" id="dice">🎲</div>
-
-      <button class="roll" id="rollBtn" onclick="rollDice()">
-        🎲 ROLL DICE
-      </button>
-
-      <div class="message" id="message">
-        Roll a 6 to bring a token out!
-      </div>
-
-      <button class="newgame" onclick="newGame()">
-        🔄 NEW GAME
-      </button>
-
-    </div>
-
-    <div class="legend">
-      <div>🟢 Your tokens</div>
-      <div>🔴 Computer tokens</div>
-      <div>⭐ Safe squares</div>
-      <div>🎲 Roll 6 to enter</div>
-    </div>
-
-  </div>
+<div class="card game" onclick="show('reaction')">
+<div class="emoji">🏃</div>
+<div>
+<h3>Reaction Rush</h3>
+<p>Tap at the right time</p>
+</div>
+</div>
 
 </div>
+</section>
+
+
+<!-- GAMES -->
+
+<section id="games" class="page">
+
+<div class="section-title">
+<h2>All Games 🎮</h2>
+</div>
+
+<div class="grid">
+
+<div class="card game" onclick="show('ludo')">
+<div class="emoji">🎲</div>
+<div>
+<h3>Ludo</h3>
+<p>2 dice</p>
+</div>
+</div>
+
+<div class="card game" onclick="show('football')">
+<div class="emoji">⚽</div>
+<div>
+<h3>Football</h3>
+<p>Club matches</p>
+</div>
+</div>
+
+<div class="card game" onclick="show('quiz')">
+<div class="emoji">🧠</div>
+<div>
+<h3>Quiz</h3>
+<p>10 questions</p>
+</div>
+</div>
+
+<div class="card game" onclick="show('speed')">
+<div class="emoji">⚡</div>
+<div>
+<h3>Speed Battle</h3>
+<p>Reaction test</p>
+</div>
+</div>
+
+<div class="card game" onclick="show('word')">
+<div class="emoji">🔤</div>
+<div>
+<h3>Word Rush</h3>
+<p>Guess words</p>
+</div>
+</div>
+
+<div class="card game" onclick="show('puzzle')">
+<div class="emoji">🧩</div>
+<div>
+<h3>Puzzle</h3>
+<p>Slide numbers</p>
+</div>
+</div>
+
+<div class="card game" onclick="show('reaction')">
+<div class="emoji">🏃</div>
+<div>
+<h3>Reaction Rush</h3>
+<p>Tap green</p>
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- LUDO -->
+
+<section id="ludo" class="page">
+
+<button class="back" onclick="show('games')">
+← Games
+</button>
+
+<div class="section-title">
+<h2>🎲 Naija Ludo</h2>
+<span class="small">2 Dice</span>
+</div>
+
+<div class="ludo-wrap">
+
+<div class="ludo" id="ludoBoard">
+
+<div class="home hgreen green">
+<i class="slot"></i>
+<i class="slot"></i>
+<i class="slot"></i>
+<i class="slot"></i>
+</div>
+
+<div class="home hblue blue">
+<i class="slot"></i>
+<i class="slot"></i>
+<i class="slot"></i>
+<i class="slot"></i>
+</div>
+
+<div class="home horange orange">
+<i class="slot"></i>
+<i class="slot"></i>
+<i class="slot"></i>
+<i class="slot"></i>
+</div>
+
+<div class="home hred red">
+<i class="slot"></i>
+<i class="slot"></i>
+<i class="slot"></i>
+<i class="slot"></i>
+</div>
+
+<div class="track" id="track"></div>
+
+<div class="center"></div>
+
+</div>
+
+<div class="dice">
+<div class="die" id="d1">⚀</div>
+<div class="die" id="d2">⚀</div>
+</div>
+
+<div class="ludo-msg" id="ludoMsg">
+Your turn. Roll both dice.
+</div>
+
+<button class="primary" id="rollBtn" onclick="rollLudo()">
+🎲 ROLL 2 DICE
+</button>
+
+<div class="moves" id="moveOptions"></div>
+
+</div>
+</section>
+
+
+<!-- FOOTBALL -->
+
+<section id="football" class="page">
+
+<button class="back" onclick="show('games')">
+← Games
+</button>
+
+<div id="footballSelect">
+
+<div class="section-title">
+<h2>⚽ Choose Your Club</h2>
+</div>
+
+<p class="small">
+Start with these clubs. More clubs can be added later.
+</p>
+
+<div class="teamgrid">
+
+<div class="team" onclick="selectTeam('Chelsea','🔵',this)">
+<div class="crest">🔵</div>
+<b>Chelsea</b>
+</div>
+
+<div class="team" onclick="selectTeam('Manchester City','🔷',this)">
+<div class="crest">🔷</div>
+<b>Manchester City</b>
+</div>
+
+<div class="team" onclick="selectTeam('Liverpool','🔴',this)">
+<div class="crest">🔴</div>
+<b>Liverpool</b>
+</div>
+
+<div class="team" onclick="selectTeam('Arsenal','🔴',this)">
+<div class="crest">🔴</div>
+<b>Arsenal</b>
+</div>
+
+<div class="team" onclick="selectTeam('Manchester United','🔴',this)">
+<div class="crest">🔴</div>
+<b>Manchester United</b>
+</div>
+
+<div class="team" onclick="selectTeam('Tottenham','⚪',this)">
+<div class="crest">⚪</div>
+<b>Tottenham</b>
+</div>
+
+<div class="team" onclick="selectTeam('Newcastle','⚫',this)">
+<div class="crest">⚫</div>
+<b>Newcastle</b>
+</div>
+
+<div class="team" onclick="selectTeam('Aston Villa','🟣',this)">
+<div class="crest">🟣</div>
+<b>Aston Villa</b>
+</div>
+
+</div>
+
+<button class="primary" style="margin-top:15px" onclick="startFootball()">
+START MATCH ⚽
+</button>
+
+</div>
+
+
+<div id="footballGame" class="hide">
+
+<div class="card">
+
+<div class="scoreboard">
+
+<div>
+<div id="myTeam">Chelsea</div>
+<div class="score" id="myScore">0</div>
+</div>
+
+<b>VS</b>
+
+<div>
+<div id="oppTeam">Arsenal</div>
+<div class="score" id="oppScore">0</div>
+</div>
+
+</div>
+
+<div class="pitch">
+<div class="ball">⚽</div>
+</div>
+
+<p id="matchMsg" class="small" style="text-align:center">
+Choose an action.
+</p>
+
+<div class="football-actions">
+
+<button onclick="footballPlay('attack')">
+⚔️ Attack
+</button>
+
+<button onclick="footballPlay('pass')">
+🎯 Pass
+</button>
+
+<button onclick="footballPlay('shoot')">
+🥅 Shoot
+</button>
+
+</div>
+
+<button class="secondary"
+style="width:100%;margin-top:10px"
+onclick="newMatch()">
+🔄 New Match
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quiz" class="page">
+
+<button class="back" onclick="show('games')">
+← Games
+</button>
+
+<div class="section-title">
+<h2>🧠 Naija Quiz</h2>
+<span id="qCount">1/10</span>
+</div>
+
+<div class="card">
+
+<div class="quizq" id="question"></div>
+
+<div class="answers" id="answers"></div>
+
+</div>
+
+</section>
+
+
+<!-- SPEED -->
+
+<section id="speed" class="page">
+
+<button class="back" onclick="show('games')">
+← Games
+</button>
+
+<div class="section-title">
+<h2>⚡ Speed Battle</h2>
+</div>
+
+<div class="card" style="text-align:center">
+
+<p id="speedMsg">
+Press start and wait.
+</p>
+
+<button class="primary" id="speedBtn">
+START
+</button>
+
+</div>
+
+</section>
+
+
+<!-- WORD -->
+
+<section id="word" class="page">
+
+<button class="back" onclick="show('games')">
+← Games
+</button>
+
+<div class="section-title">
+<h2>🔤 Word Rush</h2>
+</div>
+
+<div class="card" style="text-align:center">
+
+<h2 id="wordMask">
+_ _ _ _
+</h2>
+
+<p class="small">
+Hint: <span id="hint"></span>
+</p>
+
+<input
+id="wordInput"
+placeholder="Type your answer"
+style="width:100%;padding:13px;border-radius:12px;border:0;margin:10px 0"
+>
+
+<button class="primary" onclick="checkWord()">
+SUBMIT
+</button>
+
+</div>
+
+</section>
+
+
+<!-- PUZZLE -->
+
+<section id="puzzle" class="page">
+
+<button class="back" onclick="show('games')">
+← Games
+</button>
+
+<div class="section-title">
+<h2>🧩 Naija Puzzle</h2>
+</div>
+
+<div class="card" style="text-align:center">
+
+<p class="small">
+Arrange 1–8 with the blank at the end.
+</p>
+
+<div
+id="puzzleGrid"
+style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px">
+</div>
+
+<button
+class="secondary"
+style="margin-top:12px"
+onclick="shufflePuzzle()">
+SHUFFLE
+</button>
+
+</div>
+
+</section>
+
+
+<!-- REACTION -->
+
+<section id="reaction" class="page">
+
+<button class="back" onclick="show('games')">
+← Games
+</button>
+
+<div class="section-title">
+<h2>🏃 Reaction Rush</h2>
+</div>
+
+<div class="card" style="text-align:center">
+
+<p id="reactMsg">
+Press start.
+</p>
+
+<button
+id="reactBtn"
+class="primary"
+onclick="reactionStart()">
+START
+</button>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+<div class="profile">
+
+<div class="avatar">🇳🇬</div>
+
+<h2>Naija Player</h2>
+
+<p class="small">
+Level <b id="profileLevel">1</b>
+</p>
+
+</div>
+
+<div class="card">
+
+<p>XP</p>
+
+<div class="bar">
+<i id="xpBar"></i>
+</div>
+
+<p class="small" id="xpText">
+0 / 100 XP
+</p>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<b id="pCoins">100</b>
+<span>Coins</span>
+</div>
+
+<div class="stat">
+<b id="pXp">0</b>
+<span>XP</span>
+</div>
+
+<div class="stat">
+<b id="pGames">0</b>
+<span>Games</span>
+</div>
+
+</div>
+
+<div class="reward">
+
+<h3>🎁 Daily Reward</h3>
+
+<p>
+Claim +50 coins.
+</p>
+
+<button class="primary" onclick="dailyReward()">
+CLAIM REWARD
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- NAVIGATION -->
+
+<nav class="bottom">
+
+<button class="nav active" onclick="show('home',this)">
+🏠
+<span>Home</span>
+</button>
+
+<button class="nav" onclick="show('games',this)">
+🎮
+<span>Games</span>
+</button>
+
+<button class="nav" onclick="show('profile',this)">
+👤
+<span>Profile</span>
+</button>
+
+</nav>
+
+<div class="toast" id="toast"></div>
+
+</div>
+
 
 <script>
 
+let coins=100;
+let xp=0;
+let games=0;
+let current='home';
+
+const $=id=>document.getElementById(id);
+
+function toast(t){
+$('toast').textContent=t;
+$('toast').style.display='block';
+
+setTimeout(()=>{
+$('toast').style.display='none';
+},1600);
+}
+
+function addReward(c,x){
+coins+=c;
+xp+=x;
+games++;
+
+updateStats();
+
+toast(`+${c} coins • +${x} XP`);
+}
+
+function updateStats(){
+
+let level=Math.floor(xp/100)+1;
+
+['coins','homeCoins','pCoins']
+.forEach(id=>$(id).textContent=coins);
+
+['homeXp','pXp']
+.forEach(id=>$(id).textContent=xp);
+
+['homeLevel','profileLevel']
+.forEach(id=>$(id).textContent=level);
+
+$('pGames').textContent=games;
+
+$('xpText').textContent=(xp%100)+' / 100 XP';
+
+$('xpBar').style.width=(xp%100)+'%';
+}
+
+function show(id,nav){
+
+document.querySelectorAll('.page')
+.forEach(x=>x.classList.remove('active'));
+
+$(id).classList.add('active');
+
+current=id;
+
+if(nav){
+
+document.querySelectorAll('.nav')
+.forEach(x=>x.classList.remove('active'));
+
+nav.classList.add('active');
+
+}else{
+
+document.querySelectorAll('.nav')
+.forEach(x=>x.classList.remove('active'));
+
+document.querySelectorAll('.nav')
+[id==='home'?0:id==='games'?1:id==='profile'?2:1]
+.classList.add('active');
+}
+
+if(id==='quiz')startQuiz();
+if(id==='word')newWord();
+if(id==='puzzle')renderPuzzle();
+}
+
+updateStats();
+
+
 /* =========================
-   LUDO GAME
+   LUDO
 ========================= */
 
-const board = document.getElementById("board");
-const diceEl = document.getElementById("dice");
-const rollBtn = document.getElementById("rollBtn");
-const message = document.getElementById("message");
-const turnText = document.getElementById("turnText");
-
-/*
-  52-space classic outer path.
-  Coordinates are row,column.
-*/
-
-const path = [
-  [6,1],[6,2],[6,3],[6,4],[6,5],
-  [5,6],[4,6],[3,6],[2,6],[1,6],
-  [1,7],[1,8],
-  [2,8],[3,8],[4,8],[5,8],
-  [6,9],[6,10],[6,11],[6,12],[6,13],
-  [7,13],[8,13],
-  [8,12],[8,11],[8,10],[8,9],
-  [9,8],[10,8],[11,8],[12,8],[13,8],
-  [13,7],[13,6],
-  [12,6],[11,6],[10,6],[9,6],
-  [8,5],[8,4],[8,3],[8,2],[8,1],
-  [7,1]
+const dieFaces=[
+'⚀',
+'⚁',
+'⚂',
+'⚃',
+'⚄',
+'⚅'
 ];
 
-/*
-  Add some additional path cells to complete
-  a visually continuous Ludo route.
-*/
+const path=[];
 
-const extraPath = [
-  [1,8],[2,8],[3,8],[4,8],[5,8],
-  [8,6],[8,7],[8,8],
-  [6,6],[6,7],[6,8]
+for(let i=0;i<52;i++){
+path.push(i);
+}
+
+const track=$('track');
+
+path.forEach((n,i)=>{
+
+let c=document.createElement('div');
+
+c.className='cell';
+
+if([0,13,26,39].includes(i)){
+c.classList.add('safe');
+}
+
+track.appendChild(c);
+
+});
+
+let ludo={
+tokens:[-1,-1,-1,-1],
+cpu:[-1,-1,-1,-1],
+d:[0,0],
+rolled:false
+};
+
+function rollLudo(){
+
+if(ludo.rolled)return;
+
+ludo.d=[
+1+Math.floor(Math.random()*6),
+1+Math.floor(Math.random()*6)
 ];
 
-/* Safe spaces */
+$('d1').textContent=
+dieFaces[ludo.d[0]-1];
 
-const safeSpaces = [0,8,13,21,26,34,39,47];
+$('d2').textContent=
+dieFaces[ludo.d[1]-1];
 
-/*
-  Player tokens:
-  -1 = home
-   0-51 = path
-  52 = finished
-*/
+ludo.rolled=true;
 
-let player = [-1,-1,-1,-1];
-let computer = [-1,-1,-1,-1];
+$('rollBtn').disabled=true;
 
-let turn = "player";
-let currentRoll = 0;
-let gameOver = false;
+renderMoves();
 
-/* starting positions */
+$('ludoMsg').textContent=
+'Choose a move: use the total or split the dice.';
+}
 
-const PLAYER_START = 0;
-const COMPUTER_START = 26;
+function renderMoves(){
 
-/* Dice faces */
+let box=$('moveOptions');
 
-const diceFaces = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+box.innerHTML='';
+
+let sum=ludo.d[0]+ludo.d[1];
+
+ludo.tokens.forEach((p,i)=>{
+
+if(p<52){
+
+let b=document.createElement('button');
+
+b.className='moveBtn';
+
+b.textContent=
+`🟢 Token ${i+1} +${sum}`;
+
+b.onclick=()=>moveLudo(i,sum);
+
+box.appendChild(b);
+
+}
+
+});
+
+if(ludo.d[0]!==ludo.d[1]){
+
+ludo.tokens.forEach((p,i)=>{
+
+if(p<52 && ludo.d[0]===6){
+
+let b=document.createElement('button');
+
+b.className='moveBtn';
+
+b.textContent=
+`🎲 Token ${i+1} +6`;
+
+b.onclick=()=>moveLudo(i,6);
+
+box.appendChild(b);
+
+}
+
+});
+
+}
+
+}
+
+function moveLudo(i,n){
+
+let p=ludo.tokens[i];
+
+if(p===-1){
+
+if(n!==6){
+
+toast('A token needs a 6 to leave home');
+
+return;
+
+}
+
+p=0;
+
+}else{
+
+p+=n;
+
+}
+
+if(p>51 && p<58){
+p=58;
+}
+
+if(p>=58){
+p=58;
+}
+
+ludo.tokens[i]=p;
+
+captureLudo();
+
+renderPieces();
+
+let bonus=ludo.d.includes(6);
+
+if(ludo.tokens.every(x=>x===58)){
+
+addReward(100,30);
+
+$('ludoMsg').textContent=
+'🏆 You won the Ludo match!';
+
+resetLudo();
+
+return;
+
+}
+
+cpuTurn();
+
+if(bonus){
+
+setTimeout(()=>{
+
+ludo.rolled=false;
+
+$('rollBtn').disabled=false;
+
+$('moveOptions').innerHTML='';
+
+$('ludoMsg').textContent=
+'You rolled a 6 — roll again!';
+
+},500);
+
+}else{
+
+ludo.rolled=false;
+
+$('rollBtn').disabled=false;
+
+$('moveOptions').innerHTML='';
+
+$('ludoMsg').textContent=
+'Computer turn finished. Roll again.';
+
+}
+
+}
+
+function captureLudo(){
+
+ludo.tokens.forEach(p=>{
+
+if(p>=0 && p<52){
+
+ludo.cpu.forEach((q,j)=>{
+
+if(
+q===p &&
+![0,13,26,39].includes(p)
+){
+
+ludo.cpu[j]=-1;
+
+}
+
+});
+
+}
+
+});
+
+}
+
+function cpuTurn(){
+
+let d=
+1+Math.floor(Math.random()*6);
+
+let i=
+Math.floor(Math.random()*4);
+
+if(ludo.cpu[i]===-1){
+
+if(d===6){
+ludo.cpu[i]=26;
+}
+
+}else if(ludo.cpu[i]<58){
+
+ludo.cpu[i]+=d;
+
+}
+
+if(ludo.cpu[i]>=58){
+ludo.cpu[i]=58;
+}
+
+renderPieces();
+
+}
+
+function resetLudo(){
+
+setTimeout(()=>{
+
+ludo={
+tokens:[-1,-1,-1,-1],
+cpu:[-1,-1,-1,-1],
+d:[0,0],
+rolled:false
+};
+
+renderPieces();
+
+$('rollBtn').disabled=false;
+
+$('moveOptions').innerHTML='';
+
+},1200);
+
+}
+
+function renderPieces(){
+
+document
+.querySelectorAll('.piece')
+.forEach(x=>x.remove());
+
+let board=$('ludoBoard');
+
+const pos=(p,start,cls)=>{
+
+if(p<0 || p>=58)return;
+
+let idx=(p+start)%52;
+
+let cell=track.children[idx];
+
+let x=
+cell.offsetLeft+
+cell.offsetWidth/2;
+
+let y=
+cell.offsetTop+
+cell.offsetHeight/2;
+
+let el=document.createElement('i');
+
+el.className='piece '+cls;
+
+el.style.left=
+(25+x/track.offsetWidth*50)+'%';
+
+el.style.top=
+(25+y/track.offsetHeight*50)+'%';
+
+board.appendChild(el);
+
+};
+
+ludo.tokens.forEach(
+p=>pos(p,0,'pg')
+);
+
+ludo.cpu.forEach(
+p=>pos(p,26,'pr')
+);
+
+}
+
+renderPieces();
 
 
 /* =========================
-   CREATE PATH
+   FOOTBALL
 ========================= */
 
-function createBoard(){
+let selectedTeam='Chelsea';
+let selectedIcon='🔵';
+let myScore=0;
+let oppScore=0;
 
-  /*
-    Create path cells.
-  */
+const clubs=[
+'Chelsea',
+'Manchester City',
+'Liverpool',
+'Arsenal',
+'Manchester United',
+'Tottenham',
+'Newcastle',
+'Aston Villa'
+];
 
-  path.forEach((pos,index)=>{
+function selectTeam(name,icon,el){
 
-    const cell = document.createElement("div");
+selectedTeam=name;
+selectedIcon=icon;
 
-    cell.className = "cell path";
+document
+.querySelectorAll('.team')
+.forEach(x=>x.classList.remove('selected'));
 
-    cell.style.gridRow = pos[0];
-    cell.style.gridColumn = pos[1];
-
-    if(safeSpaces.includes(index)){
-      cell.classList.add("safe");
-    }
-
-    /*
-      Color sections.
-    */
-
-    if(index >= 0 && index <= 12){
-      cell.classList.add("green-path");
-    }
-
-    if(index >= 13 && index <= 25){
-      cell.classList.add("yellow-path");
-    }
-
-    if(index >= 26 && index <= 38){
-      cell.classList.add("red-path");
-    }
-
-    if(index >= 39){
-      cell.classList.add("blue-path");
-    }
-
-    board.appendChild(cell);
-
-  });
+el.classList.add('selected');
 
 }
 
-createBoard();
+function startFootball(){
 
+$('footballSelect')
+.classList.add('hide');
 
-/* =========================
-   TOKEN POSITION
-========================= */
+$('footballGame')
+.classList.remove('hide');
 
-function getCell(index){
-
-  if(index < 0 || index >= path.length){
-    return null;
-  }
-
-  const p = path[index];
-
-  const cells = board.querySelectorAll(".path");
-
-  for(let cell of cells){
-
-    if(
-      Number(cell.style.gridRow) === p[0] &&
-      Number(cell.style.gridColumn) === p[1]
-    ){
-      return cell;
-    }
-
-  }
-
-  return null;
-}
-
-
-/* =========================
-   DRAW TOKENS
-========================= */
-
-function drawTokens(){
-
-  document.querySelectorAll(".game-token").forEach(x=>x.remove());
-
-  drawPlayerTokens();
-  drawComputerTokens();
+newMatch();
 
 }
 
+function newMatch(){
 
-function makeToken(color,index){
+myScore=0;
+oppScore=0;
 
-  const token = document.createElement("div");
+$('myScore').textContent=0;
+$('oppScore').textContent=0;
 
-  token.className = "token " + color + " game-token";
+$('myTeam').textContent=
+selectedTeam;
 
-  token.innerText = index + 1;
+let opts=
+clubs.filter(x=>x!==selectedTeam);
 
-  return token;
+$('oppTeam').textContent=
+opts[
+Math.floor(Math.random()*opts.length)
+];
 
-}
-
-
-function drawPlayerTokens(){
-
-  player.forEach((position,index)=>{
-
-    if(position < 0 || position >= 52){
-      return;
-    }
-
-    const cell = getCell(position);
-
-    if(!cell)return;
-
-    const token = makeToken("green",index);
-
-    if(turn==="player" && currentRoll>0 && canMovePlayer(index)){
-      token.classList.add("movable");
-
-      token.onclick = ()=>{
-        movePlayer(index);
-      };
-    }
-
-    cell.appendChild(token);
-
-  });
+$('matchMsg').textContent=
+'Kick off! Choose an action.';
 
 }
 
+function footballPlay(a){
 
-function drawComputerTokens(){
+let r=Math.random();
 
-  computer.forEach((position,index)=>{
+let goal=
+a==='shoot'
+?0.34
+:a==='attack'
+?0.22
+:0.08;
 
-    if(position < 0 || position >= 52){
-      return;
-    }
+if(r<goal){
 
-    const cell = getCell(position);
+myScore++;
 
-    if(!cell)return;
+$('matchMsg').textContent=
+'⚽ GOAL! Great play!';
 
-    const token = makeToken("red",index);
+}else{
 
-    cell.appendChild(token);
-
-  });
-
-}
-
-
-/* =========================
-   MOVE RULES
-========================= */
-
-function playerAbsolute(position){
-
-  if(position === -1){
-    return -1;
-  }
-
-  return (PLAYER_START + position) % 52;
+$('matchMsg').textContent=
+a==='pass'
+?'🎯 Good pass!'
+:'🧤 The goalkeeper saved it!';
 
 }
 
+if(Math.random()<0.18){
 
-function computerAbsolute(position){
+oppScore++;
 
-  if(position === -1){
-    return -1;
-  }
-
-  return (COMPUTER_START + position) % 52;
+$('matchMsg').textContent+=
+' Opponent scored too.';
 
 }
 
+$('myScore').textContent=myScore;
+$('oppScore').textContent=oppScore;
 
-function canMovePlayer(index){
+if(myScore>=3 || oppScore>=3){
 
-  const pos = player[index];
+let win=myScore>oppScore;
 
-  if(pos === 52)return false;
+if(win){
 
-  if(pos === -1){
-    return currentRoll === 6;
-  }
+addReward(60,20);
 
-  return pos + currentRoll <= 52;
+}else{
 
-}
-
-
-function canMoveComputer(index){
-
-  const pos = computer[index];
-
-  if(pos === 52)return false;
-
-  if(pos === -1){
-    return currentRoll === 6;
-  }
-
-  return pos + currentRoll <= 52;
+addReward(10,5);
 
 }
 
-
-/* =========================
-   PLAYER ROLL
-========================= */
-
-function rollDice(){
-
-  if(turn !== "player" || gameOver){
-    return;
-  }
-
-  rollBtn.disabled = true;
-
-  currentRoll = Math.floor(Math.random()*6)+1;
-
-  diceEl.innerText = diceFaces[currentRoll-1];
-
-  message.innerText = "You rolled " + currentRoll;
-
-  const movable = player
-    .map((_,i)=>canMovePlayer(i))
-    .filter(Boolean);
-
-  if(movable.length === 0){
-
-    message.innerText =
-      "No token can move.";
-
-    setTimeout(()=>{
-
-      if(currentRoll===6){
-
-        turnText.innerText="Your turn again!";
-        rollBtn.disabled=false;
-
-      }else{
-
-        computerTurn();
-
-      }
-
-    },900);
-
-    return;
-  }
-
-  message.innerText =
-    "Choose a glowing token.";
-
-  drawTokens();
+$('matchMsg').textContent=
+win
+?'🏆 YOU WIN!'
+:'Match over — try again!';
 
 }
-
-
-/* =========================
-   PLAYER MOVE
-========================= */
-
-function movePlayer(index){
-
-  if(turn!=="player"){
-    return;
-  }
-
-  if(!canMovePlayer(index)){
-    return;
-  }
-
-  if(player[index] === -1){
-
-    player[index] = 0;
-
-  }else{
-
-    player[index] += currentRoll;
-
-  }
-
-  capturePlayer(index);
-
-  drawTokens();
-
-  if(checkPlayerWin()){
-    finishGame(true);
-    return;
-  }
-
-  const six = currentRoll === 6;
-
-  currentRoll = 0;
-
-  if(six){
-
-    message.innerText =
-      "🎉 You rolled 6! Roll again.";
-
-    rollBtn.disabled=false;
-
-  }else{
-
-    computerTurn();
-
-  }
-
-}
-
-
-/* =========================
-   CAPTURE
-========================= */
-
-function capturePlayer(index){
-
-  const playerPos = playerAbsolute(player[index]);
-
-  if(playerPos < 0)return;
-
-  if(safeSpaces.includes(playerPos)){
-    return;
-  }
-
-  computer.forEach((pos,i)=>{
-
-    if(pos < 0 || pos >= 52){
-      return;
-    }
-
-    const computerPos = computerAbsolute(pos);
-
-    if(playerPos === computerPos){
-
-      computer[i] = -1;
-
-      message.innerText =
-        "💥 You captured a computer token!";
-
-    }
-
-  });
-
-}
-
-
-/* =========================
-   COMPUTER TURN
-========================= */
-
-function computerTurn(){
-
-  if(gameOver)return;
-
-  turn="computer";
-
-  turnText.innerText="🔴 Computer's turn";
-  rollBtn.disabled=true;
-
-  setTimeout(()=>{
-
-    currentRoll =
-      Math.floor(Math.random()*6)+1;
-
-    diceEl.innerText =
-      diceFaces[currentRoll-1];
-
-    message.innerText =
-      "Computer rolled " + currentRoll;
-
-    const movable = computer
-      .map((_,i)=>canMoveComputer(i))
-      .filter(Boolean);
-
-    if(movable.length===0){
-
-      setTimeout(()=>{
-
-        if(currentRoll===6){
-
-          turn="player";
-          turnText.innerText="🟢 Your turn";
-          rollBtn.disabled=false;
-
-        }else{
-
-          startPlayerTurn();
-
-        }
-
-      },900);
-
-      return;
-    }
-
-    /*
-      Computer chooses a token.
-
-      Priority:
-      1. capture
-      2. move forward
-      3. bring token out
-    */
-
-    let choices =
-      computer
-        .map((_,i)=>i)
-        .filter(i=>canMoveComputer(i));
-
-    let chosen =
-      choices[Math.floor(Math.random()*choices.length)];
-
-    if(currentRoll===6){
-
-      const home =
-        choices.find(i=>computer[i]===-1);
-
-      if(home !== undefined){
-        chosen=home;
-      }
-
-    }
-
-    setTimeout(()=>{
-
-      if(computer[chosen]===-1){
-
-        computer[chosen]=0;
-
-      }else{
-
-        computer[chosen]+=currentRoll;
-
-      }
-
-      captureComputer(chosen);
-
-      drawTokens();
-
-      if(checkComputerWin()){
-
-        finishGame(false);
-        return;
-
-      }
-
-      const six=currentRoll===6;
-
-      currentRoll=0;
-
-      if(six){
-
-        setTimeout(()=>computerTurn(),700);
-
-      }else{
-
-        startPlayerTurn();
-
-      }
-
-    },900);
-
-  },700);
 
 }
 
 
 /* =========================
-   COMPUTER CAPTURE
+   QUIZ
 ========================= */
 
-function captureComputer(index){
+const qs=[
 
-  const computerPos =
-    computerAbsolute(computer[index]);
+[
+'What is the capital of Nigeria?',
+['Lagos','Abuja','Kano','Ibadan'],
+1
+],
 
-  if(computerPos < 0)return;
+[
+'Which Nigerian food is made from cassava?',
+['Garri','Suya','Moi moi','Jollof'],
+0
+],
 
-  if(safeSpaces.includes(computerPos)){
-    return;
-  }
+[
+'Nigeria is in which continent?',
+['Asia','Europe','Africa','South America'],
+2
+],
 
-  player.forEach((pos,i)=>{
+[
+'What is Nigeria’s currency?',
+['Cedi','Naira','Rand','Shilling'],
+1
+],
 
-    if(pos<0 || pos>=52){
-      return;
-    }
+[
+'Which city is known as the Centre of Excellence?',
+['Lagos','Abuja','Enugu','Jos'],
+0
+],
 
-    const playerPos =
-      playerAbsolute(pos);
+[
+'Which is a Nigerian river?',
+['Niger','Nile only','Thames','Amazon'],
+0
+],
 
-    if(playerPos===computerPos){
+[
+'Which food is commonly grilled?',
+['Suya','Custard','Puff puff','Akara'],
+0
+],
 
-      player[i]=-1;
+[
+'What colors are on Nigeria’s flag?',
+['Green and white','Blue and red','Black and yellow','Red and white'],
+0
+],
 
-      message.innerText =
-        "😱 Computer captured your token!";
+[
+'Which city is Nigeria’s Federal Capital Territory?',
+['Kaduna','Abuja','Benin City','Calabar'],
+1
+],
 
-    }
+[
+'Which sport is widely followed in Nigeria?',
+['Football','Curling','Cricket only','Ice hockey'],
+0
+]
 
-  });
+];
+
+let qi=0;
+let qscore=0;
+
+function startQuiz(){
+
+qi=0;
+qscore=0;
+
+renderQ();
+
+}
+
+function renderQ(){
+
+let q=qs[qi];
+
+$('qCount').textContent=
+(qi+1)+'/10';
+
+$('question').textContent=
+q[0];
+
+$('answers').innerHTML='';
+
+q[1].forEach((a,i)=>{
+
+let b=document.createElement('button');
+
+b.className='answer';
+
+b.textContent=a;
+
+b.onclick=
+()=>answerQ(i,b);
+
+$('answers').appendChild(b);
+
+});
+
+}
+
+function answerQ(i,b){
+
+let q=qs[qi];
+
+document
+.querySelectorAll('.answer')
+.forEach(x=>x.disabled=true);
+
+if(i===q[2]){
+
+b.classList.add('correct');
+
+qscore++;
+
+}else{
+
+b.classList.add('wrong');
+
+}
+
+setTimeout(()=>{
+
+qi++;
+
+if(qi<qs.length){
+
+renderQ();
+
+}else{
+
+let reward=qscore*5;
+
+addReward(
+reward,
+qscore*3
+);
+
+$('question').textContent=
+`Finished! Score ${qscore}/10`;
+
+$('answers').innerHTML=
+'<button class="primary" onclick="startQuiz()">PLAY AGAIN</button>';
+
+}
+
+},500);
 
 }
 
 
 /* =========================
-   PLAYER TURN
+   SPEED BATTLE
 ========================= */
 
-function startPlayerTurn(){
+let speedTimer;
+let ready=false;
+let startTime;
 
-  turn="player";
+function speedStart(){
 
-  turnText.innerText="🟢 Your turn";
+clearTimeout(speedTimer);
 
-  message.innerText =
-    "Roll the dice!";
+ready=false;
 
-  rollBtn.disabled=false;
+$('speedMsg').textContent=
+'Wait for GO...';
 
-  drawTokens();
+$('speedBtn').textContent=
+'WAIT';
+
+speedTimer=setTimeout(()=>{
+
+ready=true;
+
+startTime=performance.now();
+
+$('speedMsg').textContent=
+'🟢 TAP NOW!';
+
+$('speedBtn').textContent=
+'TAP!';
+
+},800+Math.random()*2200);
+
+}
+
+$('speedBtn').onclick=function(){
+
+if(!ready){
+
+if(
+$('speedMsg').textContent.includes('Wait')
+)return;
+
+}else{
+
+let ms=
+Math.round(
+performance.now()-startTime
+);
+
+ready=false;
+
+$('speedMsg').textContent=
+`Your reaction: ${ms} ms`;
+
+addReward(
+Math.max(
+5,
+30-Math.floor(ms/100)
+),
+10
+);
+
+$('speedBtn').textContent=
+'START';
+
+}
+
+};
+
+
+/* =========================
+   WORD RUSH
+========================= */
+
+const words=[
+
+['NAIRA','Nigeria money'],
+['LAGOS','A major Nigerian city'],
+['JOLLOF','A popular rice dish'],
+['SUYA','Spicy grilled meat'],
+['ABUJA','Nigeria capital'],
+['NIGER','A country and a Nigerian river'],
+['AFRICA','Nigeria is in this continent']
+
+];
+
+let wi=0;
+
+function newWord(){
+
+let w=
+words[
+Math.floor(Math.random()*words.length)
+];
+
+wi=words.indexOf(w);
+
+$('wordMask').textContent=
+w[0]
+.split('')
+.map((_,i)=>i===0?w[0]:'_')
+.join(' ');
+
+$('hint').textContent=w[1];
+
+$('wordInput').value='';
+
+}
+
+function checkWord(){
+
+let w=words[wi][0];
+
+if(
+$('wordInput')
+.value
+.trim()
+.toUpperCase()===w
+){
+
+addReward(20,10);
+
+toast('Correct! 🎉');
+
+newWord();
+
+}else{
+
+toast('Try again!');
+
+}
 
 }
 
 
 /* =========================
-   WIN
+   PUZZLE
 ========================= */
 
-function checkPlayerWin(){
+let puzzle=[
+1,2,3,
+4,5,6,
+7,8,0
+];
 
-  return player.every(x=>x===52);
+function renderPuzzle(){
+
+let g=$('puzzleGrid');
+
+g.innerHTML='';
+
+puzzle.forEach((n,i)=>{
+
+let b=document.createElement('button');
+
+b.style.cssText=
+'height:65px;border-radius:12px;font-size:24px;font-weight:900;background:#173b29;color:#fff';
+
+b.textContent=n||'';
+
+b.onclick=()=>slide(i);
+
+g.appendChild(b);
+
+});
 
 }
 
+function slide(i){
 
-function checkComputerWin(){
+let z=puzzle.indexOf(0);
 
-  return computer.every(x=>x===52);
+let r=Math.floor(i/3);
+let c=i%3;
+
+let zr=Math.floor(z/3);
+let zc=z%3;
+
+if(
+Math.abs(r-zr)+
+Math.abs(c-zc)===1
+){
+
+[puzzle[i],puzzle[z]]=
+[puzzle[z],puzzle[i]];
+
+renderPuzzle();
+
+if(
+puzzle.join()==='123456780'
+){
+
+addReward(40,20);
+
+toast(
+'Puzzle solved! 🏆'
+);
 
 }
 
+}
 
-function finishGame(playerWon){
+}
 
-  gameOver=true;
+function shufflePuzzle(){
 
-  rollBtn.disabled=true;
+for(let k=0;k<80;k++){
 
-  if(playerWon){
+let z=puzzle.indexOf(0);
 
-    turnText.innerText="🏆 YOU WIN!";
+let r=Math.floor(z/3);
+let c=z%3;
 
-    message.innerText =
-      "🎉 Congratulations! You defeated the computer! +100 coins";
+let opts=[];
 
-  }else{
+[
+[r-1,c],
+[r+1,c],
+[r,c-1],
+[r,c+1]
+].forEach(([a,b])=>{
 
-    turnText.innerText="😔 COMPUTER WINS";
+if(
+a>=0 &&
+a<3 &&
+b>=0 &&
+b<3
+){
 
-    message.innerText =
-      "The computer reached home first. Try again!";
+opts.push(a*3+b);
 
-  }
+}
+
+});
+
+slide(
+opts[
+Math.floor(
+Math.random()*opts.length
+)
+]
+);
+
+}
+
+renderPuzzle();
 
 }
 
 
 /* =========================
-   NEW GAME
+   REACTION RUSH
 ========================= */
 
-function newGame(){
+let reactReady=false;
+let reactTimer;
 
-  player=[-1,-1,-1,-1];
+function reactionStart(){
 
-  computer=[-1,-1,-1,-1];
+clearTimeout(reactTimer);
 
-  turn="player";
+reactReady=false;
 
-  currentRoll=0;
+$('reactBtn').textContent=
+'WAIT...';
 
-  gameOver=false;
+$('reactMsg').textContent=
+'Wait for green';
 
-  diceEl.innerText="🎲";
+reactTimer=setTimeout(()=>{
 
-  turnText.innerText="🟢 Your turn";
+reactReady=true;
 
-  message.innerText=
-    "Roll a 6 to bring a token out!";
+$('reactBtn').textContent=
+'🟢 TAP!';
 
-  rollBtn.disabled=false;
+$('reactMsg').textContent=
+'GO!';
 
-  drawTokens();
+},1000+Math.random()*2500);
 
 }
 
+$('reactBtn').addEventListener(
+'click',
+()=>{
 
-/* =========================
-   BACK
-========================= */
+if(reactReady){
 
-function goBack(){
+reactReady=false;
 
-  /*
-    If this is being used inside
-    your existing Game Hub,
-    change this to your home function.
+$('reactMsg').textContent=
+'Nice reaction!';
 
-    For now it goes back in browser.
-  */
+$('reactBtn').textContent=
+'START';
 
-  history.back();
+addReward(15,8);
 
 }
 
+});
 
-/* START */
 
-newGame();
+/* DAILY REWARD */
+
+function dailyReward(){
+
+addReward(50,0);
+
+toast(
+'Daily reward claimed 🎁'
+);
+
+}
 
 </script>
 
