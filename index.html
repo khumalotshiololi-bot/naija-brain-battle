@@ -31,7 +31,7 @@ button{
   min-height:100vh;
   background:
     radial-gradient(circle at top,#0e7a48 0,#063d27 35%,#071b12 75%);
-  padding-bottom:80px;
+  padding-bottom:85px;
 }
 
 /* HEADER */
@@ -154,6 +154,7 @@ button{
 
 .section-title small{
   color:#ffd43b;
+  cursor:pointer;
 }
 
 /* GAME CARDS */
@@ -214,12 +215,13 @@ button{
   background:linear-gradient(135deg,#00b8a9,#007d74);
 }
 
-/* GAME SCREEN */
+/* GAME TOP */
 
 .game-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:8px;
   margin-bottom:18px;
 }
 
@@ -232,9 +234,11 @@ button{
 }
 
 .game-title{
-  font-size:22px;
+  font-size:21px;
   font-weight:900;
 }
+
+/* QUIZ */
 
 .quiz-question{
   background:linear-gradient(135deg,#008751,#00623b);
@@ -307,88 +311,222 @@ button{
   display:none;
 }
 
-/* LUDO */
+/* =========================
+   LUDO
+========================= */
 
 .ludo-box{
   background:#102d20;
   border-radius:25px;
-  padding:18px;
+  padding:14px;
   text-align:center;
+}
+
+.ludo-info{
+  display:flex;
+  gap:8px;
+  margin-bottom:10px;
+}
+
+.player-badge{
+  flex:1;
+  padding:10px 5px;
+  border-radius:12px;
+  font-weight:bold;
+  font-size:13px;
+}
+
+.player-badge.you{
+  background:#008751;
+}
+
+.player-badge.cpu{
+  background:#d63031;
 }
 
 .ludo-board{
   width:100%;
+  max-width:400px;
   aspect-ratio:1;
-  max-width:390px;
-  margin:15px auto;
-  background:
-    linear-gradient(90deg,
-      #ff4757 0 33%,
-      #fff 33% 66%,
-      #2ed573 66%);
-  border:8px solid #ffd43b;
-  border-radius:18px;
+  margin:10px auto;
   position:relative;
+  border:6px solid #ffd43b;
+  border-radius:15px;
+  background:#e9e9e9;
   overflow:hidden;
 }
 
-.ludo-center{
-  position:absolute;
-  width:34%;
-  height:34%;
-  left:33%;
-  top:33%;
-  background:#ffd43b;
-  transform:rotate(45deg);
-}
+/* LUDO PATH */
 
-.home{
+.path-cell{
   position:absolute;
-  width:29%;
-  height:29%;
-  border-radius:15px;
+  width:7.14%;
+  height:7.14%;
+  background:white;
+  border:1px solid #bbb;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:35px;
+  font-size:10px;
+  color:#777;
 }
 
-.home.red{
-  left:4%;
-  top:4%;
-  background:#ff4757;
+.path-cell.safe{
+  background:#fff2a8;
+  color:#8a7000;
+  font-size:15px;
 }
 
-.home.green{
-  right:4%;
-  bottom:4%;
-  background:#2ed573;
+/* HOME AREAS */
+
+.ludo-home{
+  position:absolute;
+  width:35%;
+  height:35%;
+  border-radius:15px;
+  padding:12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:8px;
+  z-index:2;
 }
 
-.home.yellow{
-  right:4%;
-  top:4%;
+.ludo-home.green{
+  left:3%;
+  bottom:3%;
+  background:#00a859;
+}
+
+.ludo-home.red{
+  right:3%;
+  top:3%;
+  background:#e8414c;
+}
+
+.ludo-home.yellow{
+  right:3%;
+  bottom:3%;
+  background:#e7bd00;
+}
+
+.ludo-home.blue{
+  left:3%;
+  top:3%;
+  background:#3867ff;
+}
+
+.home-spot{
+  background:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:15px;
+}
+
+/* CENTER */
+
+.ludo-center{
+  position:absolute;
+  left:37%;
+  top:37%;
+  width:26%;
+  height:26%;
   background:#ffd43b;
+  clip-path:polygon(
+    50% 0,
+    100% 50%,
+    50% 100%,
+    0 50%
+  );
+  z-index:3;
 }
 
-.home.blue{
-  left:4%;
-  bottom:4%;
-  background:#3742fa;
+/* TOKENS */
+
+.ludo-token{
+  position:absolute;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  border:3px solid white;
+  box-shadow:0 2px 6px rgba(0,0,0,.5);
+  z-index:10;
+  transform:translate(-50%,-50%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:10px;
+  font-weight:bold;
+  padding:0;
 }
 
-.dice{
-  font-size:65px;
-  margin:10px;
+.ludo-token.green{
+  background:#00a859;
+}
+
+.ludo-token.red{
+  background:#d63031;
+}
+
+.ludo-token.movable{
+  border-color:#ffd43b;
+  animation:ludoPulse .7s infinite alternate;
+}
+
+@keyframes ludoPulse{
+  from{
+    transform:translate(-50%,-50%) scale(1);
+  }
+  to{
+    transform:translate(-50%,-50%) scale(1.2);
+  }
+}
+
+.ludo-dice-area{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.ludo-dice{
+  font-size:55px;
+  min-width:70px;
 }
 
 .roll{
   background:#ffd43b;
+  color:#173b24;
   border:0;
-  padding:15px 35px;
+  padding:14px 23px;
   border-radius:15px;
-  font-size:18px;
+  font-size:17px;
   font-weight:900;
+}
+
+.roll:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.ludo-message{
+  min-height:45px;
+  padding:10px;
+  color:#ffd43b;
+  font-weight:bold;
+}
+
+.new-match{
+  background:#123426;
+  color:white;
+  border:1px solid #286848;
+  padding:11px 18px;
+  border-radius:12px;
+  font-weight:bold;
 }
 
 /* PROFILE */
@@ -430,7 +568,7 @@ button{
   background:#ffd43b;
 }
 
-/* BOTTOM NAV */
+/* NAV */
 
 .bottom-nav{
   position:fixed;
@@ -463,7 +601,7 @@ button{
   margin-bottom:3px;
 }
 
-/* POPUP */
+/* REWARD */
 
 .reward{
   position:fixed;
@@ -478,7 +616,7 @@ button{
 .reward-box{
   width:85%;
   max-width:350px;
-  background:#fff;
+  background:white;
   color:#222;
   border-radius:25px;
   padding:30px;
@@ -501,6 +639,7 @@ button{
 }
 
 @media(max-width:380px){
+
   .games{
     grid-template-columns:1fr;
   }
@@ -508,6 +647,13 @@ button{
   .hero h1{
     font-size:27px;
   }
+
+  .ludo-token{
+    width:21px;
+    height:21px;
+    font-size:8px;
+  }
+
 }
 </style>
 </head>
@@ -516,30 +662,59 @@ button{
 
 <div class="app">
 
+<!-- HEADER -->
+
 <header class="header">
-  <div class="logo">🇳🇬 NAIJA <span>GAME HUB</span></div>
+
+  <div class="logo">
+    🇳🇬 NAIJA <span>GAME HUB</span>
+  </div>
 
   <div class="profile-mini">
-    <span>🪙 <b id="topCoins">250</b></span>
-    <div class="avatar">😎</div>
+
+    <span>
+      🪙 <b id="topCoins">250</b>
+    </span>
+
+    <div class="avatar">
+      😎
+    </div>
+
   </div>
+
 </header>
 
 
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
 
 <section id="home" class="screen active">
 
   <div class="hero">
-    <h1>Ready for the<br>Naija Challenge? 🔥</h1>
-    <p>Play games. Earn coins. Climb the leaderboard.</p>
 
-    <button class="play-btn" onclick="openGame('quiz')">
+    <h1>
+      Ready for the<br>
+      Naija Challenge? 🔥
+    </h1>
+
+    <p>
+      Play games. Earn coins. Climb the leaderboard.
+    </p>
+
+    <button
+      class="play-btn"
+      onclick="openGame('quiz')">
+
       ▶ PLAY NOW
+
     </button>
+
   </div>
 
+
   <div class="stats">
+
     <div class="stat">
       ❤️
       <b>5</b>
@@ -554,102 +729,183 @@ button{
       🪙
       <b id="homeCoins">250</b>
     </div>
+
   </div>
 
 
   <div class="section-title">
-    <h2>🔥 Featured Games</h2>
-    <small onclick="showScreen('games')">See all</small>
+
+    <h2>
+      🔥 Featured Games
+    </h2>
+
+    <small onclick="showScreen('games')">
+      See all
+    </small>
+
   </div>
+
 
   <div class="games">
 
-    <button class="game-card quiz-card"
+    <button
+      class="game-card quiz-card"
       onclick="openGame('quiz')">
+
       <div class="icon">🧠</div>
-      <h3>Naija Quiz</h3>
-      <p>Test your Nigerian knowledge</p>
+
+      <h3>
+        Naija Quiz
+      </h3>
+
+      <p>
+        Test your Nigerian knowledge
+      </p>
+
     </button>
 
-    <button class="game-card ludo-card"
+
+    <button
+      class="game-card ludo-card"
       onclick="openGame('ludo')">
+
       <div class="icon">🎲</div>
-      <h3>Naija Ludo</h3>
-      <p>Roll. Move. Win.</p>
+
+      <h3>
+        Naija Ludo
+      </h3>
+
+      <p>
+        Roll. Move. Win.
+      </p>
+
     </button>
+
 
     <button class="game-card speed-card">
+
       <div class="icon">⚡</div>
-      <h3>Speed Battle</h3>
-      <p>Coming soon</p>
+
+      <h3>
+        Speed Battle
+      </h3>
+
+      <p>
+        Coming soon
+      </p>
+
     </button>
 
+
     <button class="game-card word-card">
+
       <div class="icon">🔤</div>
-      <h3>Word Rush</h3>
-      <p>Coming soon</p>
+
+      <h3>
+        Word Rush
+      </h3>
+
+      <p>
+        Coming soon
+      </p>
+
     </button>
 
   </div>
 
 
   <div class="section-title">
-    <h2>🎁 Daily Reward</h2>
+
+    <h2>
+      🎁 Daily Reward
+    </h2>
+
   </div>
 
-  <button class="play-btn" onclick="showReward()">
+
+  <button
+    class="play-btn"
+    onclick="showReward()">
+
     🎁 CLAIM DAILY REWARD
+
   </button>
 
 </section>
 
 
-<!-- GAMES -->
+<!-- =========================
+     ALL GAMES
+========================= -->
 
 <section id="games" class="screen">
 
   <div class="section-title">
-    <h2>🎮 All Games</h2>
+
+    <h2>
+      🎮 All Games
+    </h2>
+
   </div>
+
 
   <div class="games">
 
-    <button class="game-card quiz-card"
+    <button
+      class="game-card quiz-card"
       onclick="openGame('quiz')">
+
       <div class="icon">🧠</div>
       <h3>Naija Quiz</h3>
       <p>Knowledge battle</p>
+
     </button>
 
-    <button class="game-card ludo-card"
+
+    <button
+      class="game-card ludo-card"
       onclick="openGame('ludo')">
+
       <div class="icon">🎲</div>
       <h3>Naija Ludo</h3>
       <p>Classic board battle</p>
+
     </button>
 
+
     <button class="game-card speed-card">
+
       <div class="icon">⚡</div>
       <h3>Speed Battle</h3>
       <p>Coming soon</p>
+
     </button>
 
+
     <button class="game-card word-card">
+
       <div class="icon">🔤</div>
       <h3>Word Rush</h3>
       <p>Coming soon</p>
+
     </button>
 
+
     <button class="game-card puzzle-card">
+
       <div class="icon">🧩</div>
       <h3>Naija Puzzle</h3>
       <p>Coming soon</p>
+
     </button>
 
+
     <button class="game-card reaction-card">
+
       <div class="icon">🏃</div>
       <h3>Reaction Rush</h3>
       <p>Coming soon</p>
+
     </button>
 
   </div>
@@ -657,19 +913,32 @@ button{
 </section>
 
 
-<!-- QUIZ -->
+<!-- =========================
+     QUIZ
+========================= -->
 
 <section id="quiz" class="screen">
 
   <div class="game-top">
 
-    <button class="back" onclick="showScreen('home')">
+    <button
+      class="back"
+      onclick="showScreen('home')">
+
       ← Back
+
     </button>
 
-    <div class="game-title">🧠 Naija Quiz</div>
+    <div class="game-title">
+      🧠 Naija Quiz
+    </div>
 
-    <div>🪙 <span id="quizCoins">250</span></div>
+    <div>
+      🪙
+      <span id="quizCoins">
+        250
+      </span>
+    </div>
 
   </div>
 
@@ -677,7 +946,13 @@ button{
   <div class="quiz-question">
 
     <div class="question-number">
-      QUESTION <span id="questionNumber">1</span>/10
+
+      QUESTION
+      <span id="questionNumber">
+        1
+      </span>
+      /10
+
     </div>
 
     <div id="question"></div>
@@ -685,58 +960,119 @@ button{
   </div>
 
 
-  <div class="answers" id="answers"></div>
+  <div
+    class="answers"
+    id="answers">
+  </div>
 
-  <div class="feedback" id="feedback"></div>
 
-  <button class="next" id="nextButton" onclick="nextQuestion()">
+  <div
+    class="feedback"
+    id="feedback">
+  </div>
+
+
+  <button
+    class="next"
+    id="nextButton"
+    onclick="nextQuestion()">
+
     NEXT QUESTION ➡️
+
   </button>
 
 </section>
 
 
-<!-- LUDO -->
+<!-- =========================
+     FULL LUDO
+========================= -->
 
 <section id="ludo" class="screen">
 
   <div class="game-top">
 
-    <button class="back" onclick="showScreen('home')">
+    <button
+      class="back"
+      onclick="showScreen('home')">
+
       ← Back
+
     </button>
 
-    <div class="game-title">🎲 Naija Ludo</div>
+    <div class="game-title">
+      🎲 Naija Ludo
+    </div>
 
-    <div>🪙 <span id="ludoCoins">250</span></div>
+    <div>
+      🪙
+      <span id="ludoCoins">
+        250
+      </span>
+    </div>
 
   </div>
 
+
   <div class="ludo-box">
 
-    <h2>Practice Match</h2>
+    <div class="ludo-info">
 
-    <p style="margin-top:8px;color:#9db5a7">
-      You 🟢 vs Computer 🔴
-    </p>
+      <div class="player-badge you">
+        🟢 YOU
+      </div>
 
-    <div class="ludo-board">
-
-      <div class="home red">🔴</div>
-      <div class="home yellow">🟡</div>
-      <div class="home blue">🔵</div>
-      <div class="home green">🟢</div>
-
-      <div class="ludo-center"></div>
+      <div class="player-badge cpu">
+        🔴 COMPUTER
+      </div>
 
     </div>
 
-    <div class="dice" id="dice">🎲</div>
 
-    <p id="ludoMessage">Roll the dice to start!</p>
+    <div
+      class="ludo-board"
+      id="ludoBoard">
+    </div>
 
-    <button class="roll" onclick="rollDice()">
-      🎲 ROLL DICE
+
+    <div class="ludo-dice-area">
+
+      <div
+        class="ludo-dice"
+        id="ludoDice">
+
+        🎲
+
+      </div>
+
+
+      <button
+        class="roll"
+        id="ludoRoll"
+        onclick="ludoRollDice()">
+
+        🎲 ROLL DICE
+
+      </button>
+
+    </div>
+
+
+    <div
+      class="ludo-message"
+      id="ludoMessage">
+
+      🟢 Your turn! Roll the dice.
+
+    </div>
+
+
+    <button
+      class="new-match"
+      onclick="startLudo()">
+
+      🔄 NEW MATCH
+
     </button>
 
   </div>
@@ -744,25 +1080,41 @@ button{
 </section>
 
 
-<!-- PROFILE -->
+<!-- =========================
+     PROFILE
+========================= -->
 
 <section id="profile" class="screen">
 
   <div class="profile-card">
 
-    <div class="big-avatar">😎</div>
+    <div class="big-avatar">
+      😎
+    </div>
 
-    <h2 style="margin-top:12px">Naija Champ</h2>
+    <h2 style="margin-top:12px">
+      Naija Champ
+    </h2>
 
-    <p style="color:#9db5a7">Level 2</p>
+    <p style="color:#9db5a7">
+      Level 2
+    </p>
+
 
     <div class="level">
-      <p style="margin-bottom:7px">120 / 300 XP</p>
+
+      <p style="margin-bottom:7px">
+        120 / 300 XP
+      </p>
 
       <div class="progress">
+
         <div class="progress-bar"></div>
+
       </div>
+
     </div>
+
 
     <div class="stats">
 
@@ -783,16 +1135,41 @@ button{
 
     </div>
 
+
     <div class="section-title">
-      <h2>🏅 Achievements</h2>
+
+      <h2>
+        🏅 Achievements
+      </h2>
+
     </div>
+
 
     <div class="games">
 
-      <div class="stat">🥇<br>First Win</div>
-      <div class="stat">🔥<br>3 Day Streak</div>
-      <div class="stat">🧠<br>Quiz Master</div>
-      <div class="stat">🎲<br>Ludo Rookie</div>
+      <div class="stat">
+        🥇
+        <br>
+        First Win
+      </div>
+
+      <div class="stat">
+        🔥
+        <br>
+        3 Day Streak
+      </div>
+
+      <div class="stat">
+        🧠
+        <br>
+        Quiz Master
+      </div>
+
+      <div class="stat">
+        🎲
+        <br>
+        Ludo Rookie
+      </div>
 
     </div>
 
@@ -801,57 +1178,90 @@ button{
 </section>
 
 
-<!-- BOTTOM NAV -->
+<!-- =========================
+     NAVIGATION
+========================= -->
 
 <nav class="bottom-nav">
 
-  <button class="nav-btn active"
+  <button
+    class="nav-btn active"
     onclick="showScreen('home')">
+
     <div>🏠</div>
     Home
+
   </button>
 
-  <button class="nav-btn"
+
+  <button
+    class="nav-btn"
     onclick="showScreen('games')">
+
     <div>🎮</div>
     Games
+
   </button>
 
-  <button class="nav-btn"
-    onclick="alert('Leaderboard coming soon! 🏆')">
+
+  <button
+    class="nav-btn"
+    onclick="alert('🏆 Leaderboard coming soon!')">
+
     <div>🏆</div>
     Ranking
+
   </button>
 
-  <button class="nav-btn"
+
+  <button
+    class="nav-btn"
     onclick="showScreen('profile')">
+
     <div>👤</div>
     Profile
+
   </button>
 
 </nav>
 
 
-<!-- DAILY REWARD -->
+<!-- =========================
+     DAILY REWARD
+========================= -->
 
-<div class="reward" id="reward">
+<div
+  class="reward"
+  id="reward">
 
   <div class="reward-box">
 
-    <div class="gift">🎁</div>
+    <div class="gift">
+      🎁
+    </div>
 
-    <h2>Daily Reward!</h2>
+    <h2>
+      Daily Reward!
+    </h2>
 
     <p style="margin-top:10px">
       You received
     </p>
 
-    <h1 style="color:#d69e00;margin-top:8px">
+    <h1
+      style="color:#d69e00;margin-top:8px">
+
       🪙 +50 Coins
+
     </h1>
 
-    <button class="claim" onclick="claimReward()">
+
+    <button
+      class="claim"
+      onclick="claimReward()">
+
       CLAIM
+
     </button>
 
   </div>
@@ -861,71 +1271,78 @@ button{
 
 <script>
 
-/* GAME DATA */
+/* =========================
+   QUIZ DATA
+========================= */
 
 const questions = [
 
-{
- q:"What is the capital of Nigeria?",
- a:["Lagos","Abuja","Kano","Benin City"],
- c:"Abuja"
-},
+  {
+    q:"What is the capital of Nigeria?",
+    a:["Lagos","Abuja","Kano","Benin City"],
+    c:"Abuja"
+  },
 
-{
- q:"How many states are in Nigeria?",
- a:["30","36","37","40"],
- c:"36"
-},
+  {
+    q:"How many states are in Nigeria?",
+    a:["30","36","37","40"],
+    c:"36"
+  },
 
-{
- q:"What is Nigeria's currency?",
- a:["Dollar","Naira","Cedi","Rand"],
- c:"Naira"
-},
+  {
+    q:"What is Nigeria's currency?",
+    a:["Dollar","Naira","Cedi","Rand"],
+    c:"Naira"
+  },
 
-{
- q:"Which city is known as Nigeria's commercial capital?",
- a:["Abuja","Lagos","Kano","Jos"],
- c:"Lagos"
-},
+  {
+    q:"Which city is known as Nigeria's commercial capital?",
+    a:["Abuja","Lagos","Kano","Jos"],
+    c:"Lagos"
+  },
 
-{
- q:"What are the colours of the Nigerian flag?",
- a:["Green and White","Red and White","Blue and White","Green and Red"],
- c:"Green and White"
-},
+  {
+    q:"What are the colours of the Nigerian flag?",
+    a:["Green and White","Red and White","Blue and White","Green and Red"],
+    c:"Green and White"
+  },
 
-{
- q:"Which river is one of Nigeria's major rivers?",
- a:["River Niger","River Nile","River Thames","River Amazon"],
- c:"River Niger"
-},
+  {
+    q:"Which river is one of Nigeria's major rivers?",
+    a:["River Niger","River Nile","River Thames","River Amazon"],
+    c:"River Niger"
+  },
 
-{
- q:"Nigeria is located on which continent?",
- a:["Asia","Africa","Europe","Australia"],
- c:"Africa"
-},
+  {
+    q:"Nigeria is located on which continent?",
+    a:["Asia","Africa","Europe","Australia"],
+    c:"Africa"
+  },
 
-{
- q:"What is Nigeria's internet country code?",
- a:[".ng",".na",".ni",".nig"],
- c:".ng"
-},
+  {
+    q:"What is Nigeria's internet country code?",
+    a:[".ng",".na",".ni",".nig"],
+    c:".ng"
+  },
 
-{
- q:"Which Nigerian city is famous for the National Arts Theatre?",
- a:["Lagos","Abuja","Enugu","Kaduna"],
- c:"Lagos"
-},
+  {
+    q:"Which Nigerian city is famous for the National Arts Theatre?",
+    a:["Lagos","Abuja","Enugu","Kaduna"],
+    c:"Lagos"
+  },
 
-{
- q:"What is the name of Nigeria's national football team?",
- a:["Super Eagles","Green Lions","Naija Stars","Golden Warriors"],
- c:"Super Eagles"
-}
+  {
+    q:"What is the name of Nigeria's national football team?",
+    a:["Super Eagles","Green Lions","Naija Stars","Golden Warriors"],
+    c:"Super Eagles"
+  }
 
 ];
+
+
+/* =========================
+   GENERAL GAME VARIABLES
+========================= */
 
 let currentQuestion=0;
 let score=0;
@@ -933,38 +1350,63 @@ let coins=250;
 let streak=3;
 
 
-/* SCREEN SYSTEM */
+/* =========================
+   SCREEN SYSTEM
+========================= */
 
 function showScreen(id){
 
-  document.querySelectorAll(".screen")
-    .forEach(s=>s.classList.remove("active"));
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen=>{
+      screen.classList.remove("active");
+    });
 
-  document.getElementById(id)
-    .classList.add("active");
+
+  const screen=
+    document.getElementById(id);
+
+  if(screen){
+    screen.classList.add("active");
+  }
+
 
   window.scrollTo(0,0);
 
-  document.querySelectorAll(".nav-btn")
-    .forEach(b=>b.classList.remove("active"));
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(button=>{
+      button.classList.remove("active");
+    });
 
 }
 
 
-/* OPEN GAME */
+/* =========================
+   OPEN GAME
+========================= */
 
 function openGame(game){
 
   showScreen(game);
 
+
   if(game==="quiz"){
     startQuiz();
+  }
+
+
+  if(game==="ludo"){
+    startLudo();
   }
 
 }
 
 
-/* QUIZ */
+/* =========================
+   QUIZ
+========================= */
 
 function startQuiz(){
 
@@ -978,24 +1420,37 @@ function startQuiz(){
 
 function showQuestion(){
 
-  const data=questions[currentQuestion];
+  const data=
+    questions[currentQuestion];
 
-  document.getElementById("questionNumber")
-    .textContent=currentQuestion+1;
 
-  document.getElementById("question")
-    .textContent=data.q;
+  document
+    .getElementById("questionNumber")
+    .textContent=
+    currentQuestion+1;
 
-  document.getElementById("feedback")
+
+  document
+    .getElementById("question")
+    .textContent=
+    data.q;
+
+
+  document
+    .getElementById("feedback")
     .textContent="";
 
-  document.getElementById("nextButton")
+
+  document
+    .getElementById("nextButton")
     .style.display="none";
+
 
   const container=
     document.getElementById("answers");
 
   container.innerHTML="";
+
 
   data.a.forEach(answer=>{
 
@@ -1003,11 +1458,19 @@ function showQuestion(){
       document.createElement("button");
 
     button.className="answer";
+
     button.textContent=answer;
 
+
     button.onclick=()=>{
-      answerQuestion(button,answer);
+
+      answerQuestion(
+        button,
+        answer
+      );
+
     };
+
 
     container.appendChild(button);
 
@@ -1016,15 +1479,23 @@ function showQuestion(){
 }
 
 
-function answerQuestion(button,answer){
+function answerQuestion(
+  button,
+  answer
+){
 
   const correct=
     questions[currentQuestion].c;
 
+
   const buttons=
     document.querySelectorAll(".answer");
 
-  buttons.forEach(b=>b.disabled=true);
+
+  buttons.forEach(b=>{
+    b.disabled=true;
+  });
+
 
   if(answer===correct){
 
@@ -1036,8 +1507,11 @@ function answerQuestion(button,answer){
 
     coins+=10;
 
-    document.getElementById("feedback")
-      .textContent="🎉 CORRECT! +10 coins";
+
+    document
+      .getElementById("feedback")
+      .textContent=
+      "🎉 CORRECT! +10 coins";
 
   }else{
 
@@ -1045,22 +1519,29 @@ function answerQuestion(button,answer){
 
     streak=0;
 
-    document.getElementById("feedback")
+
+    document
+      .getElementById("feedback")
       .textContent=
       "❌ Wrong! Answer: "+correct;
 
+
     buttons.forEach(b=>{
 
-      if(b.textContent===correct)
+      if(b.textContent===correct){
         b.classList.add("correct");
+      }
 
     });
 
   }
 
+
   updateCoins();
 
-  document.getElementById("nextButton")
+
+  document
+    .getElementById("nextButton")
     .style.display="block";
 
 }
@@ -1070,6 +1551,7 @@ function nextQuestion(){
 
   currentQuestion++;
 
+
   if(currentQuestion>=questions.length){
 
     alert(
@@ -1077,6 +1559,7 @@ function nextQuestion(){
       "Score: "+score+"/10\n"+
       "🪙 Coins: "+coins
     );
+
 
     showScreen("home");
 
@@ -1089,33 +1572,47 @@ function nextQuestion(){
 }
 
 
-/* COINS */
+/* =========================
+   COINS
+========================= */
 
 function updateCoins(){
 
-  document.getElementById("topCoins")
+  document
+    .getElementById("topCoins")
     .textContent=coins;
 
-  document.getElementById("homeCoins")
+
+  document
+    .getElementById("homeCoins")
     .textContent=coins;
 
-  document.getElementById("quizCoins")
+
+  document
+    .getElementById("quizCoins")
     .textContent=coins;
 
-  document.getElementById("ludoCoins")
+
+  document
+    .getElementById("ludoCoins")
     .textContent=coins;
 
-  document.getElementById("profileCoins")
+
+  document
+    .getElementById("profileCoins")
     .textContent=coins;
 
 }
 
 
-/* DAILY REWARD */
+/* =========================
+   DAILY REWARD
+========================= */
 
 function showReward(){
 
-  document.getElementById("reward")
+  document
+    .getElementById("reward")
     .style.display="flex";
 
 }
@@ -1127,43 +1624,1223 @@ function claimReward(){
 
   updateCoins();
 
-  document.getElementById("reward")
+
+  document
+    .getElementById("reward")
     .style.display="none";
 
-  alert("🎉 +50 coins added!");
+
+  alert(
+    "🎉 +50 coins added!"
+  );
 
 }
 
 
-/* LUDO */
+/* =====================================================
+   NAIJA LUDO
+===================================================== */
 
-function rollDice(){
 
-  const number=
-    Math.floor(Math.random()*6)+1;
+/*
+  The board uses 52 spaces.
+*/
 
-  const diceFaces=[
-    "⚀","⚁","⚂",
-    "⚃","⚄","⚅"
+const ludoPath=[];
+
+
+/* TOP */
+
+for(let x=0;x<14;x++){
+
+  ludoPath.push([
+    0,
+    x
+  ]);
+
+}
+
+
+/* RIGHT */
+
+for(let y=1;y<14;y++){
+
+  ludoPath.push([
+    y,
+    13
+  ]);
+
+}
+
+
+/* BOTTOM */
+
+for(let x=12;x>=0;x--){
+
+  ludoPath.push([
+    13,
+    x
+  ]);
+
+}
+
+
+/* LEFT */
+
+for(let y=12;y>=1;y--){
+
+  ludoPath.push([
+    y,
+    0
+  ]);
+
+}
+
+
+/*
+  Safe spaces
+*/
+
+const ludoSafeSpaces=[
+  0,
+  8,
+  13,
+  21,
+  26,
+  34,
+  39,
+  47
+];
+
+
+/*
+  Player and computer starting spaces
+*/
+
+const playerStart=26;
+
+const computerStart=0;
+
+
+/*
+  Token state
+
+  "home" = token is waiting
+  number = position on board
+  52+ = finished
+*/
+
+let playerTokens=[
+  "home",
+  "home",
+  "home",
+  "home"
+];
+
+let computerTokens=[
+  "home",
+  "home",
+  "home",
+  "home"
+];
+
+
+let ludoTurn="player";
+
+let ludoDice=0;
+
+let ludoGameOver=false;
+
+
+/* =========================
+   CREATE BOARD
+========================= */
+
+function createLudoBoard(){
+
+  const board=
+    document.getElementById("ludoBoard");
+
+
+  board.innerHTML="";
+
+
+  /*
+    Create path cells
+  */
+
+  ludoPath.forEach(
+    (position,index)=>{
+
+      const cell=
+        document.createElement("div");
+
+
+      cell.className=
+        "path-cell";
+
+
+      const row=
+        position[0];
+
+
+      const col=
+        position[1];
+
+
+      cell.style.left=
+        (col*7.14)+"%";
+
+
+      cell.style.top=
+        (row*7.14)+"%";
+
+
+      if(
+        ludoSafeSpaces.includes(index)
+      ){
+
+        cell.classList.add("safe");
+
+        cell.textContent="★";
+
+      }
+
+
+      board.appendChild(cell);
+
+    }
+  );
+
+
+  /*
+    Add home zones
+  */
+
+  addLudoHome(
+    "green",
+    "🟢"
+  );
+
+
+  addLudoHome(
+    "red",
+    "🔴"
+  );
+
+
+  addLudoHome(
+    "blue",
+    "🔵"
+  );
+
+
+  addLudoHome(
+    "yellow",
+    "🟡"
+  );
+
+
+  /*
+    Add center
+  */
+
+  const center=
+    document.createElement("div");
+
+  center.className=
+    "ludo-center";
+
+  board.appendChild(center);
+
+}
+
+
+/* =========================
+   HOME ZONE
+========================= */
+
+function addLudoHome(
+  color,
+  emoji
+){
+
+  const board=
+    document.getElementById("ludoBoard");
+
+
+  const home=
+    document.createElement("div");
+
+
+  home.className=
+    "ludo-home "+color;
+
+
+  for(let i=0;i<4;i++){
+
+    const spot=
+      document.createElement("div");
+
+
+    spot.className=
+      "home-spot";
+
+
+    spot.textContent=
+      emoji;
+
+
+    home.appendChild(spot);
+
+  }
+
+
+  board.appendChild(home);
+
+}
+
+
+/* =========================
+   GET POSITION
+========================= */
+
+function getLudoPosition(
+  pathIndex
+){
+
+  if(
+    typeof pathIndex!=="number"
+  ){
+
+    return null;
+
+  }
+
+
+  const board=
+    document.getElementById("ludoBoard");
+
+
+  const rect=
+    board.getBoundingClientRect();
+
+
+  const row=
+    ludoPath[pathIndex][0];
+
+
+  const col=
+    ludoPath[pathIndex][1];
+
+
+  return {
+
+    x:
+      col/14*100+
+      (100/14/2),
+
+    y:
+      row/14*100+
+      (100/14/2)
+
+  };
+
+}
+
+
+/* =========================
+   CREATE TOKEN
+========================= */
+
+function createLudoToken(
+  color,
+  index,
+  position
+){
+
+  const token=
+    document.createElement("button");
+
+
+  token.className=
+    "ludo-token "+color;
+
+
+  token.textContent=
+    index+1;
+
+
+  /*
+    TOKEN AT HOME
+  */
+
+  if(position==="home"){
+
+    const home=
+      document.querySelector(
+        ".ludo-home."+color
+      );
+
+
+    if(home){
+
+      const spots=
+        home.querySelectorAll(
+          ".home-spot"
+        );
+
+
+      const spot=
+        spots[index];
+
+
+      const board=
+        document.getElementById(
+          "ludoBoard"
+        );
+
+
+      const boardRect=
+        board.getBoundingClientRect();
+
+
+      const spotRect=
+        spot.getBoundingClientRect();
+
+
+      token.style.left=
+        (
+          (spotRect.left-boardRect.left)
+          /
+          boardRect.width
+          *
+          100
+        )+"%";
+
+
+      token.style.top=
+        (
+          (spotRect.top-boardRect.top)
+          /
+          boardRect.height
+          *
+          100
+        )+"%";
+
+    }
+
+
+  }else{
+
+
+    /*
+      TOKEN FINISHED
+    */
+
+    if(position>=52){
+
+      return null;
+
+    }
+
+
+    const p=
+      getLudoPosition(position);
+
+
+    if(!p)
+      return null;
+
+
+    token.style.left=
+      p.x+"%";
+
+
+    token.style.top=
+      p.y+"%";
+
+  }
+
+
+  /*
+    Player movable token
+  */
+
+  if(
+    color==="green" &&
+    ludoTurn==="player" &&
+    ludoDice>0 &&
+    canPlayerMove(
+      index,
+      ludoDice
+    )
+  ){
+
+    token.classList.add(
+      "movable"
+    );
+
+
+    token.onclick=()=>{
+
+      movePlayerToken(
+        index,
+        ludoDice
+      );
+
+    };
+
+  }
+
+
+  return token;
+
+}
+
+
+/* =========================
+   DRAW TOKENS
+========================= */
+
+function drawLudoTokens(){
+
+  const board=
+    document.getElementById(
+      "ludoBoard"
+    );
+
+
+  board
+    .querySelectorAll(".ludo-token")
+    .forEach(token=>{
+      token.remove();
+    });
+
+
+  /*
+    Player tokens
+  */
+
+  playerTokens.forEach(
+    (position,index)=>{
+
+      const token=
+        createLudoToken(
+          "green",
+          index,
+          position
+        );
+
+
+      if(token){
+        board.appendChild(token);
+      }
+
+    }
+  );
+
+
+  /*
+    Computer tokens
+  */
+
+  computerTokens.forEach(
+    (position,index)=>{
+
+      const token=
+        createLudoToken(
+          "red",
+          index,
+          position
+        );
+
+
+      if(token){
+        board.appendChild(token);
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================
+   CAN PLAYER MOVE
+========================= */
+
+function canPlayerMove(
+  index,
+  dice
+){
+
+  const position=
+    playerTokens[index];
+
+
+  /*
+    Finished token
+  */
+
+  if(position>=52)
+    return false;
+
+
+  /*
+    Home token
+  */
+
+  if(position==="home"){
+
+    return dice===6;
+
+  }
+
+
+  /*
+    Normal movement
+  */
+
+  return true;
+
+}
+
+
+/* =========================
+   ROLL DICE
+========================= */
+
+function ludoRollDice(){
+
+  if(ludoGameOver)
+    return;
+
+
+  if(ludoTurn!=="player")
+    return;
+
+
+  if(ludoDice!==0)
+    return;
+
+
+  ludoDice=
+    Math.floor(
+      Math.random()*6
+    )+1;
+
+
+  const faces=[
+    "⚀",
+    "⚁",
+    "⚂",
+    "⚃",
+    "⚄",
+    "⚅"
   ];
 
-  document.getElementById("dice")
-    .textContent=diceFaces[number-1];
 
-  document.getElementById("ludoMessage")
+  document
+    .getElementById("ludoDice")
     .textContent=
-    "You rolled "+number+"! 🎲";
+    faces[ludoDice-1];
 
-  coins+=2;
+
+  const canMove=
+    playerTokens.some(
+      (token,index)=>
+        canPlayerMove(
+          index,
+          ludoDice
+        )
+    );
+
+
+  if(!canMove){
+
+    document
+      .getElementById("ludoMessage")
+      .textContent=
+      "😅 No token can move.";
+
+
+    ludoDice=0;
+
+
+    setTimeout(
+      computerTurn,
+      900
+    );
+
+
+    return;
+
+  }
+
+
+  document
+    .getElementById("ludoMessage")
+    .textContent=
+    "🎲 You rolled "+ludoDice+
+    "! Tap a glowing token.";
+
+
+  drawLudoTokens();
+
+}
+
+
+/* =========================
+   MOVE PLAYER
+========================= */
+
+function movePlayerToken(
+  index,
+  dice
+){
+
+  if(ludoGameOver)
+    return;
+
+
+  let position=
+    playerTokens[index];
+
+
+  /*
+    Leaving home
+  */
+
+  if(position==="home"){
+
+    if(dice!==6)
+      return;
+
+
+    position=
+      playerStart;
+
+  }else{
+
+    position=
+      position+dice;
+
+  }
+
+
+  /*
+    Finish token
+  */
+
+  if(position>=52){
+
+    position=52;
+
+  }
+
+
+  playerTokens[index]=
+    position;
+
+
+  /*
+    Capture computer
+  */
+
+  if(position<52){
+
+    captureComputer(
+      position
+    );
+
+  }
+
+
+  ludoDice=0;
+
+
+  drawLudoTokens();
+
+
+  /*
+    WIN
+  */
+
+  if(
+    playerTokens.every(
+      token=>token===52
+    )
+  ){
+
+    finishLudo(
+      "🏆 YOU WIN!",
+      100
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Six = another turn
+  */
+
+  if(dice===6){
+
+    document
+      .getElementById("ludoMessage")
+      .textContent=
+      "🔥 You rolled a 6! Roll again.";
+
+    return;
+
+  }
+
+
+  /*
+    Computer turn
+  */
+
+  ludoTurn="computer";
+
+
+  document
+    .getElementById("ludoMessage")
+    .textContent=
+    "🤖 Computer is thinking...";
+
+
+  setTimeout(
+    computerTurn,
+    1000
+  );
+
+}
+
+
+/* =========================
+   CAPTURE COMPUTER
+========================= */
+
+function captureComputer(
+  position
+){
+
+  /*
+    Safe spaces cannot capture
+  */
+
+  if(
+    ludoSafeSpaces.includes(
+      position
+    )
+  ){
+
+    return;
+
+  }
+
+
+  computerTokens.forEach(
+    (cpuPosition,index)=>{
+
+      if(
+        typeof cpuPosition==="number" &&
+        cpuPosition<52 &&
+        cpuPosition===position
+      ){
+
+        computerTokens[index]="home";
+
+
+        document
+          .getElementById("ludoMessage")
+          .textContent=
+          "💥 You captured a computer token!";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================
+   COMPUTER TURN
+========================= */
+
+function computerTurn(){
+
+  if(ludoGameOver)
+    return;
+
+
+  ludoTurn="computer";
+
+
+  const dice=
+    Math.floor(
+      Math.random()*6
+    )+1;
+
+
+  const faces=[
+    "⚀",
+    "⚁",
+    "⚂",
+    "⚃",
+    "⚄",
+    "⚅"
+  ];
+
+
+  document
+    .getElementById("ludoDice")
+    .textContent=
+    faces[dice-1];
+
+
+  document
+    .getElementById("ludoMessage")
+    .textContent=
+    "🤖 Computer rolled "+dice+".";
+
+
+  /*
+    Find a token that can move.
+  */
+
+  let choices=[];
+
+
+  computerTokens.forEach(
+    (position,index)=>{
+
+      if(
+        position==="home" &&
+        dice===6
+      ){
+
+        choices.push(index);
+
+      }else if(
+        typeof position==="number" &&
+        position<52
+      ){
+
+        choices.push(index);
+
+      }
+
+    }
+  );
+
+
+  /*
+    No move
+  */
+
+  if(choices.length===0){
+
+    ludoTurn="player";
+
+    document
+      .getElementById("ludoMessage")
+      .textContent=
+      "🟢 Your turn! Roll the dice.";
+
+    document
+      .getElementById("ludoDice")
+      .textContent="🎲";
+
+    return;
+
+  }
+
+
+  /*
+    Choose a token randomly
+  */
+
+  const index=
+    choices[
+      Math.floor(
+        Math.random()*choices.length
+      )
+    ];
+
+
+  let position=
+    computerTokens[index];
+
+
+  /*
+    Leave home
+  */
+
+  if(position==="home"){
+
+    position=
+      computerStart;
+
+  }else{
+
+    position=
+      position+dice;
+
+  }
+
+
+  /*
+    Finish
+  */
+
+  if(position>=52){
+
+    position=52;
+
+  }
+
+
+  computerTokens[index]=
+    position;
+
+
+  /*
+    Capture player
+  */
+
+  if(position<52){
+
+    capturePlayer(
+      position
+    );
+
+  }
+
+
+  drawLudoTokens();
+
+
+  /*
+    Computer wins
+  */
+
+  if(
+    computerTokens.every(
+      token=>token===52
+    )
+  ){
+
+    finishLudo(
+      "🤖 COMPUTER WINS!",
+      20
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Six gives another turn
+  */
+
+  if(dice===6){
+
+    document
+      .getElementById("ludoMessage")
+      .textContent=
+      "🤖 Computer rolled 6. It rolls again.";
+
+
+    setTimeout(
+      computerTurn,
+      900
+    );
+
+
+    return;
+
+  }
+
+
+  /*
+    Back to player
+  */
+
+  ludoTurn="player";
+
+
+  document
+    .getElementById("ludoDice")
+    .textContent="🎲";
+
+
+  document
+    .getElementById("ludoMessage")
+    .textContent=
+    "🟢 Your turn! Roll the dice.";
+
+
+  drawLudoTokens();
+
+}
+
+
+/* =========================
+   CAPTURE PLAYER
+========================= */
+
+function capturePlayer(
+  position
+){
+
+  if(
+    ludoSafeSpaces.includes(
+      position
+    )
+  ){
+
+    return;
+
+  }
+
+
+  playerTokens.forEach(
+    (playerPosition,index)=>{
+
+      if(
+        typeof playerPosition==="number" &&
+        playerPosition<52 &&
+        playerPosition===position
+      ){
+
+        playerTokens[index]="home";
+
+
+        document
+          .getElementById("ludoMessage")
+          .textContent=
+          "💥 Computer captured your token!";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================
+   FINISH GAME
+========================= */
+
+function finishLudo(
+  message,
+  reward
+){
+
+  ludoGameOver=true;
+
+
+  coins+=reward;
+
 
   updateCoins();
 
+
+  document
+    .getElementById("ludoMessage")
+    .textContent=
+    message+
+    " 🪙 +"+
+    reward+
+    " coins!";
+
+
+  document
+    .getElementById("ludoRoll")
+    .disabled=true;
+
+
+  setTimeout(()=>{
+
+    alert(
+      message+
+      "\n\n"+
+      "🪙 Reward: +"+
+      reward+
+      " coins"
+    );
+
+  },300);
+
 }
 
 
-/* INITIALIZE */
+/* =========================
+   NEW LUDO MATCH
+========================= */
+
+function startLudo(){
+
+  playerTokens=[
+    "home",
+    "home",
+    "home",
+    "home"
+  ];
+
+
+  computerTokens=[
+    "home",
+    "home",
+    "home",
+    "home"
+  ];
+
+
+  ludoTurn="player";
+
+  ludoDice=0;
+
+  ludoGameOver=false;
+
+
+  document
+    .getElementById("ludoDice")
+    .textContent="🎲";
+
+
+  document
+    .getElementById("ludoMessage")
+    .textContent=
+    "🟢 Your turn! Roll the dice.";
+
+
+  document
+    .getElementById("ludoRoll")
+    .disabled=false;
+
+
+  createLudoBoard();
+
+  drawLudoTokens();
+
+}
+
+
+/* =========================
+   START APP
+========================= */
 
 updateCoins();
+
+startLudo();
 
 </script>
 
