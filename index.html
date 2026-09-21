@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Naija Brain Battle</title>
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>Naija Brain Battle - Football</title>
 
 <style>
 *{
@@ -14,19 +15,18 @@
 
 html,body{
   margin:0;
-  padding:0;
   width:100%;
-  min-height:100%;
+  height:100%;
+  overflow:hidden;
   font-family:Arial,Helvetica,sans-serif;
-  background:#07120d;
-  color:white;
-  overflow-x:hidden;
+  background:#050807;
+  color:#fff;
 }
 
 button{
   border:0;
+  font-weight:900;
   cursor:pointer;
-  font-weight:800;
 }
 
 .hidden{
@@ -34,671 +34,492 @@ button{
 }
 
 /* =========================
-   HOME
+ HOME
 ========================= */
 
-#app{
-  min-height:100vh;
-}
-
-.home{
-  min-height:100vh;
-  padding:24px 16px 40px;
+#home{
+  position:absolute;
+  inset:0;
+  overflow-y:auto;
   background:
-    radial-gradient(circle at top,#143d2a 0,#07120d 45%,#030806 100%);
+    radial-gradient(circle at 50% 0,#18502f,#07140d 48%,#020504);
+  padding:25px 15px 40px;
 }
 
 .logo{
   text-align:center;
-  margin:15px auto 8px;
+  padding-top:25px;
 }
 
-.logo-badge{
-  width:82px;
-  height:82px;
-  margin:auto;
+.logo-icon{
+  width:88px;
+  height:88px;
   border-radius:50%;
+  margin:auto;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(145deg,#ffd447,#ff9d00);
-  box-shadow:0 0 35px rgba(255,190,40,.35);
-  font-size:42px;
+  font-size:47px;
+  background:linear-gradient(145deg,#ffe16b,#ff9b00);
+  box-shadow:0 0 40px rgba(255,190,30,.3);
 }
 
 .logo h1{
-  margin:12px 0 4px;
-  font-size:29px;
+  font-size:30px;
+  margin:14px 0 5px;
 }
 
 .logo p{
+  color:#a7b9ad;
   margin:0;
-  color:#a9c3b4;
 }
 
-.game-grid{
-  max-width:700px;
-  margin:30px auto;
+.mode-grid{
+  width:min(700px,100%);
+  margin:35px auto;
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:1fr 1fr;
   gap:14px;
 }
 
-.game-card{
+.mode{
   min-height:145px;
-  border-radius:22px;
   padding:20px;
-  color:white;
   text-align:left;
-  background:linear-gradient(145deg,#123522,#0a1e14);
+  border-radius:22px;
+  color:white;
+  background:linear-gradient(145deg,#163b27,#0a1c12);
   border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  box-shadow:0 12px 35px rgba(0,0,0,.3);
 }
 
-.game-card:active{
+.mode:active{
   transform:scale(.97);
 }
 
-.game-icon{
+.mode-icon{
   font-size:40px;
 }
 
-.game-card h3{
-  margin:10px 0 5px;
+.mode h3{
+  margin:9px 0 5px;
 }
 
-.game-card p{
+.mode p{
   margin:0;
-  color:#a7bbae;
-  font-size:13px;
+  color:#a5b8aa;
+  font-size:12px;
 }
 
 /* =========================
-   FOOTBALL MENU
+ MENU
 ========================= */
 
 #footballMenu{
-  min-height:100vh;
-  padding:18px 14px 35px;
+  position:absolute;
+  inset:0;
+  overflow-y:auto;
+  padding:16px;
   background:
-    radial-gradient(circle at 50% -10%,#235d38,#07120d 55%);
+  radial-gradient(circle at 50% -10%,#236c3e,#07150d 55%,#020504);
 }
 
-.topbar{
-  max-width:900px;
+.menu-top{
+  width:min(900px,100%);
   margin:auto;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
-.back-btn{
-  background:#162b20;
-  color:white;
-  border:1px solid #31513f;
+.back{
   padding:11px 16px;
   border-radius:13px;
+  color:white;
+  background:#152a20;
+  border:1px solid #355240;
 }
 
-.top-title{
-  font-size:21px;
-  font-weight:900;
+.menu-title{
+  font-size:20px;
+  font-weight:1000;
 }
 
-.club-section{
-  max-width:900px;
+.selection{
+  width:min(900px,100%);
   margin:30px auto;
 }
 
-.club-section h2{
+.selection h2{
   text-align:center;
-  margin-bottom:7px;
+  margin-bottom:5px;
 }
 
-.subtitle{
+.sub{
+  color:#9db2a4;
   text-align:center;
-  color:#9db5a6;
-  margin-top:0;
 }
 
-.club-grid{
+.clubs{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:12px;
-  margin-top:20px;
+  margin-top:22px;
 }
 
 .club{
-  position:relative;
-  padding:17px 10px;
-  border-radius:19px;
-  background:linear-gradient(145deg,#152a20,#0d1d15);
-  border:2px solid transparent;
   color:white;
+  border-radius:20px;
+  padding:18px 10px;
+  background:linear-gradient(145deg,#162c21,#0b1b13);
+  border:2px solid transparent;
 }
 
 .club.selected{
   border-color:#ffd447;
-  box-shadow:0 0 25px rgba(255,212,71,.2);
+  box-shadow:0 0 28px rgba(255,212,71,.18);
 }
 
 .crest{
-  width:65px;
-  height:65px;
+  width:68px;
+  height:68px;
   margin:auto;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:25px;
+  font-size:21px;
   font-weight:1000;
-  border:3px solid rgba(255,255,255,.8);
-  box-shadow:0 7px 18px rgba(0,0,0,.35);
+  border:3px solid rgba(255,255,255,.85);
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
 }
 
 .chelsea{
-  background:linear-gradient(145deg,#1267b1,#073b73);
+  background:linear-gradient(145deg,#1675c4,#063d78);
 }
 
 .city{
-  background:linear-gradient(145deg,#7fd5f5,#2985bd);
-  color:#063b57;
+  background:linear-gradient(145deg,#8be0fa,#348ebf);
+  color:#073b56;
 }
 
 .liverpool{
-  background:linear-gradient(145deg,#d92335,#7e0712);
+  background:linear-gradient(145deg,#e32639,#790814);
 }
 
 .arsenal{
-  background:linear-gradient(145deg,#e21d38,#8d071c);
+  background:linear-gradient(145deg,#ed233e,#850819);
 }
 
 .club-name{
   display:block;
   margin-top:10px;
-  font-size:14px;
-}
-
-.start-match{
-  display:block;
-  width:min(90%,450px);
-  margin:28px auto 0;
-  padding:17px;
-  border-radius:17px;
-  background:linear-gradient(135deg,#ffd447,#ff9f00);
-  color:#171000;
-  font-size:17px;
-  box-shadow:0 12px 28px rgba(255,166,0,.22);
 }
 
 .match-preview{
-  max-width:600px;
-  margin:25px auto 0;
+  margin:28px auto;
   display:flex;
   align-items:center;
   justify-content:center;
   gap:25px;
 }
 
-.preview-team{
+.preview{
   text-align:center;
-  width:120px;
-}
-
-.preview-team .crest{
-  width:58px;
-  height:58px;
+  width:125px;
 }
 
 .vs{
-  font-size:25px;
-  font-weight:1000;
   color:#ffd447;
+  font-size:25px;
+}
+
+.start{
+  display:block;
+  width:min(450px,95%);
+  margin:20px auto;
+  padding:17px;
+  border-radius:16px;
+  font-size:17px;
+  background:linear-gradient(135deg,#ffe06a,#ff9d00);
+  color:#1c1600;
+  box-shadow:0 10px 30px rgba(255,170,0,.2);
 }
 
 /* =========================
-   FOOTBALL GAME
+ GAME
 ========================= */
 
 #footballGame{
-  min-height:100vh;
-  background:#06130b;
-  overflow:hidden;
+  position:absolute;
+  inset:0;
+  background:#07130c;
 }
 
-.game-header{
-  height:72px;
-  padding:8px 12px;
-  background:linear-gradient(#07150c,#0c2115);
+.game-top{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:70px;
+  z-index:50;
   display:flex;
-  align-items:center;
   justify-content:center;
-  position:relative;
-  z-index:10;
-  border-bottom:1px solid #24432f;
+  align-items:center;
+  background:linear-gradient(#06100b,#0a1c12);
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 
 .scoreboard{
   display:flex;
   align-items:center;
-  gap:10px;
-  background:#050b08;
+  gap:12px;
+  background:rgba(0,0,0,.75);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:15px;
   padding:7px 12px;
-  border-radius:14px;
-  min-width:260px;
-  justify-content:center;
 }
 
 .score-team{
   display:flex;
   align-items:center;
-  gap:5px;
-  font-size:12px;
-  font-weight:900;
+  gap:6px;
+  font-size:11px;
 }
 
-.score-crest{
-  width:25px;
-  height:25px;
-  font-size:10px;
+.small-crest{
+  width:28px;
+  height:28px;
   border-width:1px;
+  font-size:9px;
 }
 
 .score{
   font-size:22px;
   color:#ffd447;
-  min-width:50px;
-  text-align:center;
 }
 
-.match-clock{
+.clock{
   position:absolute;
   right:12px;
+  color:#d1ddd5;
   font-size:13px;
-  color:#b7cabc;
-}
-
-/* pitch */
-
-.pitch-wrap{
-  position:relative;
-  width:100%;
-  height:calc(100vh - 72px);
-  min-height:560px;
-  overflow:hidden;
-  background:#17733c;
-}
-
-.pitch{
-  position:absolute;
-  left:2%;
-  right:2%;
-  top:2%;
-  bottom:20%;
-  border:3px solid rgba(255,255,255,.85);
-  overflow:hidden;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #168044 0,
-      #168044 9%,
-      #197a3e 9%,
-      #197a3e 18%
-    );
-  box-shadow:inset 0 0 40px rgba(0,0,0,.18);
-}
-
-.center-line{
-  position:absolute;
-  left:50%;
-  top:0;
-  bottom:0;
-  width:3px;
-  background:rgba(255,255,255,.8);
-}
-
-.center-circle{
-  position:absolute;
-  width:120px;
-  height:120px;
-  border:3px solid rgba(255,255,255,.8);
-  border-radius:50%;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-}
-
-.center-dot{
-  position:absolute;
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:white;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-}
-
-.penalty{
-  position:absolute;
-  top:32%;
-  height:36%;
-  width:16%;
-  border:3px solid rgba(255,255,255,.8);
-}
-
-.penalty.left{
-  left:-1px;
-  border-left:0;
-}
-
-.penalty.right{
-  right:-1px;
-  border-right:0;
-}
-
-.goal{
-  position:absolute;
-  top:42%;
-  height:16%;
-  width:4%;
-  border:4px solid white;
-}
-
-.goal.left{
-  left:-4%;
-}
-
-.goal.right{
-  right:-4%;
-}
-
-.ball{
-  position:absolute;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 35% 30%,white 0 20%,#ddd 21% 100%);
-  border:2px solid #222;
-  box-shadow:0 3px 5px rgba(0,0,0,.5);
-  z-index:5;
-  transform:translate(-50%,-50%);
-}
-
-/* player */
-
-.player{
-  position:absolute;
-  width:42px;
-  height:70px;
-  transform:translate(-50%,-50%);
-  z-index:6;
-  transition:left .18s linear,top .18s linear;
-}
-
-.player .head{
-  position:absolute;
-  width:19px;
-  height:19px;
-  left:50%;
-  top:0;
-  transform:translateX(-50%);
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 35% 30%,#ffd5aa,#a45d39);
-  border:1px solid rgba(0,0,0,.4);
-}
-
-.player .body{
-  position:absolute;
-  width:25px;
-  height:32px;
-  left:50%;
-  top:17px;
-  transform:translateX(-50%);
-  border-radius:7px 7px 5px 5px;
-  box-shadow:0 3px 5px rgba(0,0,0,.35);
-}
-
-.player .leg{
-  position:absolute;
-  top:45px;
-  width:8px;
-  height:22px;
-  border-radius:5px;
-  background:#d0a07b;
-}
-
-.player .leg.l{
-  left:10px;
-}
-
-.player .leg.r{
-  right:10px;
-}
-
-.player.user .body{
-  background:var(--kit,#164e9b);
-}
-
-.player.ai .body{
-  background:var(--kit,#c71f32);
-}
-
-.player.running .leg.l{
-  animation:legA .2s infinite alternate;
-}
-
-.player.running .leg.r{
-  animation:legB .2s infinite alternate;
-}
-
-@keyframes legA{
-  from{transform:rotate(18deg)}
-  to{transform:rotate(-18deg)}
-}
-
-@keyframes legB{
-  from{transform:rotate(-18deg)}
-  to{transform:rotate(18deg)}
-}
-
-.player-name{
-  position:absolute;
-  top:-18px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:8px;
-  white-space:nowrap;
   font-weight:900;
-  text-shadow:0 1px 2px #000;
-}
-
-/* referee */
-
-.referee{
-  position:absolute;
-  width:34px;
-  height:62px;
-  left:50%;
-  top:48%;
-  transform:translate(-50%,-50%);
-  z-index:7;
-  transition:left .25s,top .25s;
-}
-
-.referee .rhead{
-  width:17px;
-  height:17px;
-  border-radius:50%;
-  background:#a96742;
-  margin:auto;
-}
-
-.referee .rbody{
-  width:23px;
-  height:30px;
-  background:#151515;
-  border-radius:5px;
-  margin:auto;
-}
-
-.whistle{
-  position:absolute;
-  left:50%;
-  top:-32px;
-  transform:translateX(-50%);
-  background:#fff;
-  color:#111;
-  padding:8px 13px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:900;
-  animation:fadeWhistle 2.5s forwards;
-}
-
-@keyframes fadeWhistle{
-  0%{opacity:1;transform:translateX(-50%) scale(1)}
-  70%{opacity:1}
-  100%{opacity:0;transform:translateX(-50%) scale(.8)}
-}
-
-/* controls */
-
-.controls{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:19%;
-  min-height:125px;
-  background:linear-gradient(transparent,rgba(2,7,4,.96) 25%);
-  z-index:15;
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  padding:10px 14px 15px;
-}
-
-.joystick{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  background:rgba(255,255,255,.09);
-  border:2px solid rgba(255,255,255,.15);
-  position:relative;
-  touch-action:none;
-}
-
-.joy-dot{
-  position:absolute;
-  width:43px;
-  height:43px;
-  border-radius:50%;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  background:rgba(255,255,255,.28);
-}
-
-.action-buttons{
-  display:flex;
-  gap:9px;
-  align-items:end;
-}
-
-.action{
-  width:67px;
-  height:67px;
-  border-radius:50%;
-  color:white;
-  background:rgba(15,35,24,.94);
-  border:2px solid rgba(255,255,255,.17);
-  box-shadow:0 7px 18px rgba(0,0,0,.3);
-  font-size:11px;
-}
-
-.action.attack{
-  background:linear-gradient(145deg,#d69d18,#8d5b00);
-}
-
-.action.pass{
-  background:linear-gradient(145deg,#1683bc,#075477);
-}
-
-.action.shoot{
-  background:linear-gradient(145deg,#dc3b3b,#861414);
-}
-
-.action:active{
-  transform:scale(.92);
-}
-
-/* overlay */
-
-.game-overlay{
-  position:absolute;
-  inset:0;
-  z-index:30;
-  background:rgba(0,0,0,.72);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-}
-
-.overlay-card{
-  width:min(92%,430px);
-  background:linear-gradient(145deg,#12291c,#07130c);
-  border:1px solid #385941;
-  border-radius:24px;
-  padding:25px;
-  box-shadow:0 20px 60px rgba(0,0,0,.55);
-}
-
-.whistle-big{
-  font-size:60px;
-}
-
-.overlay-card h2{
-  margin:10px 0;
-  font-size:28px;
-}
-
-.overlay-card p{
-  color:#adc0b3;
-  line-height:1.5;
-}
-
-.continue-btn{
-  width:100%;
-  padding:15px;
-  border-radius:14px;
-  margin-top:12px;
-  background:#ffd447;
-  color:#1b1600;
-  font-size:16px;
 }
 
 /* =========================
-   QUESTION
+ STADIUM
 ========================= */
 
-.question-card{
-  width:min(95%,520px);
+#stadium{
+  position:absolute;
+  top:70px;
+  bottom:0;
+  left:0;
+  right:0;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 15%,rgba(255,255,255,.12),transparent 18%),
+    linear-gradient(#17211c 0 17%,#303934 17% 29%,#101812 29% 100%);
 }
+
+.stands{
+  position:absolute;
+  left:-10%;
+  right:-10%;
+  top:4%;
+  height:28%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #26342d 0,
+      #26342d 4%,
+      #101712 4%,
+      #101712 8%
+    );
+  border-bottom:5px solid #59645e;
+  box-shadow:0 12px 30px rgba(0,0,0,.7);
+}
+
+.crowd{
+  position:absolute;
+  inset:10% 3% 5%;
+  opacity:.8;
+  background:
+    radial-gradient(circle,#e5e5e5 0 2px,transparent 3px) 0 0/18px 15px;
+}
+
+.roof{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:10%;
+  background:linear-gradient(#050706,#151b18);
+}
+
+.light{
+  position:absolute;
+  top:5%;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  background:#fffbd7;
+  box-shadow:0 0 22px 8px rgba(255,250,190,.55);
+}
+
+.light.l1{left:8%}
+.light.l2{left:24%}
+.light.l3{right:24%}
+.light.l4{right:8%}
+
+/* =========================
+ CANVAS
+========================= */
+
+#gameCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  touch-action:none;
+}
+
+/* =========================
+ CONTROLS
+========================= */
+
+.controls{
+  position:absolute;
+  z-index:70;
+  left:0;
+  right:0;
+  bottom:0;
+  height:31%;
+  pointer-events:none;
+}
+
+.joystick{
+  pointer-events:auto;
+  position:absolute;
+  left:18px;
+  bottom:20px;
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:2px solid rgba(255,255,255,.18);
+  box-shadow:0 5px 25px rgba(0,0,0,.35);
+  touch-action:none;
+}
+
+.joy{
+  position:absolute;
+  width:45px;
+  height:45px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:rgba(255,255,255,.28);
+}
+
+.actions{
+  pointer-events:auto;
+  position:absolute;
+  right:12px;
+  bottom:18px;
+  display:flex;
+  gap:9px;
+}
+
+.action{
+  width:66px;
+  height:66px;
+  border-radius:50%;
+  color:white;
+  font-size:10px;
+  border:2px solid rgba(255,255,255,.18);
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+}
+
+.pass{
+  background:linear-gradient(145deg,#1586be,#064f73);
+}
+
+.tackle{
+  background:linear-gradient(145deg,#bd8b19,#694800);
+}
+
+.shoot{
+  background:linear-gradient(145deg,#e13939,#7d1111);
+}
+
+.action:active{
+  transform:scale(.91);
+}
+
+/* =========================
+ OVERLAYS
+========================= */
+
+.overlay{
+  position:absolute;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.75);
+}
+
+.card{
+  width:min(440px,94%);
+  padding:27px;
+  border-radius:24px;
+  text-align:center;
+  background:
+    linear-gradient(145deg,#142c1e,#07120c);
+  border:1px solid #3a5844;
+  box-shadow:0 25px 70px rgba(0,0,0,.6);
+}
+
+.card h2{
+  font-size:28px;
+  margin:12px 0;
+}
+
+.card p{
+  color:#afc1b5;
+  line-height:1.5;
+}
+
+.big{
+  font-size:60px;
+}
+
+.main-btn{
+  width:100%;
+  padding:15px;
+  margin-top:10px;
+  border-radius:14px;
+  background:#ffd447;
+  color:#171200;
+  font-size:15px;
+}
+
+/* question */
 
 .question-number{
   color:#ffd447;
-  font-weight:900;
+  font-weight:1000;
 }
 
 .question{
+  margin:17px 0;
   font-size:20px;
-  line-height:1.3;
-  margin:18px 0;
+  line-height:1.35;
 }
 
 .answers{
@@ -709,516 +530,754 @@ button{
 .answer{
   padding:14px;
   border-radius:13px;
-  background:#193323;
   color:white;
-  border:1px solid #365641;
   text-align:left;
+  background:#193526;
+  border:1px solid #3b5a45;
 }
 
 .answer.correct{
-  background:#146c38;
+  background:#14743c;
 }
 
 .answer.wrong{
-  background:#812323;
+  background:#8a2525;
 }
 
 /* result */
 
 .result-score{
-  font-size:55px;
   color:#ffd447;
+  font-size:50px;
   font-weight:1000;
 }
 
-.result-teams{
+.result-row{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:20px;
+  gap:18px;
   margin:20px 0;
 }
 
 .result-team{
-  text-align:center;
+  width:110px;
 }
 
-.result-team .crest{
-  width:65px;
-  height:65px;
+/* notifications */
+
+#message{
+  position:absolute;
+  top:83px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:80;
+  padding:9px 17px;
+  border-radius:20px;
+  background:rgba(0,0,0,.75);
+  font-size:12px;
+  font-weight:900;
+  opacity:0;
+  transition:.25s;
+  pointer-events:none;
 }
+
+#message.show{
+  opacity:1;
+}
+
+/* mobile */
 
 @media(max-width:390px){
-  .action{
-    width:58px;
-    height:58px;
-    font-size:9px;
-  }
 
   .joystick{
-    width:85px;
-    height:85px;
+    width:88px;
+    height:88px;
+  }
+
+  .joy{
+    width:38px;
+    height:38px;
+  }
+
+  .action{
+    width:57px;
+    height:57px;
+    font-size:8px;
   }
 
   .scoreboard{
-    min-width:220px;
+    transform:scale(.9);
   }
 
-  .score-team{
-    font-size:10px;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="app">
+<!-- =====================================================
+ HOME
+===================================================== -->
 
-  <!-- ================= HOME ================= -->
+<section id="home">
 
-  <section id="home" class="home">
+  <div class="logo">
 
-    <div class="logo">
-      <div class="logo-badge">🧠</div>
-      <h1>Naija Brain Battle</h1>
-      <p>Think fast. Play smart. Win the battle.</p>
-    </div>
+    <div class="logo-icon">🧠</div>
 
-    <div class="game-grid">
+    <h1>Naija Brain Battle</h1>
 
-      <button class="game-card" onclick="openFootball()">
-        <div class="game-icon">⚽</div>
-        <h3>Football Battle</h3>
-        <p>1 vs 1 football + Brain Battle</p>
+    <p>Think fast. Play smart. Win the battle.</p>
+
+  </div>
+
+  <div class="mode-grid">
+
+    <button class="mode" onclick="openFootball()">
+      <div class="mode-icon">⚽</div>
+      <h3>Football Battle</h3>
+      <p>11 vs 11 football + Brain Battle</p>
+    </button>
+
+    <button class="mode" onclick="comingSoon()">
+      <div class="mode-icon">🎲</div>
+      <h3>Ludo</h3>
+      <p>Play the Ludo battle</p>
+    </button>
+
+    <button class="mode" onclick="comingSoon()">
+      <div class="mode-icon">⚡</div>
+      <h3>Speed Battle</h3>
+      <p>Answer before time runs out</p>
+    </button>
+
+    <button class="mode" onclick="comingSoon()">
+      <div class="mode-icon">🧩</div>
+      <h3>Puzzle</h3>
+      <p>Challenge your brain</p>
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+ FOOTBALL MENU
+===================================================== -->
+
+<section id="footballMenu" class="hidden">
+
+  <div class="menu-top">
+
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <div class="menu-title">⚽ FOOTBALL BATTLE</div>
+
+    <div style="width:65px"></div>
+
+  </div>
+
+  <div class="selection">
+
+    <h2>Choose Your Club</h2>
+
+    <p class="sub">
+      Build your team and enter the stadium
+    </p>
+
+    <div class="clubs">
+
+      <button class="club selected"
+      onclick="selectClub('Chelsea',this)">
+
+        <div class="crest chelsea">CFC</div>
+        <span class="club-name">Chelsea</span>
+
       </button>
 
-      <button class="game-card" onclick="comingSoon()">
-        <div class="game-icon">🎲</div>
-        <h3>Ludo</h3>
-        <p>Play the Ludo battle</p>
+      <button class="club"
+      onclick="selectClub('Manchester City',this)">
+
+        <div class="crest city">MC</div>
+        <span class="club-name">Manchester City</span>
+
       </button>
 
-      <button class="game-card" onclick="comingSoon()">
-        <div class="game-icon">⚡</div>
-        <h3>Speed Battle</h3>
-        <p>Answer before time runs out</p>
+      <button class="club"
+      onclick="selectClub('Liverpool',this)">
+
+        <div class="crest liverpool">LFC</div>
+        <span class="club-name">Liverpool</span>
+
       </button>
 
-      <button class="game-card" onclick="comingSoon()">
-        <div class="game-icon">🧩</div>
-        <h3>Puzzle</h3>
-        <p>Challenge your brain</p>
-      </button>
+      <button class="club"
+      onclick="selectClub('Arsenal',this)">
 
-    </div>
+        <div class="crest arsenal">AFC</div>
+        <span class="club-name">Arsenal</span>
 
-  </section>
-
-
-  <!-- ================= FOOTBALL MENU ================= -->
-
-  <section id="footballMenu" class="hidden">
-
-    <div class="topbar">
-      <button class="back-btn" onclick="goHome()">← Back</button>
-      <div class="top-title">⚽ FOOTBALL BATTLE</div>
-      <div style="width:65px"></div>
-    </div>
-
-    <div class="club-section">
-
-      <h2>Choose Your Club</h2>
-      <p class="subtitle">Select the team you want to control</p>
-
-      <div class="club-grid">
-
-        <button class="club selected"
-                data-club="Chelsea"
-                onclick="selectClub('Chelsea',this)">
-          <div class="crest chelsea">CFC</div>
-          <span class="club-name">Chelsea</span>
-        </button>
-
-        <button class="club"
-                data-club="Manchester City"
-                onclick="selectClub('Manchester City',this)">
-          <div class="crest city">MC</div>
-          <span class="club-name">Manchester City</span>
-        </button>
-
-        <button class="club"
-                data-club="Liverpool"
-                onclick="selectClub('Liverpool',this)">
-          <div class="crest liverpool">LFC</div>
-          <span class="club-name">Liverpool</span>
-        </button>
-
-        <button class="club"
-                data-club="Arsenal"
-                onclick="selectClub('Arsenal',this)">
-          <div class="crest arsenal">AFC</div>
-          <span class="club-name">Arsenal</span>
-        </button>
-
-      </div>
-
-      <div class="match-preview">
-
-        <div class="preview-team">
-          <div id="previewHomeCrest" class="crest chelsea">CFC</div>
-          <div id="previewHomeName">Chelsea</div>
-        </div>
-
-        <div class="vs">VS</div>
-
-        <div class="preview-team">
-          <div id="previewAwayCrest" class="crest city">MC</div>
-          <div id="previewAwayName">Manchester City</div>
-        </div>
-
-      </div>
-
-      <button class="start-match" onclick="startFootball()">
-        ⚽ START MATCH
       </button>
 
     </div>
 
-  </section>
+    <div class="match-preview">
 
+      <div class="preview">
 
-  <!-- ================= FOOTBALL GAME ================= -->
+        <div id="previewHomeCrest"
+        class="crest chelsea">CFC</div>
 
-  <section id="footballGame" class="hidden">
-
-    <div class="game-header">
-
-      <div class="scoreboard">
-
-        <div class="score-team">
-          <div id="homeScoreCrest" class="crest score-crest chelsea">CFC</div>
-          <span id="homeShort">CHE</span>
-        </div>
-
-        <div class="score">
-          <span id="homeScore">0</span>
-          -
-          <span id="awayScore">0</span>
-        </div>
-
-        <div class="score-team">
-          <span id="awayShort">MCI</span>
-          <div id="awayScoreCrest" class="crest score-crest city">MC</div>
-        </div>
+        <div id="previewHomeName">Chelsea</div>
 
       </div>
 
-      <div class="match-clock" id="clock">00:00</div>
+      <div class="vs">VS</div>
+
+      <div class="preview">
+
+        <div id="previewAwayCrest"
+        class="crest city">MC</div>
+
+        <div id="previewAwayName">
+          Manchester City
+        </div>
+
+      </div>
 
     </div>
 
+    <button class="start" onclick="startFootball()">
+      ⚽ ENTER STADIUM
+    </button>
 
-    <div class="pitch-wrap">
+  </div>
 
-      <div id="pitch" class="pitch">
+</section>
 
-        <div class="center-line"></div>
-        <div class="center-circle"></div>
-        <div class="center-dot"></div>
 
-        <div class="penalty left"></div>
-        <div class="penalty right"></div>
+<!-- =====================================================
+ FOOTBALL GAME
+===================================================== -->
 
-        <div class="goal left"></div>
-        <div class="goal right"></div>
+<section id="footballGame" class="hidden">
 
-        <!-- PLAYER -->
+  <div class="game-top">
 
-        <div id="player" class="player user">
-          <div class="player-name">YOU</div>
-          <div class="head"></div>
-          <div class="body"></div>
-          <div class="leg l"></div>
-          <div class="leg r"></div>
-        </div>
+    <div class="scoreboard">
 
-        <!-- AI PLAYER -->
+      <div class="score-team">
 
-        <div id="opponent" class="player ai">
-          <div class="player-name">AI</div>
-          <div class="head"></div>
-          <div class="body"></div>
-          <div class="leg l"></div>
-          <div class="leg r"></div>
-        </div>
+        <div id="homeCrest"
+        class="crest small-crest chelsea">CFC</div>
 
-        <!-- REFEREE -->
-
-        <div id="referee" class="referee">
-          <div class="rhead"></div>
-          <div class="rbody"></div>
-        </div>
-
-        <!-- BALL -->
-
-        <div id="ball" class="ball"></div>
+        <span id="homeShort">CHE</span>
 
       </div>
 
+      <div class="score">
 
-      <!-- MOBILE CONTROLS -->
-
-      <div class="controls">
-
-        <div id="joystick" class="joystick">
-          <div id="joyDot" class="joy-dot"></div>
-        </div>
-
-        <div class="action-buttons">
-
-          <button class="action attack" onclick="attack()">
-            ATTACK
-          </button>
-
-          <button class="action pass" onclick="passBall()">
-            PASS
-          </button>
-
-          <button class="action shoot" onclick="shoot()">
-            SHOOT
-          </button>
-
-        </div>
+        <span id="homeScore">0</span>
+        -
+        <span id="awayScore">0</span>
 
       </div>
 
+      <div class="score-team">
 
-      <!-- KICKOFF OVERLAY -->
+        <span id="awayShort">MCI</span>
 
-      <div id="kickoffOverlay" class="game-overlay">
-
-        <div class="overlay-card">
-
-          <div class="whistle-big">🧑‍⚖️</div>
-
-          <h2 id="kickoffTitle">MATCH READY</h2>
-
-          <p id="kickoffText">
-            The referee is ready.
-            Get ready for kickoff.
-          </p>
-
-          <button class="continue-btn"
-                  onclick="kickOff()">
-            🔊 BLOW WHISTLE & KICK OFF
-          </button>
-
-        </div>
+        <div id="awayCrest"
+        class="crest small-crest city">MC</div>
 
       </div>
 
+    </div>
 
-      <!-- QUESTION OVERLAY -->
+    <div id="clock" class="clock">
+      00:00
+    </div>
 
-      <div id="questionOverlay" class="game-overlay hidden">
+  </div>
 
-        <div class="overlay-card question-card">
 
-          <div class="question-number" id="questionNumber">
-            BRAIN BATTLE
+  <div id="stadium">
+
+    <div class="roof"></div>
+
+    <div class="stands">
+      <div class="crowd"></div>
+    </div>
+
+    <div class="light l1"></div>
+    <div class="light l2"></div>
+    <div class="light l3"></div>
+    <div class="light l4"></div>
+
+    <canvas id="gameCanvas"></canvas>
+
+  </div>
+
+
+  <div id="message"></div>
+
+
+  <!-- CONTROLS -->
+
+  <div class="controls">
+
+    <div id="joystick" class="joystick">
+
+      <div id="joy" class="joy"></div>
+
+    </div>
+
+    <div class="actions">
+
+      <button class="action pass"
+      onclick="passBall()">
+        PASS
+      </button>
+
+      <button class="action tackle"
+      onclick="tackle()">
+        TACKLE
+      </button>
+
+      <button class="action shoot"
+      onclick="shoot()">
+        SHOOT
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- KICKOFF -->
+
+  <div id="kickoff" class="overlay">
+
+    <div class="card">
+
+      <div class="big">🏟️</div>
+
+      <h2 id="kickoffTitle">
+        MATCH DAY
+      </h2>
+
+      <p>
+        11 players vs 11 players.<br>
+        Two goalkeepers. One referee.<br>
+        The stadium is ready.
+      </p>
+
+      <button class="main-btn"
+      onclick="kickOff()">
+        🔊 BLOW WHISTLE
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- QUESTION -->
+
+  <div id="questionOverlay"
+  class="overlay hidden">
+
+    <div class="card">
+
+      <div id="questionNumber"
+      class="question-number">
+        🧠 BRAIN BATTLE
+      </div>
+
+      <div id="questionText"
+      class="question">
+        Question
+      </div>
+
+      <div id="answers"
+      class="answers"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RESULT -->
+
+  <div id="resultOverlay"
+  class="overlay hidden">
+
+    <div class="card">
+
+      <div class="big">🏆</div>
+
+      <h2>FULL TIME</h2>
+
+      <div class="result-row">
+
+        <div class="result-team">
+
+          <div id="resultHomeCrest"
+          class="crest chelsea">CFC</div>
+
+          <div id="resultHomeName">
+            Chelsea
           </div>
 
-          <div class="question" id="questionText">
-            Question
-          </div>
+        </div>
 
-          <div id="answers" class="answers"></div>
+        <div class="result-score">
+
+          <span id="resultHomeScore">0</span>
+          :
+          <span id="resultAwayScore">0</span>
+
+        </div>
+
+        <div class="result-team">
+
+          <div id="resultAwayCrest"
+          class="crest city">MC</div>
+
+          <div id="resultAwayName">
+            Manchester City
+          </div>
 
         </div>
 
       </div>
 
+      <button class="main-btn"
+      onclick="playAgain()">
+        🔄 PLAY AGAIN
+      </button>
 
-      <!-- RESULT -->
-
-      <div id="resultOverlay" class="game-overlay hidden">
-
-        <div class="overlay-card">
-
-          <div style="font-size:45px">🏆</div>
-
-          <h2>FULL TIME</h2>
-
-          <div class="result-teams">
-
-            <div class="result-team">
-              <div id="resultHomeCrest"
-                   class="crest chelsea">CFC</div>
-              <div id="resultHomeName">Chelsea</div>
-            </div>
-
-            <div class="result-score">
-              <span id="resultHomeScore">0</span>
-              :
-              <span id="resultAwayScore">0</span>
-            </div>
-
-            <div class="result-team">
-              <div id="resultAwayCrest"
-                   class="crest city">MC</div>
-              <div id="resultAwayName">Manchester City</div>
-            </div>
-
-          </div>
-
-          <button class="continue-btn"
-                  onclick="playAgain()">
-            🔄 PLAY AGAIN
-          </button>
-
-          <button class="continue-btn"
-                  style="background:#203c2a;color:white"
-                  onclick="goHome()">
-            🏠 HOME
-          </button>
-
-        </div>
-
-      </div>
+      <button class="main-btn"
+      style="background:#1b3727;color:white"
+      onclick="goHome()">
+        🏠 HOME
+      </button>
 
     </div>
 
-  </section>
+  </div>
 
-</div>
+</section>
 
 
 <script>
 
-/* =====================================
-   CLUB DATABASE
-===================================== */
+/* =====================================================
+ CLUBS
+===================================================== */
 
-const clubs = {
+const clubs={
 
-  "Chelsea":{
+  Chelsea:{
     short:"CHE",
     crest:"CFC",
     color:"#1267b1",
-    crestClass:"chelsea"
+    css:"chelsea"
   },
 
   "Manchester City":{
     short:"MCI",
     crest:"MC",
     color:"#7fd5f5",
-    crestClass:"city"
+    css:"city"
   },
 
-  "Liverpool":{
+  Liverpool:{
     short:"LIV",
     crest:"LFC",
     color:"#d92335",
-    crestClass:"liverpool"
+    css:"liverpool"
   },
 
-  "Arsenal":{
+  Arsenal:{
     short:"ARS",
     crest:"AFC",
     color:"#e21d38",
-    crestClass:"arsenal"
+    css:"arsenal"
   }
 
 };
 
-
-/* =====================================
-   GAME STATE
-===================================== */
-
-let selectedClub = "Chelsea";
-let opponentClub = "Manchester City";
-
-let homeScore = 0;
-let awayScore = 0;
-
-let playerX = 30;
-let playerY = 55;
-
-let opponentX = 70;
-let opponentY = 45;
-
-let ballX = 34;
-let ballY = 55;
-
-let gameStarted = false;
-let matchSeconds = 0;
-
-let matchTimer = null;
-let aiTimer = null;
-
-let questionIndex = 0;
-let questionsAnswered = 0;
-
-let audioContext = null;
+let selectedClub="Chelsea";
+let opponentClub="Manchester City";
 
 
-/* =====================================
-   HOME / MENU
-===================================== */
+/* =====================================================
+ CANVAS
+===================================================== */
+
+const canvas=document.getElementById("gameCanvas");
+const ctx=canvas.getContext("2d");
+
+let W=0;
+let H=0;
+
+function resize(){
+
+  const rect=canvas.getBoundingClientRect();
+
+  W=canvas.width=rect.width*devicePixelRatio;
+  H=canvas.height=rect.height*devicePixelRatio;
+
+  ctx.setTransform(
+    devicePixelRatio,
+    0,
+    0,
+    devicePixelRatio,
+    0,
+    0
+  );
+
+  W=rect.width;
+  H=rect.height;
+
+}
+
+window.addEventListener("resize",resize);
+
+
+/* =====================================================
+ GAME STATE
+===================================================== */
+
+let playing=false;
+
+let homeScore=0;
+let awayScore=0;
+
+let matchSeconds=0;
+
+let timer=null;
+let animation=null;
+
+let questionIndex=0;
+
+
+/* =====================================================
+ FIELD COORDINATES
+===================================================== */
+
+/*
+ x = 0..100
+ y = 0..100
+*/
+
+let ball={
+  x:50,
+  y:50,
+  vx:0,
+  vy:0,
+  owner:null
+};
+
+let players=[];
+
+let userPlayer=null;
+
+let referee={
+  x:50,
+  y:53,
+  vx:0,
+  vy:0
+};
+
+
+/* =====================================================
+ FORMATIONS
+===================================================== */
+
+const formationHome=[
+
+  [7,50],
+
+  [18,20],
+  [18,38],
+  [18,62],
+  [18,80],
+
+  [32,15],
+  [32,38],
+  [32,62],
+  [32,85],
+
+  [43,40],
+  [43,60]
+
+];
+
+const formationAway=[
+
+  [93,50],
+
+  [82,20],
+  [82,38],
+  [82,62],
+  [82,80],
+
+  [68,15],
+  [68,38],
+  [68,62],
+  [68,85],
+
+  [57,40],
+  [57,60]
+
+];
+
+
+/* =====================================================
+ CREATE PLAYERS
+===================================================== */
+
+function createTeams(){
+
+  players=[];
+
+  formationHome.forEach((p,i)=>{
+
+    players.push({
+
+      team:"home",
+
+      number:i+1,
+
+      x:p[0],
+      y:p[1],
+
+      baseX:p[0],
+      baseY:p[1],
+
+      vx:0,
+      vy:0,
+
+      speed:i===0?.75:.42,
+
+      color:clubs[selectedClub].color,
+
+      skin:"#a96542",
+
+      controlled:i===9,
+
+      role:i===0?"GK":
+      i<5?"DEF":
+      i<9?"MID":"ATT"
+
+    });
+
+  });
+
+
+  formationAway.forEach((p,i)=>{
+
+    players.push({
+
+      team:"away",
+
+      number:i+1,
+
+      x:p[0],
+      y:p[1],
+
+      baseX:p[0],
+      baseY:p[1],
+
+      vx:0,
+      vy:0,
+
+      speed:i===0?.7:.40,
+
+      color:clubs[opponentClub].color,
+
+      skin:"#9c5d3e",
+
+      controlled:false,
+
+      role:i===0?"GK":
+      i<5?"DEF":
+      i<9?"MID":"ATT"
+
+    });
+
+  });
+
+  userPlayer=players.find(p=>p.controlled);
+
+}
+
+
+/* =====================================================
+ MENU
+===================================================== */
 
 function openFootball(){
 
   document.getElementById("home")
-    .classList.add("hidden");
+  .classList.add("hidden");
 
   document.getElementById("footballMenu")
-    .classList.remove("hidden");
+  .classList.remove("hidden");
 
 }
+
 
 function goHome(){
 
-  stopMatch();
+  stopGame();
 
   document.getElementById("footballGame")
-    .classList.add("hidden");
+  .classList.add("hidden");
 
   document.getElementById("footballMenu")
-    .classList.add("hidden");
+  .classList.add("hidden");
 
   document.getElementById("home")
-    .classList.remove("hidden");
+  .classList.remove("hidden");
 
 }
+
 
 function comingSoon(){
 
-  alert("This game mode is coming soon. Football Battle is ready!");
+  alert(
+    "This game mode is coming soon. Football Battle is available now!"
+  );
 
 }
 
 
-/* =====================================
-   CLUB SELECTION
-===================================== */
+/* =====================================================
+ CLUB SELECTION
+===================================================== */
 
 function selectClub(name,button){
 
-  selectedClub = name;
+  selectedClub=name;
 
   document.querySelectorAll(".club")
-    .forEach(c=>c.classList.remove("selected"));
+  .forEach(x=>x.classList.remove("selected"));
 
   button.classList.add("selected");
 
-  const available =
+  const available=
     Object.keys(clubs)
-      .filter(c=>c !== selectedClub);
+    .filter(x=>x!==selectedClub);
 
-  opponentClub =
-    available[Math.floor(Math.random()*available.length)];
+  opponentClub=
+    available[
+      Math.floor(Math.random()*available.length)
+    ];
 
   updatePreview();
 
@@ -1227,288 +1286,250 @@ function selectClub(name,button){
 
 function updatePreview(){
 
-  const home = clubs[selectedClub];
-  const away = clubs[opponentClub];
+  const h=clubs[selectedClub];
+  const a=clubs[opponentClub];
 
-  const homeCrest =
-    document.getElementById("previewHomeCrest");
+  const hc=document.getElementById("previewHomeCrest");
+  const ac=document.getElementById("previewAwayCrest");
 
-  const awayCrest =
-    document.getElementById("previewAwayCrest");
+  hc.className="crest "+h.css;
+  ac.className="crest "+a.css;
 
-  homeCrest.className =
-    "crest " + home.crestClass;
-
-  awayCrest.className =
-    "crest " + away.crestClass;
-
-  homeCrest.textContent = home.crest;
-  awayCrest.textContent = away.crest;
+  hc.textContent=h.crest;
+  ac.textContent=a.crest;
 
   document.getElementById("previewHomeName")
-    .textContent = selectedClub;
+  .textContent=selectedClub;
 
   document.getElementById("previewAwayName")
-    .textContent = opponentClub;
+  .textContent=opponentClub;
 
 }
 
 
-/* =====================================
-   START MATCH
-===================================== */
+/* =====================================================
+ START
+===================================================== */
 
 function startFootball(){
 
   document.getElementById("footballMenu")
-    .classList.add("hidden");
+  .classList.add("hidden");
 
   document.getElementById("footballGame")
-    .classList.remove("hidden");
+  .classList.remove("hidden");
 
-  setupTeams();
+  resize();
+
+  setupScoreboard();
 
   resetMatch();
 
 }
 
 
-/* =====================================
-   SETUP TEAMS
-===================================== */
+function setupScoreboard(){
 
-function setupTeams(){
-
-  const home = clubs[selectedClub];
-  const away = clubs[opponentClub];
+  const h=clubs[selectedClub];
+  const a=clubs[opponentClub];
 
   document.getElementById("homeShort")
-    .textContent = home.short;
+  .textContent=h.short;
 
   document.getElementById("awayShort")
-    .textContent = away.short;
+  .textContent=a.short;
 
-  setCrest(
-    "homeScoreCrest",
-    home
-  );
+  setCrest("homeCrest",h);
+  setCrest("awayCrest",a);
 
-  setCrest(
-    "awayScoreCrest",
-    away
-  );
-
-  setCrest(
-    "resultHomeCrest",
-    home
-  );
-
-  setCrest(
-    "resultAwayCrest",
-    away
-  );
+  setCrest("resultHomeCrest",h);
+  setCrest("resultAwayCrest",a);
 
   document.getElementById("resultHomeName")
-    .textContent = selectedClub;
+  .textContent=selectedClub;
 
   document.getElementById("resultAwayName")
-    .textContent = opponentClub;
-
-  document.getElementById("player")
-    .style.setProperty("--kit",home.color);
-
-  document.getElementById("opponent")
-    .style.setProperty("--kit",away.color);
+  .textContent=opponentClub;
 
 }
 
 
 function setCrest(id,club){
 
-  const el = document.getElementById(id);
+  const el=document.getElementById(id);
 
-  el.className =
-    "crest " + club.crestClass;
+  el.className=
+    "crest "+(
+      id.includes("home")
+      ||id==="homeCrest"
+      ?club.css
+      :club.css
+    );
 
-  el.textContent = club.crest;
+  el.textContent=club.crest;
 
 }
 
 
-/* =====================================
-   RESET
-===================================== */
+/* =====================================================
+ RESET
+===================================================== */
 
 function resetMatch(){
 
-  stopMatch();
+  stopGame();
 
-  homeScore = 0;
-  awayScore = 0;
-  matchSeconds = 0;
+  homeScore=0;
+  awayScore=0;
+  matchSeconds=0;
 
-  playerX = 30;
-  playerY = 55;
+  questionIndex=0;
 
-  opponentX = 70;
-  opponentY = 45;
+  ball={
+    x:50,
+    y:50,
+    vx:0,
+    vy:0,
+    owner:null
+  };
 
-  ballX = 34;
-  ballY = 55;
+  referee={
+    x:50,
+    y:53,
+    vx:0,
+    vy:0
+  };
 
-  gameStarted = false;
-
-  questionIndex = 0;
-  questionsAnswered = 0;
+  createTeams();
 
   document.getElementById("homeScore")
-    .textContent = 0;
+  .textContent=0;
 
   document.getElementById("awayScore")
-    .textContent = 0;
+  .textContent=0;
 
   document.getElementById("clock")
-    .textContent = "00:00";
+  .textContent="00:00";
 
   document.getElementById("resultOverlay")
-    .classList.add("hidden");
+  .classList.add("hidden");
 
   document.getElementById("questionOverlay")
-    .classList.add("hidden");
+  .classList.add("hidden");
 
-  document.getElementById("kickoffOverlay")
-    .classList.remove("hidden");
+  document.getElementById("kickoff")
+  .classList.remove("hidden");
 
   document.getElementById("kickoffTitle")
-    .textContent =
-      selectedClub + " vs " + opponentClub;
+  .textContent=
+    selectedClub+" vs "+opponentClub;
 
-  document.getElementById("kickoffText")
-    .textContent =
-      "The referee is ready. Press the button for the opening whistle.";
-
-  render();
+  draw();
 
 }
 
 
-/* =====================================
-   WHISTLE
-===================================== */
+/* =====================================================
+ WHISTLE
+===================================================== */
+
+let audio=null;
 
 function whistle(){
 
   try{
 
-    audioContext =
-      audioContext ||
-      new (window.AudioContext ||
+    audio=
+      audio ||
+      new(window.AudioContext||
       window.webkitAudioContext)();
 
-    const oscillator =
-      audioContext.createOscillator();
+    const o=audio.createOscillator();
+    const g=audio.createGain();
 
-    const gain =
-      audioContext.createGain();
+    o.type="square";
+    o.frequency.value=2100;
 
-    oscillator.type = "square";
-    oscillator.frequency.value = 2100;
-
-    gain.gain.setValueAtTime(
-      0.0001,
-      audioContext.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      .25,
-      audioContext.currentTime + .03
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
+    g.gain.setValueAtTime(
       .0001,
-      audioContext.currentTime + .7
+      audio.currentTime
     );
 
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-
-    oscillator.start();
-    oscillator.stop(
-      audioContext.currentTime + .75
+    g.gain.exponentialRampToValueAtTime(
+      .25,
+      audio.currentTime+.03
     );
+
+    g.gain.exponentialRampToValueAtTime(
+      .0001,
+      audio.currentTime+.7
+    );
+
+    o.connect(g);
+    g.connect(audio.destination);
+
+    o.start();
+
+    o.stop(audio.currentTime+.75);
 
   }catch(e){}
 
 }
 
 
-/* =====================================
-   KICKOFF
-===================================== */
+/* =====================================================
+ KICKOFF
+===================================================== */
 
 function kickOff(){
 
   whistle();
 
-  const ref =
-    document.getElementById("referee");
+  document.getElementById("kickoff")
+  .classList.add("hidden");
 
-  const message =
-    document.createElement("div");
+  playing=true;
 
-  message.className = "whistle";
-  message.textContent = "📯 WHISTLE!";
+  startClock();
 
-  ref.appendChild(message);
+  gameLoop();
 
-  setTimeout(()=>{
-
-    document.getElementById("kickoffOverlay")
-      .classList.add("hidden");
-
-    gameStarted = true;
-
-    startMatchClock();
-
-  },900);
+  showMessage("📯 WHISTLE! KICKOFF!");
 
 }
 
 
-/* =====================================
-   CLOCK
-===================================== */
+/* =====================================================
+ CLOCK
+===================================================== */
 
-function startMatchClock(){
+function startClock(){
 
-  clearInterval(matchTimer);
+  clearInterval(timer);
 
-  matchTimer = setInterval(()=>{
+  timer=setInterval(()=>{
 
-    if(!gameStarted) return;
+    if(!playing)return;
 
     matchSeconds++;
 
-    const minutes =
-      Math.floor(matchSeconds/60)
-        .toString()
-        .padStart(2,"0");
+    const m=
+      String(Math.floor(matchSeconds/60))
+      .padStart(2,"0");
 
-    const seconds =
-      (matchSeconds%60)
-        .toString()
-        .padStart(2,"0");
+    const s=
+      String(matchSeconds%60)
+      .padStart(2,"0");
 
     document.getElementById("clock")
-      .textContent =
-      minutes + ":" + seconds;
+    .textContent=m+":"+s;
 
     /*
-       3 minutes = full time for mobile game.
-       We can change this later.
+      Mobile match lasts 3 minutes.
+      Change 180 to 300 for 5 minutes.
     */
 
-    if(matchSeconds >= 180){
+    if(matchSeconds>=180){
 
       finishMatch();
 
@@ -1519,493 +1540,441 @@ function startMatchClock(){
 }
 
 
-/* =====================================
-   STOP MATCH
-===================================== */
+/* =====================================================
+ STOP
+===================================================== */
 
-function stopMatch(){
+function stopGame(){
 
-  clearInterval(matchTimer);
-  clearInterval(aiTimer);
+  playing=false;
 
-  gameStarted = false;
+  clearInterval(timer);
 
-}
-
-
-/* =====================================
-   RENDER PLAYERS
-===================================== */
-
-function render(){
-
-  const player =
-    document.getElementById("player");
-
-  const opponent =
-    document.getElementById("opponent");
-
-  const ball =
-    document.getElementById("ball");
-
-  const referee =
-    document.getElementById("referee");
-
-  player.style.left = playerX + "%";
-  player.style.top = playerY + "%";
-
-  opponent.style.left = opponentX + "%";
-  opponent.style.top = opponentY + "%";
-
-  ball.style.left = ballX + "%";
-  ball.style.top = ballY + "%";
-
-  referee.style.left =
-    ((playerX + opponentX) / 2) + "%";
-
-  referee.style.top =
-    ((playerY + opponentY) / 2 + 8) + "%";
+  if(animation)
+    cancelAnimationFrame(animation);
 
 }
 
 
-/* =====================================
-   MOVEMENT
-===================================== */
+/* =====================================================
+ GAME LOOP
+===================================================== */
 
-function movePlayer(dx,dy){
+function gameLoop(){
 
-  if(!gameStarted) return;
+  if(!playing)return;
 
-  playerX += dx;
-  playerY += dy;
+  update();
 
-  playerX = Math.max(5,Math.min(95,playerX));
-  playerY = Math.max(8,Math.min(90,playerY));
+  draw();
 
-  document.getElementById("player")
-    .classList.add("running");
-
-  render();
-
-  setTimeout(()=>{
-
-    document.getElementById("player")
-      .classList.remove("running");
-
-  },250);
+  animation=
+    requestAnimationFrame(gameLoop);
 
 }
 
 
-/* =====================================
-   JOYSTICK
-===================================== */
+/* =====================================================
+ DISTANCE
+===================================================== */
 
-const joystick =
-  document.getElementById("joystick");
+function dist(a,b){
 
-const joyDot =
-  document.getElementById("joyDot");
-
-let joyActive = false;
-
-function joystickMove(clientX,clientY){
-
-  const rect =
-    joystick.getBoundingClientRect();
-
-  const cx =
-    rect.left + rect.width/2;
-
-  const cy =
-    rect.top + rect.height/2;
-
-  let dx = clientX-cx;
-  let dy = clientY-cy;
-
-  const max = rect.width*.32;
-
-  const distance =
-    Math.sqrt(dx*dx+dy*dy);
-
-  if(distance > max){
-
-    dx = dx/distance*max;
-    dy = dy/distance*max;
-
-  }
-
-  joyDot.style.left =
-    "calc(50% + "+dx+"px)";
-
-  joyDot.style.top =
-    "calc(50% + "+dy+"px)";
-
-  movePlayer(
-    dx/max*.9,
-    dy/max*.9
+  return Math.hypot(
+    a.x-b.x,
+    a.y-b.y
   );
 
 }
 
 
-joystick.addEventListener("touchstart",e=>{
+/* =====================================================
+ CLAMP
+===================================================== */
 
-  joyActive=true;
+function clamp(v,min,max){
 
-  joystickMove(
-    e.touches[0].clientX,
-    e.touches[0].clientY
-  );
-
-},{passive:true});
-
-
-joystick.addEventListener("touchmove",e=>{
-
-  if(!joyActive) return;
-
-  joystickMove(
-    e.touches[0].clientX,
-    e.touches[0].clientY
-  );
-
-},{passive:true});
-
-
-joystick.addEventListener("touchend",()=>{
-
-  joyActive=false;
-
-  joyDot.style.left="50%";
-  joyDot.style.top="50%";
-
-});
-
-
-/* =====================================
-   KEYBOARD
-===================================== */
-
-document.addEventListener("keydown",e=>{
-
-  if(!gameStarted) return;
-
-  if(e.key==="ArrowUp" || e.key==="w")
-    movePlayer(0,-1.5);
-
-  if(e.key==="ArrowDown" || e.key==="s")
-    movePlayer(0,1.5);
-
-  if(e.key==="ArrowLeft" || e.key==="a")
-    movePlayer(-1.5,0);
-
-  if(e.key==="ArrowRight" || e.key==="d")
-    movePlayer(1.5,0);
-
-});
-
-
-/* =====================================
-   DISTANCE
-===================================== */
-
-function distance(){
-
-  const dx =
-    playerX-ballX;
-
-  const dy =
-    playerY-ballY;
-
-  return Math.sqrt(dx*dx+dy*dy);
+  return Math.max(min,Math.min(max,v));
 
 }
 
 
-/* =====================================
-   ATTACK
-===================================== */
+/* =====================================================
+ UPDATE GAME
+===================================================== */
 
-function attack(){
+function update(){
 
-  if(!gameStarted) return;
+  if(!userPlayer)return;
 
-  if(distance() < 13){
 
-    ballX += 8;
+  /* USER */
 
-    ballY += (Math.random()-.5)*5;
+  userPlayer.x+=joyX*.65;
+  userPlayer.y+=joyY*.65;
 
-    ballX =
-      Math.min(95,ballX);
+  userPlayer.x=clamp(userPlayer.x,4,96);
+  userPlayer.y=clamp(userPlayer.y,8,91);
 
-    ballY =
-      Math.max(5,Math.min(90,ballY));
 
-    render();
+  /* AI */
 
-    showBrainQuestion();
+  players.forEach(p=>{
 
-  }else{
+    if(p===userPlayer)return;
 
-    /*
-       Move ball toward player when
-       attacking near it.
-    */
+    let targetX=p.baseX;
+    let targetY=p.baseY;
 
-    ballX +=
-      (playerX-ballX)*.3;
+    const d=dist(p,ball);
 
-    ballY +=
-      (playerY-ballY)*.3;
+    if(d<30){
 
-    render();
+      targetX=ball.x;
+      targetY=ball.y;
 
-  }
-
-}
-
-
-/* =====================================
-   PASS
-===================================== */
-
-function passBall(){
-
-  if(!gameStarted) return;
-
-  if(distance() < 15){
-
-    ballX += 13;
-
-    ballY += (Math.random()-.5)*10;
-
-    ballX =
-      Math.min(96,ballX);
-
-    ballY =
-      Math.max(5,Math.min(90,ballY));
-
-    render();
-
-  }else{
-
-    alert("Move closer to the ball first!");
-
-  }
-
-}
-
-
-/* =====================================
-   SHOOT
-===================================== */
-
-function shoot(){
-
-  if(!gameStarted) return;
-
-  if(distance() > 16){
-
-    alert("Get closer to the ball before shooting!");
-
-    return;
-
-  }
-
-  ballX += 24;
-
-  render();
-
-  /*
-     Right side is opponent goal.
-  */
-
-  if(ballX >= 94){
-
-    homeScore++;
-
-    updateScore();
-
-    goalAnimation();
-
-    setTimeout(()=>{
-
-      resetBall();
-
-    },1000);
-
-  }else{
-
-    showBrainQuestion();
-
-  }
-
-}
-
-
-/* =====================================
-   GOAL
-===================================== */
-
-function goalAnimation(){
-
-  whistle();
-
-  const overlay =
-    document.createElement("div");
-
-  overlay.className="game-overlay";
-
-  overlay.innerHTML=`
-    <div class="overlay-card">
-      <div style="font-size:65px">⚽🔥</div>
-      <h2>GOAL!</h2>
-      <p>${selectedClub} scores!</p>
-    </div>
-  `;
-
-  document.getElementById("footballGame")
-    .appendChild(overlay);
-
-  setTimeout(()=>{
-
-    overlay.remove();
-
-  },1200);
-
-}
-
-
-/* =====================================
-   RESET BALL
-===================================== */
-
-function resetBall(){
-
-  playerX = 30;
-  playerY = 55;
-
-  opponentX = 70;
-  opponentY = 45;
-
-  ballX = 34;
-  ballY = 55;
-
-  render();
-
-}
-
-
-/* =====================================
-   SCORE
-===================================== */
-
-function updateScore(){
-
-  document.getElementById("homeScore")
-    .textContent = homeScore;
-
-  document.getElementById("awayScore")
-    .textContent = awayScore;
-
-}
-
-
-/* =====================================
-   AI
-===================================== */
-
-function startAI(){
-
-  clearInterval(aiTimer);
-
-  aiTimer = setInterval(()=>{
-
-    if(!gameStarted) return;
-
-    /*
-       AI moves toward ball.
-    */
-
-    const dx = ballX-opponentX;
-    const dy = ballY-opponentY;
-
-    opponentX +=
-      Math.sign(dx)*.7;
-
-    opponentY +=
-      Math.sign(dy)*.7;
-
-    opponentX =
-      Math.max(5,Math.min(95,opponentX));
-
-    opponentY =
-      Math.max(8,Math.min(90,opponentY));
-
-    /*
-       AI reaches ball.
-    */
-
-    const d =
-      Math.sqrt(
-        Math.pow(ballX-opponentX,2)+
-        Math.pow(ballY-opponentY,2)
-      );
-
-    if(d < 8){
+    }else{
 
       /*
-         AI attacks toward your goal.
+        Formation slowly follows the ball.
       */
 
-      ballX -= 5;
+      targetX+=
+        (ball.x-50)*
+        (p.team==="home"?.16:-.16);
 
-      ballY +=
-        (Math.random()-.5)*3;
+      targetY+=
+        (ball.y-50)*.12;
 
-      if(ballX <= 6){
+    }
 
-        awayScore++;
+    const dx=targetX-p.x;
+    const dy=targetY-p.y;
 
-        updateScore();
+    const len=Math.hypot(dx,dy)||1;
 
-        resetBall();
+    p.x+=dx/len*p.speed;
+    p.y+=dy/len*p.speed;
+
+    p.x=clamp(p.x,3,97);
+    p.y=clamp(p.y,7,92);
+
+  });
+
+
+  /* BALL */
+
+  ball.x+=ball.vx;
+  ball.y+=ball.vy;
+
+  ball.vx*=.94;
+  ball.vy*=.94;
+
+  ball.x=clamp(ball.x,2,98);
+  ball.y=clamp(ball.y,5,94);
+
+
+  /* BALL POSSESSION */
+
+  let nearest=null;
+  let nearestDistance=999;
+
+  players.forEach(p=>{
+
+    const d=dist(p,ball);
+
+    if(d<nearestDistance){
+
+      nearestDistance=d;
+      nearest=p;
+
+    }
+
+  });
+
+  if(nearestDistance<3.5){
+
+    if(
+      Math.abs(ball.vx)+
+      Math.abs(ball.vy)<.8
+    ){
+
+      ball.owner=nearest;
+
+    }
+
+  }
+
+
+  if(ball.owner){
+
+    const p=ball.owner;
+
+    ball.x+=
+      (p.x-ball.x)*.65;
+
+    ball.y+=
+      (p.y-ball.y)*.65;
+
+  }
+
+
+  /* AI ATTACK */
+
+  players.forEach(p=>{
+
+    if(p.team!=="away")return;
+
+    if(p===userPlayer)return;
+
+    if(dist(p,ball)<3){
+
+      if(Math.random()<.025){
+
+        ball.owner=p;
+
+        ball.vx=-1.4;
+
+        ball.vy=(50-p.y)*.025;
 
       }
 
     }
 
-    render();
+  });
 
-  },350);
+
+  /* REFEREE */
+
+  referee.x+=
+    (ball.x-referee.x)*.035;
+
+  referee.y+=
+    (ball.y-referee.y)*.035;
+
+  referee.x=clamp(referee.x,15,85);
+  referee.y=clamp(referee.y,10,88);
+
+
+  /* GOAL */
+
+  if(ball.x>=98 && ball.y>37 && ball.y<63){
+
+    scoreGoal("home");
+
+  }
+
+  if(ball.x<=2 && ball.y>37 && ball.y<63){
+
+    scoreGoal("away");
+
+  }
 
 }
 
 
-/* =====================================
-   QUESTIONS
-===================================== */
+/* =====================================================
+ PASS
+===================================================== */
 
-const questions = [
+function passBall(){
+
+  if(!playing)return;
+
+  if(!userPlayer)return;
+
+  const d=dist(userPlayer,ball);
+
+  if(d>5){
+
+    showMessage("Get closer to the ball!");
+
+    return;
+
+  }
+
+  ball.owner=userPlayer;
+
+  /*
+    Find teammate in forward direction.
+  */
+
+  const mates=
+    players.filter(
+      p=>p.team==="home" && p!==userPlayer
+    );
+
+  let target=
+    mates
+    .filter(p=>p.x>userPlayer.x)
+    .sort(
+      (a,b)=>a.x-b.x
+    )[0];
+
+  if(!target)
+    target=mates[0];
+
+  const dx=target.x-ball.x;
+  const dy=target.y-ball.y;
+
+  const len=Math.hypot(dx,dy)||1;
+
+  ball.owner=null;
+
+  ball.vx=dx/len*2.4;
+  ball.vy=dy/len*2.4;
+
+  showMessage("PASS!");
+
+}
+
+
+/* =====================================================
+ TACKLE
+===================================================== */
+
+function tackle(){
+
+  if(!playing)return;
+
+  const enemies=
+    players.filter(
+      p=>p.team==="away"
+    );
+
+  let closest=null;
+  let dmin=999;
+
+  enemies.forEach(p=>{
+
+    const d=dist(userPlayer,p);
+
+    if(d<dmin){
+
+      dmin=d;
+      closest=p;
+
+    }
+
+  });
+
+  if(dmin<7){
+
+    ball.owner=null;
+
+    ball.x=closest.x;
+    ball.y=closest.y;
+
+    ball.vx=.7;
+    ball.vy=
+      (Math.random()-.5)*1.5;
+
+    showMessage("💥 GREAT TACKLE!");
+
+  }else{
+
+    showMessage("Move closer to tackle!");
+
+  }
+
+}
+
+
+/* =====================================================
+ SHOOT
+===================================================== */
+
+function shoot(){
+
+  if(!playing)return;
+
+  if(dist(userPlayer,ball)>5){
+
+    showMessage("Get closer to the ball!");
+
+    return;
+
+  }
+
+  ball.owner=null;
+
+  ball.vx=3.7;
+
+  ball.vy=
+    (50-ball.y)*.045;
+
+  showMessage("⚽ SHOT!");
+
+}
+
+
+/* =====================================================
+ GOAL
+===================================================== */
+
+function scoreGoal(team){
+
+  if(team==="home")
+    homeScore++;
+  else
+    awayScore++;
+
+  document.getElementById("homeScore")
+  .textContent=homeScore;
+
+  document.getElementById("awayScore")
+  .textContent=awayScore;
+
+  whistle();
+
+  showMessage(
+    team==="home"
+    ? "⚽ GOAL! "+selectedClub
+    : "⚽ GOAL! "+opponentClub
+  );
+
+  ball={
+    x:50,
+    y:50,
+    vx:0,
+    vy:0,
+    owner:null
+  };
+
+  players.forEach(p=>{
+
+    if(p.team==="home"){
+
+      p.x=p.baseX;
+      p.y=p.baseY;
+
+    }else{
+
+      p.x=p.baseX;
+      p.y=p.baseY;
+
+    }
+
+  });
+
+}
+
+
+/* =====================================================
+ BRAIN BATTLE
+===================================================== */
+
+const questions=[
 
   {
-    q:"What is the capital city of Nigeria?",
+    q:"What is the capital of Nigeria?",
     a:["Lagos","Abuja","Kano","Ibadan"],
     c:1
   },
 
   {
-    q:"Which Nigerian player is known as the Super Eagles captain?",
-    a:["William Troost-Ekong","Didier Drogba","Sadio Mane","Mohamed Salah"],
-    c:0
-  },
-
-  {
-    q:"How many players normally start for one football team?",
-    a:["7","9","11","15"],
+    q:"How many players start for one football team?",
+    a:["7","9","11","13"],
     c:2
   },
 
@@ -2016,9 +1985,9 @@ const questions = [
   },
 
   {
-    q:"How many minutes are in a normal football match?",
-    a:["60","70","80","90"],
-    c:3
+    q:"How many minutes are in normal regulation football?",
+    a:["60","75","90","120"],
+    c:2
   },
 
   {
@@ -2037,6 +2006,12 @@ const questions = [
     q:"Which ocean is the largest?",
     a:["Atlantic","Indian","Pacific","Arctic"],
     c:2
+  },
+
+  {
+    q:"How many players are on the pitch when two full teams play?",
+    a:["18","20","22","24"],
+    c:2
   }
 
 ];
@@ -2044,152 +2019,990 @@ const questions = [
 
 function showBrainQuestion(){
 
-  if(!gameStarted) return;
+  if(!playing)return;
 
-  const data =
+  const q=
     questions[
-      questionIndex % questions.length
+      questionIndex%questions.length
     ];
 
   questionIndex++;
 
   document.getElementById("questionNumber")
-    .textContent =
-      "🧠 BRAIN BATTLE " +
-      questionIndex;
+  .textContent=
+    "🧠 BRAIN BATTLE "+questionIndex;
 
   document.getElementById("questionText")
-    .textContent = data.q;
+  .textContent=q.q;
 
-  const answers =
+  const box=
     document.getElementById("answers");
 
-  answers.innerHTML="";
+  box.innerHTML="";
 
-  data.a.forEach((answer,index)=>{
+  q.a.forEach((answer,i)=>{
 
-    const button =
+    const b=
       document.createElement("button");
 
-    button.className="answer";
+    b.className="answer";
 
-    button.textContent =
-      String.fromCharCode(65+index) +
-      ". " + answer;
+    b.textContent=
+      String.fromCharCode(65+i)+
+      ". "+answer;
 
-    button.onclick=()=>{
+    b.onclick=()=>{
 
-      checkAnswer(
-        button,
-        index===data.c,
-        data
-      );
+      [...box.children]
+      .forEach(x=>x.disabled=true);
+
+      if(i===q.c){
+
+        b.classList.add("correct");
+
+        setTimeout(()=>{
+
+          document.getElementById(
+            "questionOverlay"
+          ).classList.add("hidden");
+
+          playing=true;
+
+          ball.vx=1.7;
+
+          showMessage(
+            "🧠 CORRECT! ATTACK BOOST!"
+          );
+
+        },700);
+
+      }else{
+
+        b.classList.add("wrong");
+
+        box.children[q.c]
+        .classList.add("correct");
+
+        setTimeout(()=>{
+
+          document.getElementById(
+            "questionOverlay"
+          ).classList.add("hidden");
+
+          playing=true;
+
+        },1000);
+
+      }
 
     };
 
-    answers.appendChild(button);
+    box.appendChild(b);
 
   });
 
-  document.getElementById("questionOverlay")
-    .classList.remove("hidden");
+  playing=false;
 
-  gameStarted=false;
+  document.getElementById(
+    "questionOverlay"
+  ).classList.remove("hidden");
 
 }
 
 
-function checkAnswer(button,correct,data){
+/* =====================================================
+ MESSAGE
+===================================================== */
 
-  const buttons =
-    document.querySelectorAll(".answer");
+let messageTimer=null;
 
-  buttons.forEach(b=>b.disabled=true);
+function showMessage(text){
 
-  if(correct){
+  const el=document.getElementById("message");
 
-    button.classList.add("correct");
+  el.textContent=text;
 
-    questionsAnswered++;
+  el.classList.add("show");
 
-    /*
-       Correct answer gives player
-       an attacking advantage.
-    */
+  clearTimeout(messageTimer);
 
-    setTimeout(()=>{
+  messageTimer=setTimeout(()=>{
 
-      document.getElementById("questionOverlay")
-        .classList.add("hidden");
+    el.classList.remove("show");
 
-      gameStarted=true;
+  },1200);
 
-      ballX += 10;
+}
 
-      render();
 
-    },700);
+/* =====================================================
+ DRAW STADIUM / FIELD
+===================================================== */
+
+function draw(){
+
+  ctx.clearRect(0,0,W,H);
+
+  drawField();
+
+  drawPlayers();
+
+  drawReferee();
+
+  drawBall();
+
+}
+
+
+/* =====================================================
+ FIELD
+===================================================== */
+
+function fieldPoint(x,y){
+
+  /*
+    Perspective:
+    top of field is narrower,
+    bottom is wider.
+  */
+
+  const horizon=H*.23;
+
+  const bottom=H*.91;
+
+  const depth=y/100;
+
+  const width=
+    W*.60+
+    W*.34*depth;
+
+  const left=
+    (W-width)/2;
+
+  const px=
+    left+
+    x/100*width;
+
+  const py=
+    horizon+
+    depth*(bottom-horizon);
+
+  return {x:px,y:py};
+
+}
+
+
+function drawField(){
+
+  const topY=H*.23;
+  const bottomY=H*.91;
+
+  const topW=W*.60;
+  const bottomW=W*.94;
+
+  const topL=(W-topW)/2;
+  const bottomL=(W-bottomW)/2;
+
+  /* grass */
+
+  const grd=
+    ctx.createLinearGradient(
+      0,topY,0,bottomY
+    );
+
+  grd.addColorStop(0,"#155c32");
+  grd.addColorStop(.5,"#16733b");
+  grd.addColorStop(1,"#0e542c");
+
+  ctx.fillStyle=grd;
+
+  ctx.beginPath();
+
+  ctx.moveTo(topL,topY);
+  ctx.lineTo(topL+topW,topY);
+  ctx.lineTo(bottomL+bottomW,bottomY);
+  ctx.lineTo(bottomL,bottomY);
+
+  ctx.closePath();
+
+  ctx.fill();
+
+
+  /* mowing stripes */
+
+  for(let i=0;i<10;i++){
+
+    const y1=i/10*100;
+    const y2=(i+1)/10*100;
+
+    const a=fieldPoint(0,y1);
+    const b=fieldPoint(100,y1);
+    const c=fieldPoint(100,y2);
+    const d=fieldPoint(0,y2);
+
+    ctx.fillStyle=
+      i%2===0
+      ?"rgba(255,255,255,.035)"
+      :"rgba(0,0,0,.035)";
+
+    ctx.beginPath();
+
+    ctx.moveTo(a.x,a.y);
+    ctx.lineTo(b.x,b.y);
+    ctx.lineTo(c.x,c.y);
+    ctx.lineTo(d.x,d.y);
+
+    ctx.closePath();
+    ctx.fill();
+
+  }
+
+
+  /* field border */
+
+  ctx.strokeStyle="rgba(255,255,255,.9)";
+  ctx.lineWidth=2;
+
+  const tl=fieldPoint(0,0);
+  const tr=fieldPoint(100,0);
+  const br=fieldPoint(100,100);
+  const bl=fieldPoint(0,100);
+
+  ctx.beginPath();
+
+  ctx.moveTo(tl.x,tl.y);
+  ctx.lineTo(tr.x,tr.y);
+  ctx.lineTo(br.x,br.y);
+  ctx.lineTo(bl.x,bl.y);
+  ctx.closePath();
+
+  ctx.stroke();
+
+
+  /* halfway */
+
+  line(
+    fieldPoint(0,50),
+    fieldPoint(100,50)
+  );
+
+
+  /* center circle */
+
+  const c=fieldPoint(50,50);
+
+  const radius=
+    Math.min(W,H)*.105;
+
+  ctx.beginPath();
+  ctx.ellipse(
+    c.x,
+    c.y,
+    radius,
+    radius*.55,
+    0,
+    0,
+    Math.PI*2
+  );
+
+  ctx.stroke();
+
+
+  /* penalty boxes */
+
+  drawBox(0);
+  drawBox(100);
+
+
+  /* goals */
+
+  drawGoal(0);
+  drawGoal(100);
+
+}
+
+
+function line(a,b){
+
+  ctx.beginPath();
+
+  ctx.moveTo(a.x,a.y);
+  ctx.lineTo(b.x,b.y);
+
+  ctx.stroke();
+
+}
+
+
+function drawBox(side){
+
+  const y1=31;
+  const y2=69;
+  const depth=16;
+
+  let points;
+
+  if(side===0){
+
+    points=[
+      fieldPoint(0,y1),
+      fieldPoint(depth,y1),
+      fieldPoint(depth,y2),
+      fieldPoint(0,y2)
+    ];
 
   }else{
 
-    button.classList.add("wrong");
+    points=[
+      fieldPoint(100-depth,y1),
+      fieldPoint(100,y1),
+      fieldPoint(100,y2),
+      fieldPoint(100-depth,y2)
+    ];
 
-    buttons.forEach((b,i)=>{
+  }
 
-      if(i===data.c)
-        b.classList.add("correct");
+  ctx.beginPath();
 
-    });
+  ctx.moveTo(points[0].x,points[0].y);
 
-    setTimeout(()=>{
+  points.slice(1)
+  .forEach(p=>ctx.lineTo(p.x,p.y));
 
-      document.getElementById("questionOverlay")
-        .classList.add("hidden");
+  ctx.closePath();
 
-      gameStarted=true;
+  ctx.stroke();
 
-    },1000);
+}
+
+
+function drawGoal(side){
+
+  const y1=43;
+  const y2=57;
+
+  let a,b;
+
+  if(side===0){
+
+    a=fieldPoint(0,y1);
+    b=fieldPoint(0,y2);
+
+  }else{
+
+    a=fieldPoint(100,y1);
+    b=fieldPoint(100,y2);
+
+  }
+
+  ctx.strokeStyle="#fff";
+  ctx.lineWidth=5;
+
+  ctx.beginPath();
+
+  ctx.moveTo(a.x,a.y);
+  ctx.lineTo(b.x,b.y);
+
+  ctx.stroke();
+
+}
+
+
+/* =====================================================
+ PLAYERS
+===================================================== */
+
+function drawPlayers(){
+
+  /*
+    Draw far players first.
+  */
+
+  const sorted=
+    [...players]
+    .sort(
+      (a,b)=>a.y-b.y
+    );
+
+  sorted.forEach(p=>{
+
+    const pos=
+      fieldPoint(p.x,p.y);
+
+    const scale=
+      .55+
+      p.y/100*.55;
+
+    drawPlayer(p,pos,scale);
+
+  });
+
+}
+
+
+function drawPlayer(p,pos,scale){
+
+  const s=scale;
+
+  const head=8*s;
+  const bodyW=14*s;
+  const bodyH=18*s;
+
+  /* shadow */
+
+  ctx.fillStyle="rgba(0,0,0,.35)";
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    pos.x,
+    pos.y+17*s,
+    11*s,
+    4*s,
+    0,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  /* legs */
+
+  ctx.strokeStyle="#d29b73";
+  ctx.lineWidth=4*s;
+  ctx.lineCap="round";
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    pos.x-4*s,
+    pos.y+10*s
+  );
+
+  ctx.lineTo(
+    pos.x-6*s,
+    pos.y+22*s
+  );
+
+  ctx.moveTo(
+    pos.x+4*s,
+    pos.y+10*s
+  );
+
+  ctx.lineTo(
+    pos.x+6*s,
+    pos.y+22*s
+  );
+
+  ctx.stroke();
+
+
+  /* body */
+
+  ctx.fillStyle=p.color;
+
+  roundRect(
+    pos.x-bodyW/2,
+    pos.y-3*s,
+    bodyW,
+    bodyH,
+    4*s
+  );
+
+  ctx.fill();
+
+
+  /* shirt highlight */
+
+  ctx.fillStyle="rgba(255,255,255,.2)";
+
+  ctx.fillRect(
+    pos.x-bodyW*.35,
+    pos.y,
+    bodyW*.18,
+    bodyH*.65
+  );
+
+
+  /* head */
+
+  ctx.fillStyle=p.skin;
+
+  ctx.beginPath();
+
+  ctx.arc(
+    pos.x,
+    pos.y-9*s,
+    head,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  /* hair */
+
+  ctx.fillStyle="#16110d";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    pos.x,
+    pos.y-11*s,
+    head*.8,
+    Math.PI,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  /* number */
+
+  ctx.fillStyle="white";
+  ctx.font=
+    "bold "+Math.max(6,8*s)+"px Arial";
+
+  ctx.textAlign="center";
+
+  ctx.fillText(
+    p.number,
+    pos.x,
+    pos.y+8*s
+  );
+
+
+  /* controlled ring */
+
+  if(p===userPlayer){
+
+    ctx.strokeStyle="#ffd447";
+    ctx.lineWidth=2;
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+      pos.x,
+      pos.y+25*s,
+      13*s,
+      5*s,
+      0,
+      0,
+      Math.PI*2
+    );
+
+    ctx.stroke();
 
   }
 
 }
 
 
-/* =====================================
-   FINISH
-===================================== */
+function roundRect(x,y,w,h,r){
+
+  ctx.beginPath();
+
+  ctx.moveTo(x+r,y);
+
+  ctx.arcTo(
+    x+w,y,
+    x+w,y+h,
+    r
+  );
+
+  ctx.arcTo(
+    x+w,y+h,
+    x,y+h,
+    r
+  );
+
+  ctx.arcTo(
+    x,y+h,
+    x,y,
+    r
+  );
+
+  ctx.arcTo(
+    x,y,
+    x+w,y,
+    r
+  );
+
+  ctx.closePath();
+
+}
+
+
+/* =====================================================
+ REFEREE
+===================================================== */
+
+function drawReferee(){
+
+  const p=
+    fieldPoint(
+      referee.x,
+      referee.y
+    );
+
+  const scale=
+    .55+
+    referee.y/100*.55;
+
+  ctx.fillStyle="rgba(0,0,0,.35)";
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    p.x,
+    p.y+20*scale,
+    10*scale,
+    4*scale,
+    0,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  /* legs */
+
+  ctx.strokeStyle="#ddd";
+  ctx.lineWidth=4*scale;
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    p.x-4*scale,
+    p.y+9*scale
+  );
+
+  ctx.lineTo(
+    p.x-6*scale,
+    p.y+22*scale
+  );
+
+  ctx.moveTo(
+    p.x+4*scale,
+    p.y+9*scale
+  );
+
+  ctx.lineTo(
+    p.x+6*scale,
+    p.y+22*scale
+  );
+
+  ctx.stroke();
+
+
+  /* black referee shirt */
+
+  ctx.fillStyle="#171717";
+
+  roundRect(
+    p.x-7*scale,
+    p.y-4*scale,
+    14*scale,
+    19*scale,
+    3*scale
+  );
+
+  ctx.fill();
+
+
+  /* head */
+
+  ctx.fillStyle="#a76645";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    p.x,
+    p.y-10*scale,
+    7*scale,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  /* whistle */
+
+  ctx.strokeStyle="#ddd";
+  ctx.lineWidth=1;
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    p.x+5*scale,
+    p.y-4*scale
+  );
+
+  ctx.lineTo(
+    p.x+12*scale,
+    p.y
+  );
+
+  ctx.stroke();
+
+}
+
+
+/* =====================================================
+ BALL
+===================================================== */
+
+function drawBall(){
+
+  const p=
+    fieldPoint(ball.x,ball.y);
+
+  const scale=
+    .65+
+    ball.y/100*.55;
+
+  const r=5*scale;
+
+  ctx.fillStyle="rgba(0,0,0,.3)";
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    p.x,
+    p.y+r*1.5,
+    r*1.4,
+    r*.5,
+    0,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  ctx.fillStyle="white";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    p.x,
+    p.y,
+    r,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+  ctx.strokeStyle="#222";
+  ctx.lineWidth=1;
+
+  ctx.stroke();
+
+
+  ctx.fillStyle="#222";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    p.x-r*.25,
+    p.y-r*.2,
+    r*.18,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+}
+
+
+/* =====================================================
+ JOYSTICK
+===================================================== */
+
+const joystick=
+  document.getElementById("joystick");
+
+const joy=
+  document.getElementById("joy");
+
+let joyX=0;
+let joyY=0;
+let joyActive=false;
+
+
+function updateJoystick(x,y){
+
+  const rect=
+    joystick.getBoundingClientRect();
+
+  const cx=
+    rect.left+rect.width/2;
+
+  const cy=
+    rect.top+rect.height/2;
+
+  let dx=x-cx;
+  let dy=y-cy;
+
+  const max=
+    rect.width*.31;
+
+  const d=
+    Math.hypot(dx,dy)||1;
+
+  if(d>max){
+
+    dx=dx/d*max;
+    dy=dy/d*max;
+
+  }
+
+  joy.style.left=
+    "calc(50% + "+dx+"px)";
+
+  joy.style.top=
+    "calc(50% + "+dy+"px)";
+
+  joyX=dx/max;
+  joyY=dy/max;
+
+}
+
+
+joystick.addEventListener(
+  "touchstart",
+  e=>{
+
+    joyActive=true;
+
+    updateJoystick(
+      e.touches[0].clientX,
+      e.touches[0].clientY
+    );
+
+  },
+  {passive:true}
+);
+
+
+joystick.addEventListener(
+  "touchmove",
+  e=>{
+
+    if(!joyActive)return;
+
+    updateJoystick(
+      e.touches[0].clientX,
+      e.touches[0].clientY
+    );
+
+  },
+  {passive:true}
+);
+
+
+joystick.addEventListener(
+  "touchend",
+  ()=>{
+
+    joyActive=false;
+
+    joyX=0;
+    joyY=0;
+
+    joy.style.left="50%";
+    joy.style.top="50%";
+
+  }
+);
+
+
+/* =====================================================
+ KEYBOARD
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key==="ArrowUp")
+      joyY=-1;
+
+    if(e.key==="ArrowDown")
+      joyY=1;
+
+    if(e.key==="ArrowLeft")
+      joyX=-1;
+
+    if(e.key==="ArrowRight")
+      joyX=1;
+
+  }
+);
+
+document.addEventListener(
+  "keyup",
+  e=>{
+
+    if(
+      ["ArrowUp","ArrowDown"].includes(e.key)
+    )
+      joyY=0;
+
+    if(
+      ["ArrowLeft","ArrowRight"].includes(e.key)
+    )
+      joyX=0;
+
+  }
+);
+
+
+/* =====================================================
+ FINISH
+===================================================== */
 
 function finishMatch(){
 
-  stopMatch();
+  stopGame();
 
   whistle();
 
-  document.getElementById("resultHomeScore")
-    .textContent=homeScore;
+  document.getElementById(
+    "resultHomeScore"
+  ).textContent=homeScore;
 
-  document.getElementById("resultAwayScore")
-    .textContent=awayScore;
+  document.getElementById(
+    "resultAwayScore"
+  ).textContent=awayScore;
 
-  document.getElementById("resultOverlay")
-    .classList.remove("hidden");
+  document.getElementById(
+    "resultOverlay"
+  ).classList.remove("hidden");
 
 }
 
 
 function playAgain(){
 
-  document.getElementById("resultOverlay")
-    .classList.add("hidden");
+  document.getElementById(
+    "resultOverlay"
+  ).classList.add("hidden");
 
   resetMatch();
 
 }
 
 
-/* =====================================
-   INITIALIZE
-===================================== */
+/* =====================================================
+ INITIAL
+===================================================== */
 
 updatePreview();
 
