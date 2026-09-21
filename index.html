@@ -1,21 +1,261 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Naija Brain Battle</title>
-</head>
+  <title>Naija Brain Battle</title>  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<body>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #008751, #004d2a);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .game {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      color: #222;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      color: #008751;
+      margin-top: 0;
+    }
+
+    #start-screen p {
+      font-size: 18px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #start-button,
+    #next-button {
+      background: #008751;
+      color: white;
+    }
+
+    .answer {
+      background: #eeeeee;
+      color: #222;
+    }
+
+    .answer:hover {
+      background: #d5f5e3;
+    }
+
+    #game-screen,
+    #result-screen {
+      display: none;
+    }
+
+    #question {
+      font-size: 21px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    #score {
+      color: #008751;
+      font-weight: bold;
+    }
+
+    #feedback {
+      min-height: 25px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    #next-button {
+      display: none;
+    }
+  </style></head><body>  <div class="game"><!-- START SCREEN -->
+<div id="start-screen">
   <h1>🇳🇬 Naija Brain Battle</h1>
   <p>Test your Nigerian knowledge!</p>
+  <button id="start-button" onclick="startGame()">START GAME</button>
+</div>
 
-  <button onclick="startGame()">START GAME</button>
+<!-- GAME SCREEN -->
+<div id="game-screen">
+  <h1>🇳🇬 Naija Brain Battle</h1>
 
-  <script>
+  <p>Question <span id="question-number">1</span></p>
+
+  <div id="question"></div>
+
+  <div id="answers"></div>
+
+  <div id="feedback"></div>
+
+  <button id="next-button" onclick="nextQuestion()">NEXT QUESTION</button>
+
+  <p>Score: <span id="score">0</span></p>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen">
+  <h1>🎉 Game Complete!</h1>
+  <p>Your final score is:</p>
+  <h2><span id="final-score"></span></h2>
+
+  <button id="start-button" onclick="startGame()">PLAY AGAIN</button>
+</div>
+
+  </div>  <script>
+
+    const questions = [
+      {
+        question: "What is the capital of Nigeria?",
+        answers: ["Lagos", "Abuja", "Kano", "Benin City"],
+        correct: "Abuja"
+      },
+
+      {
+        question: "How many states are there in Nigeria?",
+        answers: ["30", "36", "40", "50"],
+        correct: "36"
+      },
+
+      {
+        question: "What is the Nigerian currency?",
+        answers: ["Dollar", "Cedi", "Naira", "Rand"],
+        correct: "Naira"
+      },
+
+      {
+        question: "Which city is known as the commercial capital of Nigeria?",
+        answers: ["Lagos", "Abuja", "Jos", "Ilorin"],
+        correct: "Lagos"
+      },
+
+      {
+        question: "What are the Nigerian national colours?",
+        answers: [
+          "Green and White",
+          "Red and White",
+          "Blue and Green",
+          "Black and White"
+        ],
+        correct: "Green and White"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
     function startGame() {
-      alert("Welcome to Naija Brain Battle! 🎉");
+      currentQuestion = 0;
+      score = 0;
+
+      document.getElementById("start-screen").style.display = "none";
+      document.getElementById("result-screen").style.display = "none";
+      document.getElementById("game-screen").style.display = "block";
+
+      document.getElementById("score").textContent = score;
+
+      showQuestion();
     }
-  </script>
-</body>
+
+    function showQuestion() {
+      const questionData = questions[currentQuestion];
+
+      document.getElementById("question-number").textContent =
+        currentQuestion + 1;
+
+      document.getElementById("question").textContent =
+        questionData.question;
+
+      const answersContainer = document.getElementById("answers");
+
+      answersContainer.innerHTML = "";
+
+      document.getElementById("feedback").textContent = "";
+
+      document.getElementById("next-button").style.display = "none";
+
+      questionData.answers.forEach(answer => {
+
+        const button = document.createElement("button");
+
+        button.textContent = answer;
+        button.className = "answer";
+
+        button.onclick = function() {
+          checkAnswer(answer);
+        };
+
+        answersContainer.appendChild(button);
+      });
+    }
+
+    function checkAnswer(answer) {
+
+      const correctAnswer = questions[currentQuestion].correct;
+
+      const buttons = document.querySelectorAll(".answer");
+
+      buttons.forEach(button => {
+        button.disabled = true;
+      });
+
+      if (answer === correctAnswer) {
+
+        score++;
+
+        document.getElementById("feedback").textContent =
+          "✅ Correct!";
+
+      } else {
+
+        document.getElementById("feedback").textContent =
+          "❌ Wrong! Correct answer: " + correctAnswer;
+      }
+
+      document.getElementById("score").textContent = score;
+
+      document.getElementById("next-button").style.display = "block";
+    }
+
+    function nextQuestion() {
+
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+
+        showQuestion();
+
+      } else {
+
+        document.getElementById("game-screen").style.display = "none";
+
+        document.getElementById("result-screen").style.display = "block";
+
+        document.getElementById("final-score").textContent =
+          score + " / " + questions.length;
+      }
+    }
+
+  </script></body>
 </html>
