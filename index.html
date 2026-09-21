@@ -1,547 +1,1032 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Naija Brain Battle</title>  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naija Game Hub</title>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, #18b96d, transparent 35%),
-        radial-gradient(circle at bottom right, #006b3c, transparent 40%),
-        linear-gradient(135deg, #003b22, #008751);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 15px;
-      color: white;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    .game-container {
-      width: 100%;
-      max-width: 500px;
-    }
+body{
+  font-family:Arial,sans-serif;
+  background:#071b12;
+  color:white;
+  min-height:100vh;
+}
 
-    .card {
-      background: rgba(255,255,255,0.97);
-      color: #222;
-      border-radius: 28px;
-      padding: 22px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-      overflow: hidden;
-    }
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
 
-    /* START SCREEN */
+.app{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top,#0e7a48 0,#063d27 35%,#071b12 75%);
+  padding-bottom:80px;
+}
 
-    #start-screen {
-      text-align: center;
-    }
+/* HEADER */
 
-    .logo {
-      font-size: 70px;
-      margin-bottom: 5px;
-      animation: bounce 1.5s infinite;
-    }
+.header{
+  padding:20px 18px 10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
+.logo{
+  font-size:22px;
+  font-weight:900;
+}
 
-      50% {
-        transform: translateY(-10px);
-      }
-    }
+.logo span{
+  color:#ffd43b;
+}
 
-    .title {
-      font-size: 38px;
-      font-weight: 900;
-      color: #008751;
-      margin: 5px 0;
-    }
+.profile-mini{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 
-    .subtitle {
-      color: #666;
-      font-size: 18px;
-    }
+.avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#ffd43b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:22px;
+}
 
-    .start-btn {
-      background: linear-gradient(135deg, #00a859, #006b3c);
-      color: white;
-      border: none;
-      width: 100%;
-      padding: 18px;
-      border-radius: 16px;
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-      cursor: pointer;
-      box-shadow: 0 7px 0 #004d2b;
-      transition: 0.15s;
-    }
+/* SCREENS */
 
-    .start-btn:active {
-      transform: translateY(5px);
-      box-shadow: 0 2px 0 #004d2b;
-    }
+.screen{
+  display:none;
+  padding:10px 16px 25px;
+}
 
-    .features {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 25px;
-      font-size: 14px;
-    }
+.screen.active{
+  display:block;
+}
 
-    .feature {
-      background: #f0fff7;
-      padding: 12px;
-      border-radius: 12px;
-      color: #008751;
-      font-weight: bold;
-    }
+/* HOME */
 
-    /* GAME SCREEN */
+.hero{
+  background:linear-gradient(135deg,#00a859,#006b3c);
+  border-radius:25px;
+  padding:24px;
+  margin-top:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
 
-    #game-screen,
-    #result-screen {
-      display: none;
-    }
+.hero h1{
+  font-size:31px;
+  line-height:1.05;
+}
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
+.hero p{
+  margin-top:10px;
+  opacity:.9;
+}
 
-    .game-title {
-      font-size: 21px;
-      font-weight: 900;
-      color: #008751;
-    }
+.play-btn{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:17px;
+  margin-top:20px;
+  background:#ffd43b;
+  color:#173b24;
+  font-size:19px;
+  font-weight:900;
+  box-shadow:0 5px 0 #b28b00;
+}
 
-    .stats {
-      display: flex;
-      gap: 8px;
-    }
+.play-btn:active{
+  transform:translateY(4px);
+  box-shadow:none;
+}
 
-    .stat {
-      background: #f0fff7;
-      color: #008751;
-      padding: 7px 10px;
-      border-radius: 12px;
-      font-weight: bold;
-      font-size: 14px;
-    }
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:15px;
+}
 
-    .progress-container {
-      height: 10px;
-      background: #e5e5e5;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 25px;
-    }
+.stat{
+  background:#102d20;
+  border:1px solid #1c6241;
+  border-radius:15px;
+  padding:12px 6px;
+  text-align:center;
+}
 
-    .progress {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #00a859, #ffd700);
-      transition: width 0.4s;
-    }
+.stat b{
+  display:block;
+  color:#ffd43b;
+  margin-top:4px;
+}
 
-    .question-box {
-      background: linear-gradient(135deg, #008751, #006b3c);
-      color: white;
-      border-radius: 20px;
-      padding: 25px 18px;
-      text-align: center;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 20px rgba(0,135,81,0.3);
-    }
+/* SECTION */
 
-    .question-number {
-      font-size: 14px;
-      opacity: 0.85;
-    }
+.section-title{
+  margin:25px 0 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    #question {
-      font-size: 23px;
-      font-weight: 900;
-      margin-top: 10px;
-      line-height: 1.3;
-    }
+.section-title h2{
+  font-size:20px;
+}
 
-    .answers {
-      display: grid;
-      gap: 12px;
-    }
+.section-title small{
+  color:#ffd43b;
+}
 
-    .answer {
-      width: 100%;
-      padding: 16px;
-      border: 3px solid #e5e5e5;
-      background: white;
-      border-radius: 15px;
-      font-size: 17px;
-      font-weight: bold;
-      text-align: left;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+/* GAME CARDS */
 
-    .answer:hover {
-      border-color: #008751;
-      background: #f0fff7;
-      transform: scale(1.02);
-    }
+.games{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
 
-    .answer.correct {
-      background: #b8f5d5;
-      border-color: #008751;
-      color: #006b3c;
-    }
+.game-card{
+  border:0;
+  color:white;
+  min-height:145px;
+  border-radius:20px;
+  padding:17px;
+  text-align:left;
+  position:relative;
+  overflow:hidden;
+}
 
-    .answer.wrong {
-      background: #ffd1d1;
-      border-color: #e00000;
-      color: #a00000;
-    }
+.game-card .icon{
+  font-size:42px;
+}
 
-    .answer:disabled {
-      cursor: default;
-    }
+.game-card h3{
+  margin-top:8px;
+  font-size:18px;
+}
 
-    #feedback {
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      min-height: 30px;
-      margin-top: 15px;
-    }
+.game-card p{
+  font-size:12px;
+  opacity:.85;
+  margin-top:4px;
+}
 
-    .next-btn {
-      display: none;
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 14px;
-      background: #ffd700;
-      color: #222;
-      font-size: 18px;
-      font-weight: 900;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+.quiz-card{
+  background:linear-gradient(135deg,#008751,#005b36);
+}
 
-    /* RESULT */
+.ludo-card{
+  background:linear-gradient(135deg,#7b2cff,#41159b);
+}
 
-    #result-screen {
-      text-align: center;
-    }
+.speed-card{
+  background:linear-gradient(135deg,#ff8a00,#d63300);
+}
 
-    .trophy {
-      font-size: 80px;
-      animation: bounce 1.5s infinite;
-    }
+.word-card{
+  background:linear-gradient(135deg,#0088ff,#004bb5);
+}
 
-    .result-title {
-      color: #008751;
-      font-size: 32px;
-      font-weight: 900;
-    }
+.puzzle-card{
+  background:linear-gradient(135deg,#e91e63,#9c1244);
+}
 
-    .final-score {
-      font-size: 55px;
-      color: #008751;
-      font-weight: 900;
-      margin: 10px;
-    }
+.reaction-card{
+  background:linear-gradient(135deg,#00b8a9,#007d74);
+}
 
-    .message {
-      font-size: 18px;
-      color: #555;
-    }
+/* GAME SCREEN */
 
-    .coins {
-      color: #d69e00;
-      font-weight: bold;
-      font-size: 20px;
-    }
+.game-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
 
-  </style></head><body><div class="game-container">  <div class="card"><!-- START SCREEN -->
+.back{
+  background:#123426;
+  border:1px solid #286848;
+  color:white;
+  border-radius:12px;
+  padding:10px 14px;
+}
 
-<div id="start-screen">
+.game-title{
+  font-size:22px;
+  font-weight:900;
+}
 
-  <div class="logo">🇳🇬</div>
+.quiz-question{
+  background:linear-gradient(135deg,#008751,#00623b);
+  padding:25px 18px;
+  border-radius:22px;
+  text-align:center;
+  margin-bottom:15px;
+}
 
-  <div class="title">Naija Brain Battle</div>
+.question-number{
+  color:#ffd43b;
+  font-weight:bold;
+  font-size:13px;
+}
 
-  <p class="subtitle">
-    How well do you know Nigeria?
-  </p>
+#question{
+  font-size:22px;
+  font-weight:900;
+  margin-top:12px;
+  line-height:1.3;
+}
 
-  <button class="start-btn" onclick="startGame()">
-    🎮 START BATTLE
+.answers{
+  display:grid;
+  gap:11px;
+}
+
+.answer{
+  background:#fff;
+  color:#17231d;
+  border:3px solid transparent;
+  padding:16px;
+  border-radius:15px;
+  text-align:left;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.answer.correct{
+  background:#78e08f;
+  border-color:#20bf55;
+}
+
+.answer.wrong{
+  background:#ff7675;
+  color:white;
+  border-color:#d63031;
+}
+
+.answer:disabled{
+  cursor:default;
+}
+
+.feedback{
+  min-height:35px;
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  padding:12px;
+}
+
+.next{
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:15px;
+  background:#ffd43b;
+  font-weight:900;
+  font-size:17px;
+  display:none;
+}
+
+/* LUDO */
+
+.ludo-box{
+  background:#102d20;
+  border-radius:25px;
+  padding:18px;
+  text-align:center;
+}
+
+.ludo-board{
+  width:100%;
+  aspect-ratio:1;
+  max-width:390px;
+  margin:15px auto;
+  background:
+    linear-gradient(90deg,
+      #ff4757 0 33%,
+      #fff 33% 66%,
+      #2ed573 66%);
+  border:8px solid #ffd43b;
+  border-radius:18px;
+  position:relative;
+  overflow:hidden;
+}
+
+.ludo-center{
+  position:absolute;
+  width:34%;
+  height:34%;
+  left:33%;
+  top:33%;
+  background:#ffd43b;
+  transform:rotate(45deg);
+}
+
+.home{
+  position:absolute;
+  width:29%;
+  height:29%;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+}
+
+.home.red{
+  left:4%;
+  top:4%;
+  background:#ff4757;
+}
+
+.home.green{
+  right:4%;
+  bottom:4%;
+  background:#2ed573;
+}
+
+.home.yellow{
+  right:4%;
+  top:4%;
+  background:#ffd43b;
+}
+
+.home.blue{
+  left:4%;
+  bottom:4%;
+  background:#3742fa;
+}
+
+.dice{
+  font-size:65px;
+  margin:10px;
+}
+
+.roll{
+  background:#ffd43b;
+  border:0;
+  padding:15px 35px;
+  border-radius:15px;
+  font-size:18px;
+  font-weight:900;
+}
+
+/* PROFILE */
+
+.profile-card{
+  background:#102d20;
+  border:1px solid #276445;
+  border-radius:22px;
+  padding:25px;
+  text-align:center;
+}
+
+.big-avatar{
+  width:90px;
+  height:90px;
+  margin:auto;
+  border-radius:50%;
+  background:#ffd43b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:48px;
+}
+
+.level{
+  margin:15px 0;
+}
+
+.progress{
+  height:10px;
+  background:#263d31;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:42%;
+  background:#ffd43b;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:520px;
+  height:70px;
+  background:#071b12;
+  border-top:1px solid #24553d;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:20;
+}
+
+.nav-btn{
+  border:0;
+  background:none;
+  color:#789586;
+  font-size:11px;
+}
+
+.nav-btn.active{
+  color:#ffd43b;
+}
+
+.nav-btn div{
+  font-size:22px;
+  margin-bottom:3px;
+}
+
+/* POPUP */
+
+.reward{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:50;
+}
+
+.reward-box{
+  width:85%;
+  max-width:350px;
+  background:#fff;
+  color:#222;
+  border-radius:25px;
+  padding:30px;
+  text-align:center;
+}
+
+.reward-box .gift{
+  font-size:65px;
+}
+
+.claim{
+  width:100%;
+  padding:15px;
+  margin-top:20px;
+  border:0;
+  border-radius:14px;
+  background:#008751;
+  color:white;
+  font-weight:bold;
+}
+
+@media(max-width:380px){
+  .games{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+  <div class="logo">🇳🇬 NAIJA <span>GAME HUB</span></div>
+
+  <div class="profile-mini">
+    <span>🪙 <b id="topCoins">250</b></span>
+    <div class="avatar">😎</div>
+  </div>
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="screen active">
+
+  <div class="hero">
+    <h1>Ready for the<br>Naija Challenge? 🔥</h1>
+    <p>Play games. Earn coins. Climb the leaderboard.</p>
+
+    <button class="play-btn" onclick="openGame('quiz')">
+      ▶ PLAY NOW
+    </button>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      ❤️
+      <b>5</b>
+    </div>
+
+    <div class="stat">
+      🔥
+      <b id="homeStreak">3</b>
+    </div>
+
+    <div class="stat">
+      🪙
+      <b id="homeCoins">250</b>
+    </div>
+  </div>
+
+
+  <div class="section-title">
+    <h2>🔥 Featured Games</h2>
+    <small onclick="showScreen('games')">See all</small>
+  </div>
+
+  <div class="games">
+
+    <button class="game-card quiz-card"
+      onclick="openGame('quiz')">
+      <div class="icon">🧠</div>
+      <h3>Naija Quiz</h3>
+      <p>Test your Nigerian knowledge</p>
+    </button>
+
+    <button class="game-card ludo-card"
+      onclick="openGame('ludo')">
+      <div class="icon">🎲</div>
+      <h3>Naija Ludo</h3>
+      <p>Roll. Move. Win.</p>
+    </button>
+
+    <button class="game-card speed-card">
+      <div class="icon">⚡</div>
+      <h3>Speed Battle</h3>
+      <p>Coming soon</p>
+    </button>
+
+    <button class="game-card word-card">
+      <div class="icon">🔤</div>
+      <h3>Word Rush</h3>
+      <p>Coming soon</p>
+    </button>
+
+  </div>
+
+
+  <div class="section-title">
+    <h2>🎁 Daily Reward</h2>
+  </div>
+
+  <button class="play-btn" onclick="showReward()">
+    🎁 CLAIM DAILY REWARD
   </button>
 
-  <div class="features">
+</section>
 
-    <div class="feature">
-      🧠 Quiz
-    </div>
 
-    <div class="feature">
-      🔥 Streak
-    </div>
+<!-- GAMES -->
 
-    <div class="feature">
-      🪙 Coins
-    </div>
+<section id="games" class="screen">
+
+  <div class="section-title">
+    <h2>🎮 All Games</h2>
+  </div>
+
+  <div class="games">
+
+    <button class="game-card quiz-card"
+      onclick="openGame('quiz')">
+      <div class="icon">🧠</div>
+      <h3>Naija Quiz</h3>
+      <p>Knowledge battle</p>
+    </button>
+
+    <button class="game-card ludo-card"
+      onclick="openGame('ludo')">
+      <div class="icon">🎲</div>
+      <h3>Naija Ludo</h3>
+      <p>Classic board battle</p>
+    </button>
+
+    <button class="game-card speed-card">
+      <div class="icon">⚡</div>
+      <h3>Speed Battle</h3>
+      <p>Coming soon</p>
+    </button>
+
+    <button class="game-card word-card">
+      <div class="icon">🔤</div>
+      <h3>Word Rush</h3>
+      <p>Coming soon</p>
+    </button>
+
+    <button class="game-card puzzle-card">
+      <div class="icon">🧩</div>
+      <h3>Naija Puzzle</h3>
+      <p>Coming soon</p>
+    </button>
+
+    <button class="game-card reaction-card">
+      <div class="icon">🏃</div>
+      <h3>Reaction Rush</h3>
+      <p>Coming soon</p>
+    </button>
 
   </div>
 
-</div>
+</section>
 
 
-<!-- GAME SCREEN -->
+<!-- QUIZ -->
 
-<div id="game-screen">
+<section id="quiz" class="screen">
 
-  <div class="top-bar">
+  <div class="game-top">
 
-    <div class="game-title">
-      🇳🇬 Naija Battle
-    </div>
+    <button class="back" onclick="showScreen('home')">
+      ← Back
+    </button>
 
-    <div class="stats">
+    <div class="game-title">🧠 Naija Quiz</div>
 
-      <div class="stat">
-        ❤️ <span id="lives">3</span>
-      </div>
-
-      <div class="stat">
-        🪙 <span id="coins">0</span>
-      </div>
-
-      <div class="stat">
-        🔥 <span id="streak">0</span>
-      </div>
-
-    </div>
+    <div>🪙 <span id="quizCoins">250</span></div>
 
   </div>
 
 
-  <div class="progress-container">
-
-    <div class="progress" id="progress"></div>
-
-  </div>
-
-
-  <div class="question-box">
+  <div class="quiz-question">
 
     <div class="question-number">
-      QUESTION <span id="question-number">1</span>
+      QUESTION <span id="questionNumber">1</span>/10
     </div>
 
-    <div id="question">
-      Question goes here
-    </div>
+    <div id="question"></div>
 
   </div>
 
 
   <div class="answers" id="answers"></div>
 
-  <div id="feedback"></div>
+  <div class="feedback" id="feedback"></div>
 
-  <button class="next-btn" id="next-button" onclick="nextQuestion()">
+  <button class="next" id="nextButton" onclick="nextQuestion()">
     NEXT QUESTION ➡️
   </button>
 
-</div>
+</section>
 
 
-<!-- RESULT SCREEN -->
+<!-- LUDO -->
 
-<div id="result-screen">
+<section id="ludo" class="screen">
 
-  <div class="trophy">
-    🏆
+  <div class="game-top">
+
+    <button class="back" onclick="showScreen('home')">
+      ← Back
+    </button>
+
+    <div class="game-title">🎲 Naija Ludo</div>
+
+    <div>🪙 <span id="ludoCoins">250</span></div>
+
   </div>
 
-  <div class="result-title">
-    BATTLE COMPLETE!
+  <div class="ludo-box">
+
+    <h2>Practice Match</h2>
+
+    <p style="margin-top:8px;color:#9db5a7">
+      You 🟢 vs Computer 🔴
+    </p>
+
+    <div class="ludo-board">
+
+      <div class="home red">🔴</div>
+      <div class="home yellow">🟡</div>
+      <div class="home blue">🔵</div>
+      <div class="home green">🟢</div>
+
+      <div class="ludo-center"></div>
+
+    </div>
+
+    <div class="dice" id="dice">🎲</div>
+
+    <p id="ludoMessage">Roll the dice to start!</p>
+
+    <button class="roll" onclick="rollDice()">
+      🎲 ROLL DICE
+    </button>
+
   </div>
 
-  <p>Your score</p>
+</section>
 
-  <div class="final-score">
-    <span id="final-score">0</span>
+
+<!-- PROFILE -->
+
+<section id="profile" class="screen">
+
+  <div class="profile-card">
+
+    <div class="big-avatar">😎</div>
+
+    <h2 style="margin-top:12px">Naija Champ</h2>
+
+    <p style="color:#9db5a7">Level 2</p>
+
+    <div class="level">
+      <p style="margin-bottom:7px">120 / 300 XP</p>
+
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        🏆
+        <b>12</b>
+      </div>
+
+      <div class="stat">
+        🪙
+        <b id="profileCoins">250</b>
+      </div>
+
+      <div class="stat">
+        🔥
+        <b>3</b>
+      </div>
+
+    </div>
+
+    <div class="section-title">
+      <h2>🏅 Achievements</h2>
+    </div>
+
+    <div class="games">
+
+      <div class="stat">🥇<br>First Win</div>
+      <div class="stat">🔥<br>3 Day Streak</div>
+      <div class="stat">🧠<br>Quiz Master</div>
+      <div class="stat">🎲<br>Ludo Rookie</div>
+
+    </div>
+
   </div>
 
-  <p class="message" id="result-message"></p>
+</section>
 
-  <p class="coins">
-    🪙 Coins earned: <span id="final-coins">0</span>
-  </p>
 
-  <button class="start-btn" onclick="startGame()">
-    🔄 PLAY AGAIN
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+  <button class="nav-btn active"
+    onclick="showScreen('home')">
+    <div>🏠</div>
+    Home
   </button>
 
+  <button class="nav-btn"
+    onclick="showScreen('games')">
+    <div>🎮</div>
+    Games
+  </button>
+
+  <button class="nav-btn"
+    onclick="alert('Leaderboard coming soon! 🏆')">
+    <div>🏆</div>
+    Ranking
+  </button>
+
+  <button class="nav-btn"
+    onclick="showScreen('profile')">
+    <div>👤</div>
+    Profile
+  </button>
+
+</nav>
+
+
+<!-- DAILY REWARD -->
+
+<div class="reward" id="reward">
+
+  <div class="reward-box">
+
+    <div class="gift">🎁</div>
+
+    <h2>Daily Reward!</h2>
+
+    <p style="margin-top:10px">
+      You received
+    </p>
+
+    <h1 style="color:#d69e00;margin-top:8px">
+      🪙 +50 Coins
+    </h1>
+
+    <button class="claim" onclick="claimReward()">
+      CLAIM
+    </button>
+
+  </div>
+
 </div>
 
-  </div></div><script>
+
+<script>
+
+/* GAME DATA */
 
 const questions = [
 
-  {
-    question: "What is the capital of Nigeria?",
-    answers: ["Lagos", "Abuja", "Kano", "Benin City"],
-    correct: "Abuja"
-  },
+{
+ q:"What is the capital of Nigeria?",
+ a:["Lagos","Abuja","Kano","Benin City"],
+ c:"Abuja"
+},
 
-  {
-    question: "How many states are there in Nigeria?",
-    answers: ["30", "36", "40", "50"],
-    correct: "36"
-  },
+{
+ q:"How many states are in Nigeria?",
+ a:["30","36","37","40"],
+ c:"36"
+},
 
-  {
-    question: "What is the currency of Nigeria?",
-    answers: ["Dollar", "Cedi", "Naira", "Rand"],
-    correct: "Naira"
-  },
+{
+ q:"What is Nigeria's currency?",
+ a:["Dollar","Naira","Cedi","Rand"],
+ c:"Naira"
+},
 
-  {
-    question: "Which city is Nigeria's largest city by population?",
-    answers: ["Abuja", "Lagos", "Ibadan", "Kano"],
-    correct: "Lagos"
-  },
+{
+ q:"Which city is known as Nigeria's commercial capital?",
+ a:["Abuja","Lagos","Kano","Jos"],
+ c:"Lagos"
+},
 
-  {
-    question: "What are the colours of the Nigerian flag?",
-    answers: [
-      "Green and White",
-      "Red and White",
-      "Blue and Green",
-      "Yellow and Black"
-    ],
-    correct: "Green and White"
-  },
+{
+ q:"What are the colours of the Nigerian flag?",
+ a:["Green and White","Red and White","Blue and White","Green and Red"],
+ c:"Green and White"
+},
 
-  {
-    question: "Which river is one of Nigeria's major rivers?",
-    answers: [
-      "River Niger",
-      "River Nile",
-      "River Thames",
-      "River Congo"
-    ],
-    correct: "River Niger"
-  },
+{
+ q:"Which river is one of Nigeria's major rivers?",
+ a:["River Niger","River Nile","River Thames","River Amazon"],
+ c:"River Niger"
+},
 
-  {
-    question: "What is Nigeria's internet country code?",
-    answers: [".ng", ".na", ".ni", ".nig"],
-    correct: ".ng"
-  },
+{
+ q:"Nigeria is located on which continent?",
+ a:["Asia","Africa","Europe","Australia"],
+ c:"Africa"
+},
 
-  {
-    question: "Which continent is Nigeria located in?",
-    answers: ["Asia", "Africa", "Europe", "South America"],
-    correct: "Africa"
-  }
+{
+ q:"What is Nigeria's internet country code?",
+ a:[".ng",".na",".ni",".nig"],
+ c:".ng"
+},
+
+{
+ q:"Which Nigerian city is famous for the National Arts Theatre?",
+ a:["Lagos","Abuja","Enugu","Kaduna"],
+ c:"Lagos"
+},
+
+{
+ q:"What is the name of Nigeria's national football team?",
+ a:["Super Eagles","Green Lions","Naija Stars","Golden Warriors"],
+ c:"Super Eagles"
+}
 
 ];
 
-
-let currentQuestion = 0;
-let score = 0;
-let lives = 3;
-let streak = 0;
-let coins = 0;
+let currentQuestion=0;
+let score=0;
+let coins=250;
+let streak=3;
 
 
-function startGame() {
+/* SCREEN SYSTEM */
 
-  currentQuestion = 0;
-  score = 0;
-  lives = 3;
-  streak = 0;
-  coins = 0;
+function showScreen(id){
 
-  document.getElementById("start-screen").style.display = "none";
-  document.getElementById("result-screen").style.display = "none";
-  document.getElementById("game-screen").style.display = "block";
+  document.querySelectorAll(".screen")
+    .forEach(s=>s.classList.remove("active"));
 
-  updateStats();
+  document.getElementById(id)
+    .classList.add("active");
+
+  window.scrollTo(0,0);
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(b=>b.classList.remove("active"));
+
+}
+
+
+/* OPEN GAME */
+
+function openGame(game){
+
+  showScreen(game);
+
+  if(game==="quiz"){
+    startQuiz();
+  }
+
+}
+
+
+/* QUIZ */
+
+function startQuiz(){
+
+  currentQuestion=0;
+  score=0;
 
   showQuestion();
+
 }
 
 
-function showQuestion() {
+function showQuestion(){
 
-  const data = questions[currentQuestion];
+  const data=questions[currentQuestion];
 
-  document.getElementById("question-number").textContent =
-    currentQuestion + 1;
+  document.getElementById("questionNumber")
+    .textContent=currentQuestion+1;
 
-  document.getElementById("question").textContent =
-    data.question;
+  document.getElementById("question")
+    .textContent=data.q;
 
-  document.getElementById("feedback").textContent = "";
+  document.getElementById("feedback")
+    .textContent="";
 
-  document.getElementById("next-button").style.display = "none";
+  document.getElementById("nextButton")
+    .style.display="none";
 
-  const answers = document.getElementById("answers");
+  const container=
+    document.getElementById("answers");
 
-  answers.innerHTML = "";
+  container.innerHTML="";
 
-  data.answers.forEach(answer => {
+  data.a.forEach(answer=>{
 
-    const button = document.createElement("button");
+    const button=
+      document.createElement("button");
 
-    button.textContent = answer;
+    button.className="answer";
+    button.textContent=answer;
 
-    button.className = "answer";
+    button.onclick=()=>{
+      answerQuestion(button,answer);
+    };
 
-    button.onclick = () => checkAnswer(button, answer);
-
-    answers.appendChild(button);
+    container.appendChild(button);
 
   });
 
-
-  const progress =
-    ((currentQuestion) / questions.length) * 100;
-
-  document.getElementById("progress").style.width =
-    progress + "%";
 }
 
 
-function checkAnswer(button, answer) {
+function answerQuestion(button,answer){
 
-  const correct =
-    questions[currentQuestion].correct;
+  const correct=
+    questions[currentQuestion].c;
 
-  const buttons =
+  const buttons=
     document.querySelectorAll(".answer");
 
-  buttons.forEach(btn => {
-    btn.disabled = true;
-  });
+  buttons.forEach(b=>b.disabled=true);
 
-
-  if (answer === correct) {
+  if(answer===correct){
 
     button.classList.add("correct");
 
@@ -549,78 +1034,53 @@ function checkAnswer(button, answer) {
 
     streak++;
 
-    coins += 10 + (streak * 2);
+    coins+=10;
 
-    document.getElementById("feedback").textContent =
-      "🎉 CORRECT! 🔥";
+    document.getElementById("feedback")
+      .textContent="🎉 CORRECT! +10 coins";
 
-  }
-
-  else {
+  }else{
 
     button.classList.add("wrong");
 
-    lives--;
+    streak=0;
 
-    streak = 0;
+    document.getElementById("feedback")
+      .textContent=
+      "❌ Wrong! Answer: "+correct;
 
-    coins += 2;
+    buttons.forEach(b=>{
 
-    document.getElementById("feedback").textContent =
-      "❌ WRONG! The answer is " + correct;
-
-    buttons.forEach(btn => {
-
-      if (btn.textContent === correct) {
-        btn.classList.add("correct");
-      }
+      if(b.textContent===correct)
+        b.classList.add("correct");
 
     });
 
   }
 
+  updateCoins();
 
-  updateStats();
-
-  document.getElementById("next-button").style.display =
-    "block";
-
-
-  if (lives <= 0) {
-
-    document.getElementById("feedback").textContent =
-      "💥 GAME OVER!";
-
-    document.getElementById("next-button").textContent =
-      "SEE RESULTS 🏆";
-  }
+  document.getElementById("nextButton")
+    .style.display="block";
 
 }
 
 
-function nextQuestion() {
-
-  if (lives <= 0) {
-
-    finishGame();
-
-    return;
-  }
-
+function nextQuestion(){
 
   currentQuestion++;
 
+  if(currentQuestion>=questions.length){
 
-  if (currentQuestion >= questions.length) {
+    alert(
+      "🏆 Quiz Complete!\n\n"+
+      "Score: "+score+"/10\n"+
+      "🪙 Coins: "+coins
+    );
 
-    finishGame();
+    showScreen("home");
 
-  }
-
-  else {
-
-    document.getElementById("next-button").textContent =
-      "NEXT QUESTION ➡️";
+  }else{
 
     showQuestion();
 
@@ -629,67 +1089,85 @@ function nextQuestion() {
 }
 
 
-function updateStats() {
+/* COINS */
 
-  document.getElementById("lives").textContent =
-    lives;
+function updateCoins(){
 
-  document.getElementById("coins").textContent =
-    coins;
+  document.getElementById("topCoins")
+    .textContent=coins;
 
-  document.getElementById("streak").textContent =
-    streak;
+  document.getElementById("homeCoins")
+    .textContent=coins;
+
+  document.getElementById("quizCoins")
+    .textContent=coins;
+
+  document.getElementById("ludoCoins")
+    .textContent=coins;
+
+  document.getElementById("profileCoins")
+    .textContent=coins;
+
+}
+
+
+/* DAILY REWARD */
+
+function showReward(){
+
+  document.getElementById("reward")
+    .style.display="flex";
 
 }
 
 
-function finishGame() {
+function claimReward(){
 
-  document.getElementById("game-screen").style.display =
-    "none";
+  coins+=50;
 
-  document.getElementById("result-screen").style.display =
-    "block";
+  updateCoins();
 
+  document.getElementById("reward")
+    .style.display="none";
 
-  document.getElementById("final-score").textContent =
-    score + " / " + questions.length;
-
-  document.getElementById("final-coins").textContent =
-    coins;
-
-
-  let message;
-
-  if (score === questions.length) {
-
-    message = "🔥 PERFECT! You are a Naija Brain Master!";
-
-  }
-
-  else if (score >= 5) {
-
-    message = "🇳🇬 Excellent! You really know Nigeria!";
-
-  }
-
-  else if (score >= 3) {
-
-    message = "👏 Good job! Keep playing to improve!";
-
-  }
-
-  else {
-
-    message = "💪 Keep practicing. Your next battle can be better!";
-
-  }
-
-
-  document.getElementById("result-message").textContent =
-    message;
+  alert("🎉 +50 coins added!");
 
 }
 
-</script></body>
+
+/* LUDO */
+
+function rollDice(){
+
+  const number=
+    Math.floor(Math.random()*6)+1;
+
+  const diceFaces=[
+    "⚀","⚁","⚂",
+    "⚃","⚄","⚅"
+  ];
+
+  document.getElementById("dice")
+    .textContent=diceFaces[number-1];
+
+  document.getElementById("ludoMessage")
+    .textContent=
+    "You rolled "+number+"! 🎲";
+
+  coins+=2;
+
+  updateCoins();
+
+}
+
+
+/* INITIALIZE */
+
+updateCoins();
+
+</script>
+
+</div>
+
+</body>
 </html>
